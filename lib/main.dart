@@ -1,3 +1,4 @@
+import 'package:digit41/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/screens/splash.dart';
@@ -13,10 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Digit41',
-      theme: ThemeData(
-        primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.black,
-      ),
+      theme: AppTheme.theme,
       home: const Splash(),
     );
   }

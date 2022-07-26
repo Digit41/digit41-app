@@ -1,6 +1,8 @@
 import 'package:digit41/utils/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'cubit_logic/net_connection/net_connection_cubit.dart';
 import 'presentation/screens/splash.dart';
 
 void main() {
@@ -12,10 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Digit41',
-      theme: AppTheme.theme,
-      home: const Splash(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NetConnectionCubit>(create: (_) => NetConnectionCubit()),
+      ],
+      child: MaterialApp(
+        title: 'Digit41',
+        theme: AppTheme.theme,
+        home: const Splash(),
+      ),
     );
   }
 }

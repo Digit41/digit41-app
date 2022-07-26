@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:digit41/presentation/global_widgets/app_bottom_nav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +22,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 1), () {
-      // todo: first page after splash
-      //navigateToPage(context, , replace: true);
+      navigateToPage(context, const AppBottomNav(), replace: true);
     });
   }
 

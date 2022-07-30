@@ -1,3 +1,4 @@
+import 'package:digit41/presentation/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,16 +15,23 @@ class AppBottomNav extends StatefulWidget {
 class _AppBottomNavState extends State<AppBottomNav> {
   int _bottomItemSelectedIndex = 0;
 
+  final pages = [
+    const Home(),
+    Container(),
+    Container(),
+    Container(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const Center(child: Text('ok')),
+      body: pages[_bottomItemSelectedIndex],
       bottomNavigationBar: Theme(
         data: AppTheme.theme,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _bottomItemSelectedIndex,
-          onTap: (newIndex){
+          onTap: (newIndex) {
             setState(() {
               _bottomItemSelectedIndex = newIndex;
             });
@@ -61,7 +69,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
   }
 
   BottomNavigationBarItem _item(String iconSelected, String iconUnselected,
-          {bool selected = false}) =>
+      {bool selected = false}) =>
       BottomNavigationBarItem(
         icon: Padding(
           padding: const EdgeInsets.only(top: 16.0),

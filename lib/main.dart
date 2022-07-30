@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:digit41/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,10 +21,20 @@ class MyApp extends StatelessWidget {
         BlocProvider<NetConnectionCubit>(create: (_) => NetConnectionCubit()),
       ],
       child: MaterialApp(
+        scrollBehavior: MyCustomScrollBehavior(),
         title: 'Digit41',
         theme: AppTheme.theme,
         home: const Splash(),
       ),
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }

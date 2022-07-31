@@ -20,6 +20,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
     Container(),
     Container(),
     Container(),
+    Container(),
   ];
 
   @override

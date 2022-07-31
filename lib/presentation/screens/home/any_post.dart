@@ -32,7 +32,7 @@ class AnyPost extends StatelessWidget {
                 Text(
                   // todo: this will change
                   'Abo ghanbari',
-                  style: const TextStyle(fontSize: 11.0),
+                  style: const TextStyle(fontSize: 12.0),
                 ),
                 const SizedBox(height: 2.0),
                 Row(
@@ -51,7 +51,7 @@ class AnyPost extends StatelessWidget {
                         'ENS',
                         style: TextStyle(
                           color: Colors.grey.shade500,
-                          fontSize: 9.0,
+                          fontSize: 10.0,
                         ),
                       ),
                     ),
@@ -59,7 +59,7 @@ class AnyPost extends StatelessWidget {
                     Text(
                       // todo: this will change
                       'sofdo.com',
-                      style: const TextStyle(fontSize: 9.0),
+                      style: const TextStyle(fontSize: 10.0),
                     ),
                   ],
                 ),
@@ -91,7 +91,7 @@ class AnyPost extends StatelessWidget {
               ),
               Positioned(
                 bottom: 8.0,
-                width: MediaQuery.of(context).size.width - 100.0,
+                width: MediaQuery.of(context).size.width - 80.0,
                 child: AppButton(
                   onTap: () {},
                   color: Theme.of(context).textTheme.bodyText1!.color,
@@ -122,11 +122,11 @@ class AnyPost extends StatelessWidget {
         Row(
           children: [
             _anyOption(Images.like, '10'),
-            const SizedBox(width: 6.0),
+            const SizedBox(width: 20.0),
             _anyOption(Images.comment, '2'),
-            const SizedBox(width: 8.0),
+            const SizedBox(width: 22.0),
             _anyOption(Images.heartDigit, '2'),
-            const SizedBox(width: 8.0),
+            const SizedBox(width: 22.0),
             Expanded(child: _anyOption(Images.money, Strings.sendTip)),
             SvgPicture.asset(Images.fav),
           ],
@@ -143,6 +143,7 @@ class AnyPost extends StatelessWidget {
                 // todo: this will change
                 text:
                     'sdfdssdcdcsdccsdcdcscvssdvdvdsvdvdsvdvdvsdfdfdfsdfdsfdsdsdcsddvddsvdvdvdvdvdvsdvddsdcd',
+                style: TextStyle(height: 1.5),
               ),
               TextSpan(
                   text: ' ${Strings.more}',
@@ -168,7 +169,7 @@ class AnyPost extends StatelessWidget {
   Widget _anyOption(String icon, String val) => Row(
         children: [
           SvgPicture.asset(icon),
-          const SizedBox(width: 2.0),
+          const SizedBox(width: 4.0),
           Text(val, style: const TextStyle(fontSize: 11.0)),
         ],
       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'any_post.dart';
 import 'custom_appbar.dart';
 
 class Home extends StatelessWidget {
@@ -12,6 +13,12 @@ class Home extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           const CustomAppbar(),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (_, index) => AnyPost(),
+              childCount: 10,
+            ),
+          ),
         ],
       ),
     );

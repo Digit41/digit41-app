@@ -15,4 +15,11 @@ class Images{
   static const accountUnselected = 'assets/icons/account_unselected.svg';
 
   static const bellNotif = 'assets/icons/bell-notification-alarm.svg';
+  static const like = 'assets/icons/like.svg';
+  static const comment = 'assets/icons/comment.svg';
+  static const heartDigit = 'assets/icons/heart-digit41.svg';
+  static const money = 'assets/icons/money.svg';
+  static const fav = 'assets/icons/fav.svg';
+  static const lock = 'assets/icons/lock.svg';
+  static const smallBlackDigit = 'assets/icons/small-black-digit41.svg';
 }

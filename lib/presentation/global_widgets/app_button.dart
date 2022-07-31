@@ -7,6 +7,7 @@ class AppButton extends StatefulWidget {
   final Color? color;
   final GestureTapCallback onTap;
   final Widget? icon;
+  final Widget? extra;
   final bool zeroMargin;
   final bool spaceBetween;
   final double? titleSize;
@@ -15,6 +16,7 @@ class AppButton extends StatefulWidget {
     Key? key,
     required this.title,
     required this.onTap,
+    this.extra,
     this.color,
     this.icon,
     this.titleSize,
@@ -81,24 +83,28 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                 color: widget.color ?? Theme.of(context).primaryColor,
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
               ),
-              child: Row(
-                mainAxisAlignment: widget.spaceBetween
-                    ? MainAxisAlignment.spaceEvenly
-                    : MainAxisAlignment.center,
+              child: Stack(
                 children: [
-                  if (widget.icon != null)
-                    SizedBox(width: 24.0, height: 24.0, child: widget.icon),
-                  if (widget.icon != null) const SizedBox(width: 4.0),
-                  Text(
-                    widget.title,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: widget.titleSize,
-                      fontWeight: FontWeight.bold,
-                      height: 1.0,
-                    ),
+                  Row(
+                    mainAxisAlignment: widget.spaceBetween
+                        ? MainAxisAlignment.spaceEvenly
+                        : MainAxisAlignment.center,
+                    children: [
+                      if (widget.icon != null) widget.icon!,
+                      if (widget.icon != null) const SizedBox(width: 4.0),
+                      Text(
+                        widget.title,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: widget.titleSize,
+                          fontWeight: FontWeight.bold,
+                          height: 1.0,
+                        ),
+                      ),
+                    ],
                   ),
-                  // if (widget.ic) Container()
+                  if (widget.extra != null)
+                    Positioned(right: 0.0, child: widget.extra!),
                 ],
               ),
             ),

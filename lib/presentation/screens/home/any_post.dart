@@ -160,7 +160,7 @@ class AnyPost extends StatelessWidget {
             style: TextStyle(fontSize: 9.0, color: Colors.grey),
           ),
         ),
-        const SizedBox(height: 16.0),
+        const SizedBox(height: 32.0),
       ],
     );
   }

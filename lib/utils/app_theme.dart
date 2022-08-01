@@ -5,11 +5,19 @@ class AppTheme {
 
   static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: Colors.black,
-    brightness: Brightness.dark,
-    primaryColor: primaryColor,
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0x0A0A0ACC),
-      selectedItemColor: primaryColor,
-    )
-  );
+      brightness: Brightness.dark,
+      primaryColor: primaryColor,
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Color(0x0A0A0ACC),
+        selectedItemColor: primaryColor,
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+          ),
+        ),
+      ));
 }

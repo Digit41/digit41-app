@@ -74,7 +74,7 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                   ? EdgeInsets.zero
                   : const EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 13.0,
+                      vertical: 11.0,
                     ),
               margin: widget.zeroMargin
                   ? EdgeInsets.zero

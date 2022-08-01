@@ -18,7 +18,7 @@ class CustomAppbar extends StatelessWidget {
         child: Container(
           height: 65.0,
           alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: const EdgeInsets.only(bottom: 10.0, left: 2.0, right: 2.0),
           decoration: BoxDecoration(
             gradient: RadialGradient(
               radius: 9.0,
@@ -48,59 +48,63 @@ class CustomAppbar extends StatelessWidget {
         ),
       ),
       flexibleSpace: FlexibleSpaceBar(
-        background: Column(
-          children: [
-            const SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  Strings.totalBalance,
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 10.0,
+        background: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 20.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    Strings.totalBalance,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 10.0,
+                    ),
                   ),
-                ),
-                SvgPicture.asset(Images.bellNotif),
-              ],
-            ),
-            const SizedBox(height: 2.0),
-            Row(
-              children: [
-                SvgPicture.asset(
-                  Images.splashLogo,
-                  width: 20.0,
-                  height: 20.0,
-                ),
-                const SizedBox(width: 8.0),
-                Text('2,344 DGT', style: const TextStyle(fontSize: 18.0)),
-                const SizedBox(width: 8.0),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.green.withAlpha(90),
-                      borderRadius: BorderRadius.circular(10.0)),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6.0,
-                    vertical: 3.0,
-                  ),
-                  child: Text(
-                    // todo: this will change
-                    '+3.5',
-                    style: const TextStyle(fontSize: 10.0, color: Colors.green),
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 10.0),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                // todo: this will change
-                'ETH 1500',
-                style: const TextStyle(fontSize: 12.0),
+                  SvgPicture.asset(Images.bellNotif),
+                ],
               ),
-            ),
-          ],
+              const SizedBox(height: 2.0),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    Images.splashLogo,
+                    width: 20.0,
+                    height: 20.0,
+                  ),
+                  const SizedBox(width: 8.0),
+                  Text('2,344 DGT', style: const TextStyle(fontSize: 18.0)),
+                  const SizedBox(width: 8.0),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.green.withAlpha(90),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6.0,
+                      vertical: 3.0,
+                    ),
+                    child: Text(
+                      // todo: this will change
+                      '+3.5',
+                      style:
+                          const TextStyle(fontSize: 10.0, color: Colors.green),
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  // todo: this will change
+                  'ETH 1500',
+                  style: const TextStyle(fontSize: 12.0),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

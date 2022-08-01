@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'any_post.dart';
+import '../post/any_post.dart';
 import 'custom_appbar.dart';
 
 class Home extends StatelessWidget {

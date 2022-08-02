@@ -5,4 +5,9 @@ class Strings{
   static const sendTip = 'Send Tip';
   static const more = 'More';
   static const unlockFor = 'Unlock for ';
+  static const unlock = 'Unlock';
+  static const unlockItem = 'Unlock the item';
+  static const creator = 'CREATOR';
+  static const price = 'PRICE';
+  static const totalWalletBalance = 'TOTAL WALLET BALANCE';
 }

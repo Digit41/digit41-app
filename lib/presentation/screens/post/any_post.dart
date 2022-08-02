@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
+import '../../global_widgets/app_bottom_sheet.dart';
+import 'unlock_post.dart';
 import 'widgets/post_media.dart';
 import 'widgets/post_top_info.dart';
 
@@ -15,7 +17,16 @@ class AnyPost extends StatelessWidget {
     return Column(
       children: [
         const PostTopInfo(),
-        const PostMedia(),
+        PostMedia(
+          btnOnTap: () {
+            showGeneralBottomSheet(
+              context,
+              title: Strings.unlock,
+              child: const UnlockPost(),
+              heightFactor: 0.85,
+            );
+          },
+        ),
         Row(
           children: [
             _anyOption(Images.like, '10'),

@@ -74,7 +74,7 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                   ? EdgeInsets.zero
                   : const EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 11.0,
+                      vertical: 14.0,
                     ),
               margin: widget.zeroMargin
                   ? EdgeInsets.zero
@@ -98,7 +98,6 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                           color: Colors.black,
                           fontSize: widget.titleSize,
                           fontWeight: FontWeight.bold,
-                          height: 1.0,
                         ),
                       ),
                     ],

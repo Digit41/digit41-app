@@ -5,32 +5,48 @@ void showGeneralBottomSheet(
   String? title,
   bool dismissible = true,
   Widget? child,
+  double heightFactor = 0.6,
 }) {
   showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (_) {
-      return WillPopScope(
-        onWillPop: () async {
-          return dismissible;
-        },
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10.0, right: 16.0, left: 16.0),
+      return FractionallySizedBox(
+        heightFactor: heightFactor,
+        child: WillPopScope(
+          onWillPop: () async {
+            return dismissible;
+          },
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(title ?? ''),
-                  if (dismissible)
-                    IconButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      icon: const Icon(Icons.clear),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 16.0,
+                  right: 16.0,
+                  top: 10.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(title ?? ''),
                     ),
-                ],
+                    if (dismissible)
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(Icons.clear),
+                      ),
+                  ],
+                ),
               ),
-              if (child != null) child,
+              if (child != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  child: child,
+                ),
             ],
           ),
         ),

@@ -4,17 +4,16 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../utils/images_path.dart';
 import '../../../../utils/strings.dart';
-import '../../../global_widgets/app_bottom_sheet.dart';
 import '../../../global_widgets/app_button.dart';
 
 class PostMedia extends StatelessWidget {
-  final bool withBtn;
+  final GestureTapCallback? btnOnTap;
   final double width;
   final double height;
 
   const PostMedia(
       {Key? key,
-      this.withBtn = true,
+      this.btnOnTap,
       this.width = double.infinity,
       this.height = 260.0})
       : super(key: key);
@@ -30,27 +29,23 @@ class PostMedia extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Blur(
-            blur: 10.0,
             blurColor: Colors.grey,
+            borderRadius: BorderRadius.circular(6.0),
             // todo: this will change
-            child: FlutterLogo(
-              size: height,
-            ),
+            child: Image.network('https://s6.uupload.ir/files/image_klio.png'),
           ),
           Positioned(
-            top: 80.0,
+            top: btnOnTap == null ? height / 2.3 : 80.0,
             left: 0.0,
             right: 0.0,
             child: SvgPicture.asset(Images.lock),
           ),
-          if (withBtn)
+          if (btnOnTap != null)
             Positioned(
               bottom: 8.0,
               width: MediaQuery.of(context).size.width - 80.0,
               child: AppButton(
-                onTap: () {
-                  showGeneralBottomSheet(context, title: 'unn');
-                },
+                onTap: btnOnTap!,
                 color: Theme.of(context).textTheme.bodyText1!.color,
                 title: '${Strings.unlockFor} 3 DGT',
                 titleSize: 11.0,

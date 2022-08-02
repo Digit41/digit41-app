@@ -5,14 +5,12 @@ void showGeneralBottomSheet(
   String? title,
   bool dismissible = true,
   Widget? child,
-  double heightFactor = 0.6,
 }) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     builder: (_) {
-      return FractionallySizedBox(
-        heightFactor: heightFactor,
+      return SingleChildScrollView(
         child: WillPopScope(
           onWillPop: () async {
             return dismissible;

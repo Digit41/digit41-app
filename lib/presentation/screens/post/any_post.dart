@@ -23,7 +23,6 @@ class AnyPost extends StatelessWidget {
               context,
               title: Strings.unlock,
               child: const UnlockPost(),
-              heightFactor: 0.85,
             );
           },
         ),

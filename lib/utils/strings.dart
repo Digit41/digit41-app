@@ -19,4 +19,8 @@ class Strings{
   static const amountOf = 'Amount of';
   static const note = 'Note';
   static const optional = 'optional';
+  static const congrates = 'Congrates';
+  static const item = 'Item';
+  static const successfully = 'successfully';
+  static const unlocked = 'unlocked';
 }

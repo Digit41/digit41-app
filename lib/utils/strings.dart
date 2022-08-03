@@ -10,4 +10,13 @@ class Strings{
   static const creator = 'CREATOR';
   static const price = 'PRICE';
   static const totalWalletBalance = 'TOTAL WALLET BALANCE';
+  static const to = 'to';
+  static const please = 'please';
+  static const enter = 'enter';
+  static const number = 'number';
+  static const balance = 'Balance';
+  static const pay = 'Pay';
+  static const amountOf = 'Amount of';
+  static const note = 'Note';
+  static const optional = 'optional';
 }

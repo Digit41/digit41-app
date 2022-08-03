@@ -7,6 +7,7 @@ class AppTextFormField extends StatefulWidget {
   final FocusNode focusNode = FocusNode();
   final TextInputType? textInputType;
   final String hint;
+  final int maxLine;
   final int? length;
   final bool showLengthFail;
   final FocusNode? nextFocusNode;
@@ -20,6 +21,7 @@ class AppTextFormField extends StatefulWidget {
   AppTextFormField({
     Key? key,
     required this.hint,
+    this.maxLine = 1,
     this.textInputType,
     this.length,
     this.showLengthFail = true,
@@ -61,12 +63,14 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           ? TextInputAction.next
           : TextInputAction.done,
       textDirection: widget.textDirection,
+      maxLines: widget.maxLine,
       enabled: widget.enable,
       obscureText: widget.obscure,
       keyboardType: widget.textInputType ?? TextInputType.text,
       validator: widget.validator ?? _selfValidator,
       decoration: InputDecoration(
         hintText: widget.hint,
+        hintStyle: const TextStyle(fontSize: 13.0),
         counterText: '',
         suffixIcon: widget.suffixIcon,
         prefixIcon: widget.prefixIcon,

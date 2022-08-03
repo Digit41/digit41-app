@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 import '../../global_widgets/app_bottom_sheet.dart';
+import 'send_tip.dart';
 import 'unlock_post.dart';
 import 'widgets/post_media.dart';
 import 'widgets/post_top_info.dart';
@@ -34,7 +35,19 @@ class AnyPost extends StatelessWidget {
             const SizedBox(width: 22.0),
             _anyOption(Images.heartDigit, '2'),
             const SizedBox(width: 22.0),
-            Expanded(child: _anyOption(Images.money, Strings.sendTip)),
+            Expanded(
+              child: _anyOption(
+                Images.money,
+                Strings.sendTip,
+                onTap: () {
+                  showGeneralBottomSheet(
+                    context,
+                    title: '${Strings.sendTip} ${Strings.to}',
+                    child: SendTip(),
+                  );
+                },
+              ),
+            ),
             SvgPicture.asset(Images.fav),
           ],
         ),
@@ -73,11 +86,15 @@ class AnyPost extends StatelessWidget {
     );
   }
 
-  Widget _anyOption(String icon, String val) => Row(
-        children: [
-          SvgPicture.asset(icon),
-          const SizedBox(width: 4.0),
-          Text(val, style: const TextStyle(fontSize: 11.0)),
-        ],
+  Widget _anyOption(String icon, String val, {GestureTapCallback? onTap}) =>
+      GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            SvgPicture.asset(icon),
+            const SizedBox(width: 4.0),
+            Text(val, style: const TextStyle(fontSize: 11.0)),
+          ],
+        ),
       );
 }

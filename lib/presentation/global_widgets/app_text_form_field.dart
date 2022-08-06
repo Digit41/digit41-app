@@ -46,9 +46,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   void initState() {
     super.initState();
     widget.focusNode.addListener(() {
-      if (widget.focusNode.hasFocus) {
+      if (widget.focusNode.hasFocus && filled) {
         setState(() {
           filled = false;
+        });
+      } else if (widget.controller.text.isEmpty) {
+        setState(() {
+          filled = true;
         });
       }
     });

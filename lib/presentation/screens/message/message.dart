@@ -6,6 +6,7 @@ import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 import '../../global_widgets/app_button.dart';
 import '../../global_widgets/app_text_form_field.dart';
+import 'widgets/any_chat_account.dart';
 
 class Message extends StatelessWidget {
   Message({Key? key}) : super(key: key);
@@ -33,6 +34,21 @@ class Message extends StatelessWidget {
               style: TextStyle(fontSize: AppTheme.lFontSize)),
           const SizedBox(height: 8.0),
           _search,
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: 32.0),
+              itemBuilder: (_, int index) => const AnyChatAccount(),
+              separatorBuilder: (_, int index) => const Divider(height: 20.0),
+              itemCount: 10,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _emptyMessages() => Column(
+        children: [
           const SizedBox(height: 72.0),
           Center(
             child: Image.asset(Images.astronaut, width: 220.0, height: 220.0),
@@ -46,7 +62,5 @@ class Message extends StatelessWidget {
           const SizedBox(height: 32.0),
           AppButton(title: Strings.startConversation, onTap: () {}),
         ],
-      ),
-    );
-  }
+      );
 }

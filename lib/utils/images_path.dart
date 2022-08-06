@@ -24,4 +24,5 @@ class Images{
   static const smallBlackDigit = 'assets/icons/small-black-digit41.svg';
 
   static const astronaut = 'assets/images/astronaut.png';
+  static const chatAccountDefault = 'assets/images/chat_account_default.svg';
 }

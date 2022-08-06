@@ -1,9 +1,10 @@
-import 'package:digit41/presentation/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../utils/app_theme.dart';
 import '../../utils/images_path.dart';
+import '../screens/home/home.dart';
+import '../screens/message/message.dart';
 
 class AppBottomNav extends StatefulWidget {
   const AppBottomNav({Key? key}) : super(key: key);
@@ -16,8 +17,8 @@ class _AppBottomNavState extends State<AppBottomNav> {
   int _bottomItemSelectedIndex = 0;
 
   final pages = [
+    Message(),
     const Home(),
-    Container(),
     Container(),
     Container(),
     Container(),

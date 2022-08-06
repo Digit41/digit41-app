@@ -22,4 +22,6 @@ class Images{
   static const fav = 'assets/icons/fav.svg';
   static const lock = 'assets/icons/lock.svg';
   static const smallBlackDigit = 'assets/icons/small-black-digit41.svg';
+
+  static const astronaut = 'assets/images/astronaut.png';
 }

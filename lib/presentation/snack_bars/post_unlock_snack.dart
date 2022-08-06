@@ -32,7 +32,7 @@ class PostUnlockSnack extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${Strings.congrates}!',
+                  '${Strings.congrats}!',
                   style: Theme.of(context).textTheme.bodyText2?.merge(
                         TextStyle(
                           fontSize: AppTheme.mFontSize,

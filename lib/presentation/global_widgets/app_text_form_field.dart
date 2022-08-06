@@ -14,6 +14,7 @@ class AppTextFormField extends StatefulWidget {
   final TextDirection? textDirection;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
+  final bool hidePrefixAfterTyping;
   final bool obscure;
   final bool enable;
   final FormFieldValidator<String>? validator;
@@ -30,6 +31,7 @@ class AppTextFormField extends StatefulWidget {
     this.textDirection,
     this.suffixIcon,
     this.prefixIcon,
+    this.hidePrefixAfterTyping = false,
     this.obscure = false,
     this.enable = true,
     this.validator,
@@ -41,20 +43,21 @@ class AppTextFormField extends StatefulWidget {
 }
 
 class _AppTextFormFieldState extends State<AppTextFormField> {
-  bool filled = true;
+  bool _filled = true;
+  bool _hidePrefix = false;
   final Color _backColor = const Color(0xff292929);
 
   @override
   void initState() {
     super.initState();
     widget.focusNode.addListener(() {
-      if (widget.focusNode.hasFocus && filled) {
+      if (widget.focusNode.hasFocus && _filled) {
         setState(() {
-          filled = false;
+          _filled = false;
         });
       } else if (widget.controller.text.isEmpty) {
         setState(() {
-          filled = true;
+          _filled = true;
         });
       }
     });
@@ -73,16 +76,17 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       enabled: widget.enable,
       obscureText: widget.obscure,
       keyboardType: widget.textInputType ?? TextInputType.text,
+      onFieldSubmitted: _selfSubmit,
       validator: widget.validator ?? _selfValidator,
-      onChanged: widget.onChanged,
+      onChanged: widget.onChanged ?? _selfOnChange,
       decoration: InputDecoration(
         hintText: widget.hint,
         hintStyle: const TextStyle(fontSize: 13.0),
         counterText: '',
         suffixIcon: widget.suffixIcon,
-        prefixIcon: widget.prefixIcon,
+        prefixIcon: _hidePrefix ? null : widget.prefixIcon,
         fillColor: _backColor,
-        filled: filled,
+        filled: _filled,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
           borderSide: BorderSide(color: _backColor),
@@ -115,8 +119,21 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     }
   }
 
-  void selfSubmit(String value) {
+  void _selfSubmit(String value) {
     widget.focusNode.unfocus();
     if (widget.nextFocusNode != null) widget.nextFocusNode!.requestFocus();
+  }
+
+  ValueChanged<String>? _selfOnChange(String val) {
+    if (widget.hidePrefixAfterTyping && val.isNotEmpty) {
+      setState(() {
+        _hidePrefix = true;
+      });
+    } else if (widget.hidePrefixAfterTyping && val.isEmpty) {
+      setState(() {
+        _hidePrefix = false;
+      });
+    }
+    return null;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../utils/app_theme.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 import '../../global_widgets/app_bottom_sheet.dart';
@@ -56,7 +57,7 @@ class AnyPost extends StatelessWidget {
           text: TextSpan(
             style: TextStyle(
               color: Theme.of(context).textTheme.bodyText1!.color,
-              fontSize: 11.0,
+              fontSize: AppTheme.sFontSize,
             ),
             children: [
               const TextSpan(
@@ -73,12 +74,12 @@ class AnyPost extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8.0),
-        const Align(
+        Align(
           alignment: Alignment.centerLeft,
           child: Text(
             // todo: this will change
             '2 days ago',
-            style: TextStyle(fontSize: 9.0, color: Colors.grey),
+            style: TextStyle(fontSize: AppTheme.ssFontSize, color: Colors.grey),
           ),
         ),
         const SizedBox(height: 32.0),
@@ -93,7 +94,7 @@ class AnyPost extends StatelessWidget {
           children: [
             SvgPicture.asset(icon),
             const SizedBox(width: 4.0),
-            Text(val, style: const TextStyle(fontSize: 11.0)),
+            Text(val, style: TextStyle(fontSize: AppTheme.sFontSize)),
           ],
         ),
       );

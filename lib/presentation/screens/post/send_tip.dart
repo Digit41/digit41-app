@@ -3,6 +3,7 @@ import 'package:digit41/presentation/global_widgets/app_text_form_field.dart';
 import 'package:digit41/presentation/screens/post/widgets/post_top_info.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/app_theme.dart';
 import '../../../utils/strings.dart';
 
 class SendTip extends StatelessWidget {
@@ -27,9 +28,9 @@ class SendTip extends StatelessWidget {
         const SizedBox(height: 24.0),
         Form(key: _formKay, child: _amount),
         const SizedBox(height: 8.0),
-        const Text(
+        Text(
           '${Strings.balance}: 54 DGT',
-          style: TextStyle(color: Colors.grey, fontSize: 12.0),
+          style: TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
         ),
         const SizedBox(height: 16.0),
         _note,

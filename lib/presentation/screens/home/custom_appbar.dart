@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../utils/app_theme.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 
@@ -33,14 +34,16 @@ class CustomAppbar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 Strings.tBalance,
-                style: TextStyle(color: Colors.grey, fontSize: 11.0),
+                style:
+                    TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
               ),
               Text(
                 // todo: this will change
                 '232,22 DGT',
-                style: TextStyle(color: Colors.white, fontSize: 11.0),
+                style: TextStyle(
+                    color: Colors.white, fontSize: AppTheme.sFontSize),
               ),
               Text(''.padRight(Strings.tBalance.length)),
             ],
@@ -56,11 +59,11 @@ class CustomAppbar extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     Strings.totalBalance,
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 10.0,
+                      fontSize: AppTheme.ssFontSize,
                     ),
                   ),
                   SvgPicture.asset(Images.bellNotif),
@@ -75,7 +78,8 @@ class CustomAppbar extends StatelessWidget {
                     height: 20.0,
                   ),
                   const SizedBox(width: 8.0),
-                  Text('2,344 DGT', style: const TextStyle(fontSize: 18.0)),
+                  Text('2,344 DGT',
+                      style: TextStyle(fontSize: AppTheme.lFontSize)),
                   const SizedBox(width: 8.0),
                   Container(
                     decoration: BoxDecoration(
@@ -88,8 +92,8 @@ class CustomAppbar extends StatelessWidget {
                     child: Text(
                       // todo: this will change
                       '+3.5',
-                      style:
-                          const TextStyle(fontSize: 10.0, color: Colors.green),
+                      style: TextStyle(
+                          fontSize: AppTheme.ssFontSize, color: Colors.green),
                     ),
                   )
                 ],
@@ -100,7 +104,7 @@ class CustomAppbar extends StatelessWidget {
                 child: Text(
                   // todo: this will change
                   'ETH 1500',
-                  style: const TextStyle(fontSize: 12.0),
+                  style: TextStyle(fontSize: AppTheme.sFontSize),
                 ),
               ),
             ],

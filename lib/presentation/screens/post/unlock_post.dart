@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import '../../../utils/app_theme.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 import '../../global_widgets/app_button.dart';
@@ -18,10 +19,10 @@ class UnlockPost extends StatelessWidget {
       children: [
         const PostMedia(height: 210.0),
         const SizedBox(height: 8.0),
-        const PostTopInfo(
+        PostTopInfo(
           nameTrailing: Text(
             Strings.creator,
-            style: TextStyle(fontSize: 9.0),
+            style: TextStyle(fontSize: AppTheme.ssFontSize),
           ),
         ),
         const SizedBox(height: 24.0),
@@ -45,20 +46,22 @@ class UnlockPost extends StatelessWidget {
     children: [
       Text(
         title,
-        style: const TextStyle(color: Colors.grey, fontSize: 13.0),
-      ),
+            style: TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
+          ),
       const SizedBox(height: 12.0),
       Row(
         children: [
-          SvgPicture.asset(Images.splashLogo, width: 24.0, height: 24.0),
-          const SizedBox(width: 8.0),
-          Text('$amount DGT', style: const TextStyle(fontSize: 20.0)),
-          const SizedBox(width: 8.0),
-          Text(
-            '(${double.parse(amount) / 10} ETH)',
-            style: const TextStyle(fontSize: 13.0, color: Colors.grey),
-          ),
-        ],
+              SvgPicture.asset(Images.splashLogo, width: 24.0, height: 24.0),
+              const SizedBox(width: 8.0),
+              Text('$amount DGT',
+                  style: TextStyle(fontSize: AppTheme.lFontSize)),
+              const SizedBox(width: 8.0),
+              Text(
+                '(${double.parse(amount) / 10} ETH)',
+                style:
+                    TextStyle(fontSize: AppTheme.sFontSize, color: Colors.grey),
+              ),
+            ],
       ),
     ],
   );

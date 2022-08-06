@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/app_theme.dart';
 import '../../utils/strings.dart';
 
 class AppTextFormField extends StatefulWidget {
@@ -81,7 +82,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       onChanged: widget.onChanged ?? _selfOnChange,
       decoration: InputDecoration(
         hintText: widget.hint,
-        hintStyle: const TextStyle(fontSize: 13.0),
+        hintStyle: TextStyle(fontSize: AppTheme.sFontSize),
         counterText: '',
         suffixIcon: widget.suffixIcon,
         prefixIcon: _hidePrefix
@@ -91,8 +92,8 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                 child: widget.prefixIcon,
               ),
         prefixIconConstraints: const BoxConstraints(
-          minHeight: 20.0,
-          minWidth: 20.0,
+          minHeight: 18.0,
+          minWidth: 18.0,
         ),
         fillColor: _backColor,
         filled: _filled,

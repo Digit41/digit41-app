@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/app_theme.dart';
 import '../../utils/strings.dart';
 
 class PostUnlockSnack extends StatelessWidget {
@@ -33,8 +34,8 @@ class PostUnlockSnack extends StatelessWidget {
                 Text(
                   '${Strings.congrates}!',
                   style: Theme.of(context).textTheme.bodyText2?.merge(
-                        const TextStyle(
-                          fontSize: 15.0,
+                        TextStyle(
+                          fontSize: AppTheme.mFontSize,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),

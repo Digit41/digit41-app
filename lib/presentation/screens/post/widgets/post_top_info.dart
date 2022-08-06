@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 
 class PostTopInfo extends StatelessWidget {
@@ -33,7 +34,7 @@ class PostTopInfo extends StatelessWidget {
                   Text(
                     // todo: this will change
                     'Abo ghanbari',
-                    style: const TextStyle(fontSize: 12.0),
+                    style: TextStyle(fontSize: AppTheme.sFontSize),
                   ),
                   nameTrailing,
                 ],
@@ -55,7 +56,7 @@ class PostTopInfo extends StatelessWidget {
                       'ENS',
                       style: TextStyle(
                         color: Colors.grey.shade500,
-                        fontSize: 10.0,
+                        fontSize: AppTheme.ssFontSize,
                       ),
                     ),
                   ),
@@ -63,7 +64,7 @@ class PostTopInfo extends StatelessWidget {
                   Text(
                     // todo: this will change
                     'sofdo.com',
-                    style: const TextStyle(fontSize: 10.0),
+                    style: TextStyle(fontSize: AppTheme.ssFontSize),
                   ),
                 ],
               ),

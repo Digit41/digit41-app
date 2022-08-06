@@ -2,6 +2,7 @@ import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../../../../utils/strings.dart';
 import '../../../global_widgets/app_button.dart';
@@ -54,9 +55,9 @@ class PostMedia extends StatelessWidget {
                   child: Text(
                     // todo: this will change
                     'ETH 0.5',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 8.0,
+                      fontSize: AppTheme.ssFontSize,
                     ),
                   ),
                 ),

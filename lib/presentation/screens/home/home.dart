@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../post/any_post.dart';
-import 'custom_appbar.dart';
+import '../post/widgets/any_post.dart';
+import 'widgets/custom_appbar.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);

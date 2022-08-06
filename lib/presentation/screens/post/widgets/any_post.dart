@@ -2,14 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../utils/app_theme.dart';
-import '../../../utils/images_path.dart';
-import '../../../utils/strings.dart';
-import '../../global_widgets/app_bottom_sheet.dart';
-import 'send_tip.dart';
-import 'unlock_post.dart';
-import 'widgets/post_media.dart';
-import 'widgets/post_top_info.dart';
+import '../../../../utils/app_theme.dart';
+import '../../../../utils/images_path.dart';
+import '../../../../utils/strings.dart';
+import '../../../global_widgets/app_bottom_sheet.dart';
+import '../send_tip.dart';
+import '../unlock_post.dart';
+import 'post_media.dart';
+import 'post_top_info.dart';
 
 class AnyPost extends StatelessWidget {
   const AnyPost({Key? key}) : super(key: key);

@@ -17,6 +17,7 @@ class AppTextFormField extends StatefulWidget {
   final bool obscure;
   final bool enable;
   final FormFieldValidator<String>? validator;
+  ValueChanged<String>? onChanged;
 
   AppTextFormField({
     Key? key,
@@ -32,6 +33,7 @@ class AppTextFormField extends StatefulWidget {
     this.obscure = false,
     this.enable = true,
     this.validator,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -72,6 +74,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       obscureText: widget.obscure,
       keyboardType: widget.textInputType ?? TextInputType.text,
       validator: widget.validator ?? _selfValidator,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         hintText: widget.hint,
         hintStyle: const TextStyle(fontSize: 13.0),

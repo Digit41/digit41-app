@@ -84,7 +84,16 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         hintStyle: const TextStyle(fontSize: 13.0),
         counterText: '',
         suffixIcon: widget.suffixIcon,
-        prefixIcon: _hidePrefix ? null : widget.prefixIcon,
+        prefixIcon: _hidePrefix
+            ? null
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: widget.prefixIcon,
+              ),
+        prefixIconConstraints: const BoxConstraints(
+          minHeight: 20.0,
+          minWidth: 20.0,
+        ),
         fillColor: _backColor,
         filled: _filled,
         enabledBorder: OutlineInputBorder(

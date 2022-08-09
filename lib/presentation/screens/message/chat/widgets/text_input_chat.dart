@@ -64,7 +64,7 @@ class _TextInputChatState extends State<TextInputChat> {
           ),
           const SizedBox(width: 8.0),
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 100),
+            duration: const Duration(milliseconds: 50),
             child: _isWriting
                 ? _option(
                     Images.sendMsgTxt,

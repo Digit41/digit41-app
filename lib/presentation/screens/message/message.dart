@@ -43,6 +43,9 @@ class Message extends StatelessWidget {
           // todo: check empty message and show EmptyWidget
           Expanded(
             child: ListView.separated(
+              /// needed key for rebuild and handle dismissible function of Slidable
+              /// also todo: itemCount must be have interaction because currently have error
+              key: UniqueKey(),
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               itemBuilder: (_, int index) => const AnyChatAccount(),
               separatorBuilder: (_, int index) => const Divider(height: 0.0),

@@ -51,18 +51,11 @@ class Message extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: ElevatedButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(vertical: 12.0),
-          child: Icon(Icons.add, color: Colors.black),
-        ),
+        mini: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        child: const Icon(Icons.add, color: Colors.black),
       ),
     );
   }

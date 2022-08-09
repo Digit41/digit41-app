@@ -11,28 +11,25 @@ class EmptyMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        children: [
-          const SizedBox(height: 72.0),
-          Center(
-            child: Image.asset(Images.astronaut, width: 220.0, height: 220.0),
+    return Column(
+      children: [
+        const SizedBox(height: 72.0),
+        Center(
+          child: Image.asset(Images.astronaut, width: 220.0, height: 220.0),
+        ),
+        const Center(
+          child: Text(
+            Strings.dontHaveAnyMess,
+            style: TextStyle(color: Colors.grey),
           ),
-          const Center(
-            child: Text(
-              Strings.dontHaveAnyMess,
-              style: TextStyle(color: Colors.grey),
-            ),
+        ),
+        const SizedBox(height: 32.0),
+        if (onTap != null)
+          AppButton(
+            title: Strings.startConversation,
+            onTap: onTap!,
           ),
-          const SizedBox(height: 32.0),
-          if (onTap != null)
-            AppButton(
-              title: Strings.startConversation,
-              onTap: onTap!,
-            ),
-        ],
-      ),
+      ],
     );
   }
 }

@@ -83,7 +83,7 @@ class CustomAppbar extends StatelessWidget {
                   const SizedBox(width: 8.0),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.green.withAlpha(90),
+                        color: Theme.of(context).primaryColor.withAlpha(90),
                         borderRadius: BorderRadius.circular(10.0)),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6.0,
@@ -93,7 +93,9 @@ class CustomAppbar extends StatelessWidget {
                       // todo: this will change
                       '+3.5',
                       style: TextStyle(
-                          fontSize: AppTheme.ssFontSize, color: Colors.green),
+                        fontSize: AppTheme.ssFontSize,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   )
                 ],

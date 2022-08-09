@@ -46,7 +46,6 @@ class AppTextFormField extends StatefulWidget {
 class _AppTextFormFieldState extends State<AppTextFormField> {
   bool _filled = true;
   bool _hidePrefix = false;
-  final Color _backColor = const Color(0xff292929);
 
   @override
   void initState() {
@@ -95,11 +94,11 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           minHeight: 18.0,
           minWidth: 18.0,
         ),
-        fillColor: _backColor,
+        fillColor: AppTheme.grey,
         filled: _filled,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
-          borderSide: BorderSide(color: _backColor),
+          borderSide: const BorderSide(color: AppTheme.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),

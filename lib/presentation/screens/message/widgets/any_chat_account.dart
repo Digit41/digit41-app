@@ -15,12 +15,15 @@ class AnyChatAccount extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      endActionPane: const ActionPane(
+      key: UniqueKey(),
+      endActionPane: ActionPane(
         extentRatio: 0.2,
-        motion: ScrollMotion(),
+        motion: const ScrollMotion(),
+        // A pane can dismiss the Slidable.
+        dismissible: DismissiblePane(onDismissed: () {}),
         children: [
           SlidableAction(
-            onPressed: null,
+            onPressed: (_) {},
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -46,7 +49,7 @@ class AnyChatAccount extends StatelessWidget {
               'sffsdfsfwefewfewfefwefewfewjfhwefjrnjkrngnbrejhgjerbgbhrejbghjbrgh',
               overflow: TextOverflow.ellipsis,
               style:
-              TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
+                  TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
             ),
           ],
         ),

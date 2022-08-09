@@ -24,31 +24,46 @@ class Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 32.0),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            Strings.messages,
-            style: TextStyle(fontSize: AppTheme.lFontSize),
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 32.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              Strings.messages,
+              style: TextStyle(fontSize: AppTheme.lFontSize),
+            ),
+          ),
+          const SizedBox(height: 8.0),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: _search,
+          ),
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              itemBuilder: (_, int index) => const AnyChatAccount(),
+              separatorBuilder: (_, int index) => const Divider(height: 0.0),
+              itemCount: 10,
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () {},
+        style: ElevatedButton.styleFrom(
+          primary: Theme.of(context).primaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
           ),
         ),
-        const SizedBox(height: 8.0),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: _search,
+        child: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 12.0),
+          child: Icon(Icons.add, color: Colors.black),
         ),
-        Expanded(
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            itemBuilder: (_, int index) => const AnyChatAccount(),
-            separatorBuilder: (_, int index) => const Divider(height: 0.0),
-            itemCount: 10,
-          ),
-        ),
-      ],
+      ),
     );
   }
 

@@ -24,43 +24,51 @@ class Message extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 32.0),
-          Text(Strings.messages,
-              style: TextStyle(fontSize: AppTheme.lFontSize)),
-          const SizedBox(height: 8.0),
-          _search,
-          Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 32.0),
-              itemBuilder: (_, int index) => const AnyChatAccount(),
-              separatorBuilder: (_, int index) => const Divider(height: 20.0),
-              itemCount: 10,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 32.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            Strings.messages,
+            style: TextStyle(fontSize: AppTheme.lFontSize),
           ),
-        ],
-      ),
+        ),
+        const SizedBox(height: 8.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: _search,
+        ),
+        Expanded(
+          child: ListView.separated(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            itemBuilder: (_, int index) => const AnyChatAccount(),
+            separatorBuilder: (_, int index) => const Divider(height: 0.0),
+            itemCount: 10,
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _emptyMessages() => Column(
-        children: [
-          const SizedBox(height: 72.0),
-          Center(
-            child: Image.asset(Images.astronaut, width: 220.0, height: 220.0),
-          ),
-          const Center(
-            child: Text(
-              Strings.dontHaveAnyMess,
-              style: TextStyle(color: Colors.grey),
+  Widget _emptyMessages() => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: Column(
+          children: [
+            const SizedBox(height: 72.0),
+            Center(
+              child: Image.asset(Images.astronaut, width: 220.0, height: 220.0),
             ),
-          ),
-          const SizedBox(height: 32.0),
-          AppButton(title: Strings.startConversation, onTap: () {}),
-        ],
+            const Center(
+              child: Text(
+                Strings.dontHaveAnyMess,
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            const SizedBox(height: 32.0),
+            AppButton(title: Strings.startConversation, onTap: () {}),
+          ],
+        ),
       );
 }

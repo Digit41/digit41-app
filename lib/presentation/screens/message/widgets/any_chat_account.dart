@@ -5,7 +5,9 @@ import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 
 class AnyChatAccount extends StatelessWidget {
-  const AnyChatAccount({Key? key}) : super(key: key);
+  final bool showTrailing;
+
+  const AnyChatAccount({Key? key, this.showTrailing = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,31 +26,40 @@ class AnyChatAccount extends StatelessWidget {
           ),
         ],
       ),
-      trailing: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(
-            '12:21 AM',
-            style: TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
-          ),
-          const SizedBox(height: 6.0),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25.0),
-              color: Colors.red,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 5.0),
-            margin: const EdgeInsets.only(bottom: 2.5),
-            child: Text(
-              '2',
+      trailing: Visibility(
+        visible: showTrailing,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              '12:21 AM',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.grey,
                 fontSize: AppTheme.sFontSize,
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 6.0),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25.0),
+                color: Colors.red,
+              ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 5.0,
+              ),
+              margin: const EdgeInsets.only(bottom: 2.5),
+              child: Text(
+                '2',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: AppTheme.sFontSize,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -27,4 +27,5 @@ class Strings{
   static const searchForUser = 'Search for any user';
   static const dontHaveAnyMess = 'You don’t have any messages yet';
   static const startConversation = 'Start Conversation';
+  static const typeMsg = 'Type a message';
 }

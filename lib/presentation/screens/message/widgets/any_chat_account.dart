@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
+import '../../../../utils/utils.dart';
+import '../chat/chat.dart';
 
 class AnyChatAccount extends StatelessWidget {
   final bool showTrailing;
@@ -27,6 +29,9 @@ class AnyChatAccount extends StatelessWidget {
         ],
       ),
       child: ListTile(
+        onTap: () {
+          navigateToPage(context, const Chat());
+        },
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16.0,
           vertical: 10.0,
@@ -41,7 +46,7 @@ class AnyChatAccount extends StatelessWidget {
               'sffsdfsfwefewfewfefwefewfewjfhwefjrnjkrngnbrejhgjerbgbhrejbghjbrgh',
               overflow: TextOverflow.ellipsis,
               style:
-                  TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
+              TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
             ),
           ],
         ),

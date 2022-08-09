@@ -22,6 +22,10 @@ class Images{
   static const fav = 'assets/icons/fav.svg';
   static const lock = 'assets/icons/lock.svg';
   static const smallBlackDigit = 'assets/icons/small-black-digit41.svg';
+  static const chatMenu = 'assets/icons/chat_menu.svg';
+  static const sChat = 'assets/icons/s_chat.svg';
+  static const sendMsgTxt = 'assets/icons/send_message_txt.svg';
+  static const attachment = 'assets/icons/attachment.svg';
 
   static const astronaut = 'assets/images/astronaut.png';
   static const chatAccountDefault = 'assets/images/chat_account_default.svg';

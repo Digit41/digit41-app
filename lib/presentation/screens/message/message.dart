@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../utils/app_theme.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
-import '../../global_widgets/app_button.dart';
 import '../../global_widgets/app_text_form_field.dart';
 import 'widgets/any_chat_account.dart';
 
@@ -41,6 +40,7 @@ class Message extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: _search,
           ),
+          // todo: check empty message and show EmptyWidget
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -66,24 +66,4 @@ class Message extends StatelessWidget {
       ),
     );
   }
-
-  Widget _emptyMessages() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 72.0),
-            Center(
-              child: Image.asset(Images.astronaut, width: 220.0, height: 220.0),
-            ),
-            const Center(
-              child: Text(
-                Strings.dontHaveAnyMess,
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-            const SizedBox(height: 32.0),
-            AppButton(title: Strings.startConversation, onTap: () {}),
-          ],
-        ),
-      );
 }

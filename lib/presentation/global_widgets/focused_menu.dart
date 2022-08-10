@@ -215,39 +215,45 @@ class FocusedMenuDetails extends StatelessWidget {
                     ),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                  child: ListView.builder(
-                    itemCount: menuItems.length,
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      FocusedMenuItem item = menuItems[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                          item.onPressed();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(bottom: 1.0),
-                          color: item.backgroundColor ?? Colors.white,
-                          height: itemExtent ?? 50.0,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8.0,
-                              horizontal: 14.0,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                item.title,
-                                if (item.trailingIcon != null)
-                                  item.trailingIcon!
-                              ],
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context).copyWith(
+                      scrollbars: false,
+                    ),
+                    child: ListView.builder(
+                      itemCount: menuItems.length,
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        FocusedMenuItem item = menuItems[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            item.onPressed();
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: const EdgeInsets.only(bottom: 1.0),
+                            color: item.backgroundColor ?? Colors.white,
+                            height: itemExtent ?? 50.0,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 14.0,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  item.title,
+                                  if (item.trailingIcon != null)
+                                    item.trailingIcon!
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

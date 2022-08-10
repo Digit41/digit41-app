@@ -76,19 +76,20 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        key: containerKey,
-        onTap: () async {
-          widget.onPressed();
-          if (widget.openWithTap) {
-            await openMenu(context);
-          }
-        },
-        onLongPress: () async {
-          if (!widget.openWithTap) {
-            await openMenu(context);
-          }
-        },
-        child: widget.child);
+      key: containerKey,
+      onTap: () async {
+        widget.onPressed();
+        if (widget.openWithTap) {
+          await openMenu(context);
+        }
+      },
+      onLongPress: () async {
+        if (!widget.openWithTap) {
+          await openMenu(context);
+        }
+      },
+      child: widget.child,
+    );
   }
 
   Future openMenu(BuildContext context) async {
@@ -217,9 +218,10 @@ class FocusedMenuDetails extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: menuItems.length,
                     padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       FocusedMenuItem item = menuItems[index];
-                      Widget listItem = GestureDetector(
+                      return GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
                           item.onPressed();
@@ -245,22 +247,6 @@ class FocusedMenuDetails extends StatelessWidget {
                           ),
                         ),
                       );
-                      if (animateMenu) {
-                        return TweenAnimationBuilder(
-                          builder: (context, dynamic value, child) {
-                            return Transform(
-                              transform: Matrix4.rotationX(1.5708 * value),
-                              alignment: Alignment.bottomCenter,
-                              child: child,
-                            );
-                          },
-                          tween: Tween(begin: 1.0, end: 0.0),
-                          duration: Duration(milliseconds: index * 200),
-                          child: listItem,
-                        );
-                      } else {
-                        return listItem;
-                      }
                     },
                   ),
                 ),

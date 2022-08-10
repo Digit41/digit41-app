@@ -5,6 +5,7 @@ import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import 'widgets/bubble_chat.dart';
 import 'widgets/bubble_chat_menu.dart';
+import 'widgets/reply.dart';
 import 'widgets/text_input_chat.dart';
 
 class Chat extends StatelessWidget {
@@ -54,6 +55,11 @@ class Chat extends StatelessWidget {
             BubbleChatMenu(child: BubbleChat(send: false)),
             // todo: EmptyMessage(),
             Spacer(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Reply(title: 'scsdfsd', msg: 'sdsfsdf'),
+            ),
+            SizedBox(height: 8.0),
             Align(
               alignment: Alignment.bottomCenter,
               child: TextInputChat(),

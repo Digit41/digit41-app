@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../widgets/empty_message.dart';
+import 'widgets/bubble_chat.dart';
 import 'widgets/text_input_chat.dart';
 
 class Chat extends StatelessWidget {
@@ -20,6 +21,7 @@ class Chat extends StatelessWidget {
             icon: SvgPicture.asset(Images.chatMenu),
           ),
         ],
+        titleSpacing: 0.0,
         title: Row(
           children: [
             SvgPicture.asset(
@@ -48,6 +50,8 @@ class Chat extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Column(
           children: const [
+            BubbleChat(),
+            BubbleChat(send: false),
             EmptyMessage(),
             Spacer(),
             Align(

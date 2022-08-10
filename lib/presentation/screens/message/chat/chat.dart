@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
-import '../widgets/empty_message.dart';
 import 'widgets/bubble_chat.dart';
+import 'widgets/bubble_chat_menu.dart';
 import 'widgets/text_input_chat.dart';
 
 class Chat extends StatelessWidget {
@@ -51,8 +51,8 @@ class Chat extends StatelessWidget {
         child: Column(
           children: const [
             BubbleChat(),
-            BubbleChat(send: false),
-            EmptyMessage(),
+            BubbleChatMenu(child: BubbleChat(send: false)),
+            // todo: EmptyMessage(),
             Spacer(),
             Align(
               alignment: Alignment.bottomCenter,

@@ -9,6 +9,10 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: primaryColor,
     appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+    snackBarTheme: const SnackBarThemeData(
+      backgroundColor: Colors.black,
+      contentTextStyle: TextStyle(color: Colors.white),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Color(0x0A0A0ACC),
       selectedItemColor: primaryColor,

@@ -27,6 +27,7 @@ class Images{
   static const sendMsgTxt = 'assets/icons/send_message_txt.svg';
   static const attachment = 'assets/icons/attachment.svg';
   static const chatSeen = 'assets/icons/chat_seen.svg';
+  static const chatReply = 'assets/icons/chat_reply.svg';
 
   static const astronaut = 'assets/images/astronaut.png';
   static const chatAccountDefault = 'assets/images/chat_account_default.svg';

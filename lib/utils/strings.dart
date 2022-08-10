@@ -28,4 +28,7 @@ class Strings{
   static const dontHaveAnyMess = 'You don’t have any messages yet';
   static const startConversation = 'Start Conversation';
   static const typeMsg = 'Type a message';
+  static const reply = 'Reply';
+  static const copyTxt = 'Copy text';
+  static const copied = 'Copied';
 }

@@ -53,7 +53,7 @@ class BubbleChat extends StatelessWidget {
                       ),
                     ),
                     if (send) const SizedBox(width: 6.0),
-                    if (send) SvgPicture.asset(Images.chatSeen),
+                    if (send) SvgPicture.asset(Images.chatMsgSeen),
                   ],
                 ),
               ),

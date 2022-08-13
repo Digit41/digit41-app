@@ -72,7 +72,7 @@ class _TextInputChatState extends State<TextInputChat> {
                   )
                 : Row(
                     children: [
-                      _option(Images.sChat),
+                      _option(Images.money),
                       const SizedBox(width: 8.0),
                       _option(Images.attachment),
                     ],

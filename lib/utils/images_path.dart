@@ -23,10 +23,10 @@ class Images{
   static const lock = 'assets/icons/lock.svg';
   static const smallBlackDigit = 'assets/icons/small-black-digit41.svg';
   static const chatMenu = 'assets/icons/chat_menu.svg';
-  static const sChat = 'assets/icons/s_chat.svg';
   static const sendMsgTxt = 'assets/icons/send_message_txt.svg';
   static const attachment = 'assets/icons/attachment.svg';
-  static const chatSeen = 'assets/icons/chat_seen.svg';
+  static const chatMsgSent = 'assets/icons/chat_msg_sent.svg';
+  static const chatMsgSeen = 'assets/icons/chat_msg_seen.svg';
   static const chatReply = 'assets/icons/chat_reply.svg';
 
   static const astronaut = 'assets/images/astronaut.png';

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../../../../utils/utils.dart';
+import '../../../snack_bars/top_snack.dart';
 import '../chat/chat.dart';
 
 class AnyChatAccount extends StatelessWidget {
@@ -20,10 +22,14 @@ class AnyChatAccount extends StatelessWidget {
         extentRatio: 0.2,
         motion: const ScrollMotion(),
         // A pane can dismiss the Slidable.
-        dismissible: DismissiblePane(onDismissed: () {}),
+        dismissible: DismissiblePane(onDismissed: () {
+          showTopSnackBar(context, const ChatDeletedSnack());
+        }),
         children: [
           SlidableAction(
-            onPressed: (_) {},
+            onPressed: (_) {
+              showTopSnackBar(context, const ChatDeletedSnack());
+            },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,

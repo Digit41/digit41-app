@@ -1,4 +1,3 @@
-import 'package:digit41/presentation/snack_bars/post_unlock_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -7,6 +6,7 @@ import '../../../utils/app_theme.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 import '../../global_widgets/app_button.dart';
+import '../../snack_bars/top_snack.dart';
 import 'widgets/post_media.dart';
 import 'widgets/post_top_info.dart';
 

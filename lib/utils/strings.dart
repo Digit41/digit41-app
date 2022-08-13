@@ -31,4 +31,5 @@ class Strings{
   static const reply = 'Reply';
   static const copyTxt = 'Copy text';
   static const copied = 'Copied';
+  static const chatDeleted = 'Chat has been deleted';
 }

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:digit41/presentation/screens/message/chat/chat.dart';
+import 'package:digit41/presentation/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         title: 'Digit41',
         theme: AppTheme.theme,
-        home: const Chat(),
+        home: const Splash(),
       ),
     );
   }

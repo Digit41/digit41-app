@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../utils/app_theme.dart';
 import '../../../../../utils/images_path.dart';
 import '../../../../../utils/strings.dart';
+import '../../../../global_widgets/app_bottom_sheet.dart';
+import '../attach.dart';
 
 class TextInputChat extends StatefulWidget {
   const TextInputChat({Key? key}) : super(key: key);
@@ -74,7 +76,9 @@ class _TextInputChatState extends State<TextInputChat> {
                     children: [
                       _option(Images.money),
                       const SizedBox(width: 8.0),
-                      _option(Images.attachment),
+                      _option(Images.attachment, onTap: () {
+                        showGeneralBottomSheet(context, child: const Attach());
+                      }),
                     ],
                   ),
           ),

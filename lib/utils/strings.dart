@@ -32,4 +32,6 @@ class Strings{
   static const copyTxt = 'Copy text';
   static const copied = 'Copied';
   static const chatDeleted = 'Chat has been deleted';
+  static const camera = 'Camera';
+  static const gallery = 'Gallery';
 }

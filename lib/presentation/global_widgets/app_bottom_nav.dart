@@ -17,10 +17,10 @@ class _AppBottomNavState extends State<AppBottomNav> {
   int _bottomItemSelectedIndex = 0;
 
   final pages = [
-    Message(),
     const Home(),
     Container(),
     Container(),
+    Message(),
     Container(),
   ];
 

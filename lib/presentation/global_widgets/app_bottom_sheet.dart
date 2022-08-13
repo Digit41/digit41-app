@@ -45,6 +45,7 @@ void showGeneralBottomSheet(
                   padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: child,
                 ),
+              const SizedBox(height: 20.0),
             ],
           ),
         ),

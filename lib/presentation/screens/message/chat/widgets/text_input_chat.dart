@@ -5,6 +5,7 @@ import '../../../../../utils/app_theme.dart';
 import '../../../../../utils/images_path.dart';
 import '../../../../../utils/strings.dart';
 import '../../../../global_widgets/app_bottom_sheet.dart';
+import '../../../post/send_tip.dart';
 import '../attach.dart';
 
 class TextInputChat extends StatefulWidget {
@@ -74,7 +75,13 @@ class _TextInputChatState extends State<TextInputChat> {
                   )
                 : Row(
                     children: [
-                      _option(Images.money),
+                      _option(Images.money, onTap: () {
+                        showGeneralBottomSheet(
+                          context,
+                          title: '${Strings.sendTip} ${Strings.to}',
+                          child: SendTip(),
+                        );
+                      }),
                       const SizedBox(width: 8.0),
                       _option(Images.attachment, onTap: () {
                         showGeneralBottomSheet(context, child: const Attach());

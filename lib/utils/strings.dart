@@ -34,4 +34,6 @@ class Strings{
   static const chatDeleted = 'Chat has been deleted';
   static const camera = 'Camera';
   static const gallery = 'Gallery';
+  static const successful = 'Successful';
+  static const youSend = 'You send';
 }

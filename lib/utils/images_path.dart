@@ -33,4 +33,5 @@ class Images{
   static const chatAccountDefault = 'assets/images/chat_account_default.svg';
   static const camera = 'assets/images/camera.svg';
   static const gallery = 'assets/images/gallery.svg';
+  static const ribbons = 'assets/images/ribbons.svg';
 }

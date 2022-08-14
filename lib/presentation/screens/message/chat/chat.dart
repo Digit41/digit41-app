@@ -6,6 +6,7 @@ import '../../../../utils/images_path.dart';
 import 'widgets/bubble_chat.dart';
 import 'widgets/bubble_chat_menu.dart';
 import 'widgets/reply.dart';
+import 'widgets/success_msg_send_tip.dart';
 import 'widgets/text_input_chat.dart';
 
 class Chat extends StatelessWidget {
@@ -53,6 +54,7 @@ class Chat extends StatelessWidget {
           children: const [
             BubbleChat(),
             BubbleChatMenu(child: BubbleChat(send: false)),
+            BubbleChat(showRibbons: true, child: SuccessMsgSendTip()),
             // todo: EmptyMessage(),
             Spacer(),
             Align(

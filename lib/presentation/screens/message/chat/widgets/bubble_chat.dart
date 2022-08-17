@@ -8,10 +8,15 @@ class BubbleChat extends StatelessWidget {
   final bool showRibbons;
   final Widget? child;
   final bool send;
+  final ReplyMessage? replyMessage;
 
-  const BubbleChat(
-      {Key? key, this.send = true, this.showRibbons = false, this.child})
-      : super(key: key);
+  const BubbleChat({
+    Key? key,
+    this.send = true,
+    this.showRibbons = false,
+    this.child,
+    this.replyMessage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,17 +56,23 @@ class BubbleChat extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      if (replyMessage != null)
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: replyMessage!,
+                        ),
                       child != null
                           ? child!
                           : Text(
-                              'erfreewdee',
+                              'this is a msg for test',
                               style: TextStyle(
                                 color: send ? Colors.black : Colors.white,
                                 height: 1.5,
                               ),
                             ),
+                      const SizedBox(height: 5.0),
                       Container(
-                        margin: EdgeInsets.only(top: showRibbons ? 20.0 : 6.0),
+                        margin: EdgeInsets.only(top: showRibbons ? 20.0 : 0.0),
                         alignment: Alignment.bottomRight,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +98,57 @@ class BubbleChat extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 12.0),
+        const SizedBox(height: 20.0),
+      ],
+    );
+  }
+}
+
+class ReplyMessage extends StatelessWidget {
+  final String username;
+  final String message;
+  final bool _send;
+
+  const ReplyMessage(this._send,
+      {Key? key, required this.username, required this.message})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 2.0,
+          height: 33.0,
+          color: _send ? Colors.black : Theme.of(context).primaryColor,
+        ),
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  username,
+                  style: TextStyle(
+                    color:
+                        _send ? Colors.black : Theme.of(context).primaryColor,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  message,
+                  style: TextStyle(
+                    color: _send ? AppTheme.grey : Colors.grey,
+                    fontSize: AppTheme.sFontSize,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

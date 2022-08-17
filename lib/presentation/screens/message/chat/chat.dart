@@ -15,7 +15,55 @@ class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _appbar(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: const [
+                    BubbleChat(),
+                    BubbleChatMenu(
+                      child: BubbleChat(
+                        send: false,
+                        replyMessage: ReplyMessage(
+                          false,
+                          username: 'username',
+                          message: 'message',
+                        ),
+                      ),
+                    ),
+                    BubbleChat(
+                      replyMessage: ReplyMessage(
+                        true,
+                        username: 'username',
+                        message: 'message',
+                      ),
+                    ),
+                    BubbleChat(showRibbons: true, child: SuccessMsgSendTip())
+                  ],
+                ),
+              ),
+            ),
+            // todo: EmptyMessage(),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: Reply(title: 'username test', msg: 'reply test'),
+            ),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: TextInputChat(),
+            ),
+            const SizedBox(height: 8.0),
+          ],
+        ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _appbar() => AppBar(
         iconTheme: const IconThemeData(size: 14.0),
         actions: [
           IconButton(
@@ -47,29 +95,5 @@ class Chat extends StatelessWidget {
             )
           ],
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          children: const [
-            BubbleChat(),
-            BubbleChatMenu(child: BubbleChat(send: false)),
-            BubbleChat(showRibbons: true, child: SuccessMsgSendTip()),
-            // todo: EmptyMessage(),
-            Spacer(),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Reply(title: 'scsdfsd', msg: 'sdsfsdf'),
-            ),
-            SizedBox(height: 8.0),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: TextInputChat(),
-            ),
-            SizedBox(height: 8.0),
-          ],
-        ),
-      ),
-    );
-  }
+      );
 }

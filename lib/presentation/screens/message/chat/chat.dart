@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import 'widgets/bubble_chat.dart';
-import 'widgets/bubble_chat_menu.dart';
 import 'widgets/reply.dart';
 import 'widgets/success_msg_send_tip.dart';
 import 'widgets/text_input_chat.dart';
@@ -25,14 +24,12 @@ class Chat extends StatelessWidget {
                 child: Column(
                   children: const [
                     BubbleChat(),
-                    BubbleChatMenu(
-                      child: BubbleChat(
-                        send: false,
-                        replyMessage: ReplyMessage(
-                          false,
-                          username: 'username',
-                          message: 'message',
-                        ),
+                    BubbleChat(
+                      sent: false,
+                      replyMessage: ReplyMessage(
+                        false,
+                        username: 'username',
+                        message: 'message',
                       ),
                     ),
                     BubbleChat(

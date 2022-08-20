@@ -32,6 +32,7 @@ class FocusedMenuHolder extends StatefulWidget {
   final Color? blurBackgroundColor;
   final double? bottomOffsetHeight;
   final double? menuOffset;
+  final bool left;
 
   /// Open with tap insted of long press.
   final bool openWithTap;
@@ -50,6 +51,7 @@ class FocusedMenuHolder extends StatefulWidget {
       this.menuWidth,
       this.bottomOffsetHeight,
       this.menuOffset,
+      this.left = true,
       this.openWithTap = false})
       : super(key: key);
 
@@ -115,6 +117,7 @@ class _FocusedMenuHolderState extends State<FocusedMenuHolder> {
                 animateMenu: widget.animateMenuItems ?? true,
                 bottomOffsetHeight: widget.bottomOffsetHeight ?? 0,
                 menuOffset: widget.menuOffset ?? 0,
+                left: widget.left,
                 child: widget.child,
               ));
         },
@@ -138,6 +141,7 @@ class FocusedMenuDetails extends StatelessWidget {
   final Color? blurBackgroundColor;
   final double? bottomOffsetHeight;
   final double? menuOffset;
+  final bool left;
 
   const FocusedMenuDetails(
       {Key? key,
@@ -151,6 +155,7 @@ class FocusedMenuDetails extends StatelessWidget {
       required this.blurSize,
       required this.blurBackgroundColor,
       required this.menuWidth,
+      required this.left,
       this.bottomOffsetHeight,
       this.menuOffset})
       : super(key: key);
@@ -169,7 +174,7 @@ class FocusedMenuDetails extends StatelessWidget {
         : (childOffset.dx - maxMenuWidth + childSize!.width);
     final topOffset = (childOffset.dy + menuHeight + childSize!.height) <
             size.height - bottomOffsetHeight!
-        ? childOffset.dy + childSize!.height + menuOffset!
+        ? childOffset.dy + childSize!.height + menuOffset! - 16.0
         : childOffset.dy - menuHeight - menuOffset!;
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -192,7 +197,8 @@ class FocusedMenuDetails extends StatelessWidget {
           ),
           Positioned(
             top: topOffset,
-            left: leftOffset,
+            left: left ? leftOffset : null,
+            right: left ? null : leftOffset,
             child: TweenAnimationBuilder(
               duration: const Duration(milliseconds: 200),
               builder: (BuildContext context, dynamic value, Widget? child) {
@@ -261,7 +267,8 @@ class FocusedMenuDetails extends StatelessWidget {
           ),
           Positioned(
             top: childOffset.dy,
-            left: childOffset.dx,
+            left: left ? leftOffset : null,
+            right: left ? null : leftOffset,
             child: SizedBox(
               width: childSize!.width,
               height: childSize!.height,

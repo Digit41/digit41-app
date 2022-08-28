@@ -34,23 +34,26 @@ class UnlockPost extends StatelessWidget {
         AppButton(
             title: Strings.unlockItem,
             onTap: () {
-              showTopSnackBar(context, PostUnlockSnack(postName: 'postName'));
+              showTopSnackBar(
+                context,
+                const PostUnlockSnack(postName: 'postName'),
+              );
             }),
       ],
     );
   }
 
   Widget _info(String title, String amount) => Column(
-    mainAxisSize: MainAxisSize.min,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        title,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
             style: TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
           ),
-      const SizedBox(height: 12.0),
-      Row(
-        children: [
+          const SizedBox(height: 12.0),
+          Row(
+            children: [
               SvgPicture.asset(Images.splashLogo, width: 24.0, height: 24.0),
               const SizedBox(width: 8.0),
               Text('$amount DGT',
@@ -62,38 +65,38 @@ class UnlockPost extends StatelessWidget {
                     TextStyle(fontSize: AppTheme.sFontSize, color: Colors.grey),
               ),
             ],
-      ),
-    ],
-  );
+          ),
+        ],
+      );
 
   Widget _notEnoughBalance() => Padding(
-    padding: const EdgeInsets.only(top: 20.0),
-    child: Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.red.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-          alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 7.0),
-          child: const Text(
-            'askdasdksdksadkas',
-            style: TextStyle(color: Colors.red),
-          ),
-        ),
-        Positioned(
-          left: 0.0,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(25.0),
+        padding: const EdgeInsets.only(top: 20.0),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.red.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 7.0),
+              child: const Text(
+                'askdasdksdksadkas',
+                style: TextStyle(color: Colors.red),
+              ),
             ),
-            padding: const EdgeInsets.all(8.0),
-            child: const Icon(Icons.clear, color: Colors.white, size: 14.0),
-          ),
+            Positioned(
+              left: 0.0,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                padding: const EdgeInsets.all(8.0),
+                child: const Icon(Icons.clear, color: Colors.white, size: 14.0),
+              ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 }

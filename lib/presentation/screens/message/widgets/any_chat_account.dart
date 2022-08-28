@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../../../utils/app_theme.dart';
+import '../../../../utils/highlight_occurrences.dart';
 import '../../../../utils/images_path.dart';
 import '../../../../utils/utils.dart';
 import '../../../snack_bars/top_snack.dart';
@@ -49,7 +50,14 @@ class AnyChatAccount extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Hossein Asadi'),
+            RichText(
+              text: TextSpan(
+                children: highlightOccurrences('Hossein Asadi', ''),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                ),
+              ),
+            ),
             const SizedBox(height: 4.0),
             Text(
               'sffsdfsfwefewfewfefwefewfewjfhwefjrnjkrngnbrejhgjerbgbhrejbghjbrgh',

@@ -18,6 +18,7 @@ dependencies:
   blur: ^3.1.0
   top_snackbar_flutter: ^2.1.1
   flutter_slidable: ^2.0.0
+  emojis: ^0.9.9
 
 dev_dependencies:
   flutter_test:

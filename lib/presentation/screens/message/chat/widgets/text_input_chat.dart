@@ -1,4 +1,6 @@
+import 'package:digit41/cubit_logic/chat/emojis_visibility_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../utils/app_theme.dart';
@@ -60,7 +62,9 @@ class _TextInputChatState extends State<TextInputChat> {
                     Icons.emoji_emotions_outlined,
                     color: Colors.grey,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<EmojisVisibilityCubit>().toggleVisibility();
+                  },
                 ),
               ),
             ),
@@ -70,24 +74,24 @@ class _TextInputChatState extends State<TextInputChat> {
             duration: const Duration(milliseconds: 50),
             child: _isWriting
                 ? _option(
-                    Images.sendMsgTxt,
-                    color: Theme.of(context).primaryColor,
-                  )
+              Images.sendMsgTxt,
+              color: Theme.of(context).primaryColor,
+            )
                 : Row(
-                    children: [
-                      _option(Images.money, onTap: () {
-                        showGeneralBottomSheet(
-                          context,
-                          title: '${Strings.sendTip} ${Strings.to}',
-                          child: SendTip(),
-                        );
-                      }),
-                      const SizedBox(width: 8.0),
-                      _option(Images.attachment, onTap: () {
-                        showGeneralBottomSheet(context, child: const Attach());
-                      }),
-                    ],
-                  ),
+              children: [
+                _option(Images.money, onTap: () {
+                  showGeneralBottomSheet(
+                    context,
+                    title: '${Strings.sendTip} ${Strings.to}',
+                    child: SendTip(),
+                  );
+                }),
+                const SizedBox(width: 8.0),
+                _option(Images.attachment, onTap: () {
+                  showGeneralBottomSheet(context, child: const Attach());
+                }),
+              ],
+            ),
           ),
         ],
       ),
@@ -102,7 +106,7 @@ class _TextInputChatState extends State<TextInputChat> {
   }
 
   Widget _option(String icon,
-          {GestureTapCallback? onTap, Color color = AppTheme.grey}) =>
+      {GestureTapCallback? onTap, Color color = AppTheme.grey}) =>
       GestureDetector(
         onTap: onTap,
         child: Container(

@@ -39,7 +39,7 @@ class AnyChatAccount extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          navigateToPage(context, const Chat());
+          navigateToPage(context, Chat());
         },
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16.0,

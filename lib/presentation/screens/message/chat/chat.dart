@@ -62,7 +62,7 @@ class Chat extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: TextInputChat(),
               ),
-              _emojis(),
+              _emojis(context),
             ],
           ),
         ),
@@ -71,28 +71,28 @@ class Chat extends StatelessWidget {
   }
 
   PreferredSizeWidget _appbar() => AppBar(
-    iconTheme: const IconThemeData(size: 14.0),
-    actions: [
-      IconButton(
-        onPressed: () {},
-        icon: SvgPicture.asset(Images.chatMenu),
-      ),
-    ],
-    titleSpacing: 0.0,
-    title: Row(
-      children: [
-        SvgPicture.asset(
-          Images.chatAccountDefault,
-          width: 30.0,
-          height: 30.0,
-        ),
-        const SizedBox(width: 8.0),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        iconTheme: const IconThemeData(size: 14.0),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(Images.chatMenu),
+          ),
+        ],
+        titleSpacing: 0.0,
+        title: Row(
           children: [
-            Text('Hossein', style: TextStyle(fontSize: AppTheme.sFontSize)),
-            Text(
-              'online',
+            SvgPicture.asset(
+              Images.chatAccountDefault,
+              width: 30.0,
+              height: 30.0,
+            ),
+            const SizedBox(width: 8.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Hossein', style: TextStyle(fontSize: AppTheme.sFontSize)),
+                Text(
+                  'online',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: AppTheme.sFontSize,
@@ -104,7 +104,8 @@ class Chat extends StatelessWidget {
         ),
       );
 
-  Widget _emojis() => BlocBuilder<EmojisVisibilityCubit, EmojisVisibilityState>(
+  Widget _emojis(BuildContext ctx) =>
+      BlocBuilder<EmojisVisibilityCubit, EmojisVisibilityState>(
         builder: (context, state) {
           return Align(
             alignment: Alignment.bottomCenter,
@@ -123,6 +124,9 @@ class Chat extends StatelessWidget {
                 controller: ScrollController(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 6,
+                  childAspectRatio: 1.65,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
                 ),
                 itemCount: emojiList.length,
                 itemBuilder: (_, int index) => InkWell(
@@ -133,7 +137,9 @@ class Chat extends StatelessWidget {
                   ),
                 ),
                 shrinkWrap: true,
-                padding: const EdgeInsets.only(left: 24.0),
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(ctx).size.width * 0.08,
+                ),
               ),
             ),
           );

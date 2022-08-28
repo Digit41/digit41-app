@@ -62,7 +62,7 @@ class Chat extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: TextInputChat(),
               ),
-              _emojis(context),
+              _emojis(),
             ],
           ),
         ),
@@ -104,8 +104,7 @@ class Chat extends StatelessWidget {
         ),
       );
 
-  Widget _emojis(BuildContext ctx) =>
-      BlocBuilder<EmojisVisibilityCubit, EmojisVisibilityState>(
+  Widget _emojis() => BlocBuilder<EmojisVisibilityCubit, EmojisVisibilityState>(
         builder: (context, state) {
           return Align(
             alignment: Alignment.bottomCenter,
@@ -138,7 +137,7 @@ class Chat extends StatelessWidget {
                 ),
                 shrinkWrap: true,
                 padding: EdgeInsets.only(
-                  left: MediaQuery.of(ctx).size.width * 0.08,
+                  left: MediaQuery.of(context).size.width * 0.08,
                 ),
               ),
             ),

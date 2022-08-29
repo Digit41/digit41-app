@@ -45,5 +45,9 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+
+
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Digit41 for right operation for sending photo in chats, need to this permission</string>
 </dict>
 </plist>

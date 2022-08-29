@@ -38,4 +38,6 @@ class Strings{
   static const gallery = 'Gallery';
   static const successful = 'Successful';
   static const youSend = 'You send';
+  static const youDeniedImagePermission =
+      'you has denied access to images on their device.';
 }

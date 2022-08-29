@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../utils/app_theme.dart';
-import '../../../../utils/images_path.dart';
+import '../../utils/app_theme.dart';
+import '../../utils/images_path.dart';
 
-class PostTopInfo extends StatelessWidget {
+class UserInfo extends StatelessWidget {
   final Widget nameTrailing;
 
-  const PostTopInfo({Key? key, this.nameTrailing = const Center()})
+  const UserInfo({Key? key, this.nameTrailing = const Center()})
       : super(key: key);
 
   @override

@@ -1,6 +1,6 @@
 import 'package:digit41/presentation/global_widgets/app_button.dart';
 import 'package:digit41/presentation/global_widgets/app_text_form_field.dart';
-import 'package:digit41/presentation/screens/post/widgets/post_top_info.dart';
+import 'package:digit41/presentation/global_widgets/user_info.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/app_theme.dart';
@@ -24,7 +24,7 @@ class SendTip extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 8.0),
-        const PostTopInfo(),
+        const UserInfo(),
         const SizedBox(height: 24.0),
         Form(key: _formKay, child: _amount),
         const SizedBox(height: 8.0),

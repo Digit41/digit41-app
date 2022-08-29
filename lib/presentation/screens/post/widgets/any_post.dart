@@ -6,10 +6,10 @@ import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../../../../utils/strings.dart';
 import '../../../global_widgets/app_bottom_sheet.dart';
+import '../../../global_widgets/user_info.dart';
 import '../send_tip.dart';
 import '../unlock_post.dart';
 import 'post_media.dart';
-import 'post_top_info.dart';
 
 class AnyPost extends StatelessWidget {
   const AnyPost({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class AnyPost extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PostTopInfo(),
+        const UserInfo(),
         PostMedia(
           btnOnTap: () {
             showGeneralBottomSheet(

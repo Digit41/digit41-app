@@ -6,9 +6,9 @@ import '../../../utils/app_theme.dart';
 import '../../../utils/images_path.dart';
 import '../../../utils/strings.dart';
 import '../../global_widgets/app_button.dart';
+import '../../global_widgets/user_info.dart';
 import '../../snack_bars/top_snack.dart';
 import 'widgets/post_media.dart';
-import 'widgets/post_top_info.dart';
 
 class UnlockPost extends StatelessWidget {
   const UnlockPost({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class UnlockPost extends StatelessWidget {
       children: [
         const PostMedia(height: 210.0),
         const SizedBox(height: 8.0),
-        PostTopInfo(
+        UserInfo(
           nameTrailing: Text(
             Strings.creator,
             style: TextStyle(fontSize: AppTheme.ssFontSize),

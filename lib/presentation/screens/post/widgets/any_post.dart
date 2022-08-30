@@ -12,7 +12,9 @@ import '../unlock_post.dart';
 import 'post_media.dart';
 
 class AnyPost extends StatelessWidget {
-  const AnyPost({Key? key}) : super(key: key);
+  final bool unlocaked;
+
+  const AnyPost({Key? key, this.unlocaked = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class AnyPost extends StatelessWidget {
               child: const UnlockPost(),
             );
           },
+          unlocked: unlocaked,
         ),
         Row(
           children: [

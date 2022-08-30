@@ -30,6 +30,7 @@ class Images{
   static const chatReply = 'assets/icons/chat_reply.svg';
   static const verify = 'assets/icons/verify.svg';
   static const settings = 'assets/icons/setting.svg';
+  static const unlocked = 'assets/icons/unlock.svg';
 
   static const astronaut = 'assets/images/astronaut.png';
   static const chatAccountDefault = 'assets/images/chat_account_default.svg';

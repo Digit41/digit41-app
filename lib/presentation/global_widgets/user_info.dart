@@ -20,8 +20,8 @@ class UserInfo extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.0),
           child: SvgPicture.asset(
             Images.splashLogo,
-            width: 28.0,
-            height: 28.0,
+            width: showVerify ? 32.0 : 28.0,
+            height: showVerify ? 32.0 : 28.0,
           ),
         ),
         const SizedBox(width: 6.0),
@@ -39,7 +39,11 @@ class UserInfo extends StatelessWidget {
                       Text(
                         // todo: this will change
                         'Abo ghanbari',
-                        style: TextStyle(fontSize: AppTheme.sFontSize),
+                        style: TextStyle(
+                          fontSize: showVerify
+                              ? AppTheme.mFontSize
+                              : AppTheme.sFontSize,
+                        ),
                       ),
                       const SizedBox(width: 8.0),
                       Visibility(
@@ -76,7 +80,9 @@ class UserInfo extends StatelessWidget {
                   Text(
                     // todo: this will change
                     'sofdo.com',
-                    style: TextStyle(fontSize: AppTheme.ssFontSize),
+                    style: TextStyle(
+                      fontSize: showVerify ? 11.0 : AppTheme.ssFontSize,
+                    ),
                   ),
                 ],
               ),

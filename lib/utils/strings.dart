@@ -22,7 +22,8 @@ class Strings{
   static const congrats = 'Congrats';
   static const item = 'Item';
   static const successfully = 'successfully';
-  static const unlocked = 'unlocked';
+  static const unlocked = 'Unlocked';
+  static const myItems = 'My Items';
   static const messages = 'Messages';
   static const searchForUser = 'Search for any user';
   static const dontHaveAnyMess = 'You don’t have any messages yet';

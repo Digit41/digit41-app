@@ -11,13 +11,15 @@ class PostMedia extends StatelessWidget {
   final GestureTapCallback? btnOnTap;
   final double width;
   final double height;
+  final bool unlocked;
 
-  const PostMedia(
-      {Key? key,
-      this.btnOnTap,
-      this.width = double.infinity,
-      this.height = 260.0})
-      : super(key: key);
+  const PostMedia({
+    Key? key,
+    this.btnOnTap,
+    this.width = double.infinity,
+    this.height = 260.0,
+    this.unlocked = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +31,39 @@ class PostMedia extends StatelessWidget {
         fit: StackFit.expand,
         alignment: Alignment.center,
         children: [
-          Blur(
-            blurColor: Colors.grey,
-            borderRadius: BorderRadius.circular(6.0),
-            // todo: this will change
-            child: Image.network('https://s6.uupload.ir/files/image_klio.png'),
-          ),
-          Positioned(
-            top: btnOnTap == null ? height / 2.3 : 80.0,
-            left: 0.0,
-            right: 0.0,
-            child: SvgPicture.asset(Images.lock),
-          ),
-          if (btnOnTap != null)
+          if (unlocked)
+            ClipRRect(
+              borderRadius: BorderRadius.circular(6.0),
+              child: Image.network(
+                'https://s6.uupload.ir/files/image_klio.png',
+                fit: BoxFit.fill,
+              ),
+            ),
+          if (unlocked)
+            Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12.0,
+                horizontal: 10.0,
+              ),
+              alignment: Alignment.topLeft,
+              child: SvgPicture.asset(Images.unlocked),
+            ),
+          if (!unlocked)
+            Blur(
+              blurColor: Colors.grey,
+              borderRadius: BorderRadius.circular(6.0),
+              // todo: this will change
+              child:
+                  Image.network('https://s6.uupload.ir/files/image_klio.png'),
+            ),
+          if (!unlocked)
+            Positioned(
+              top: btnOnTap == null ? height / 2.3 : 80.0,
+              left: 0.0,
+              right: 0.0,
+              child: SvgPicture.asset(Images.lock),
+            ),
+          if (btnOnTap != null && !unlocked)
             Positioned(
               bottom: 8.0,
               width: MediaQuery.of(context).size.width - 80.0,

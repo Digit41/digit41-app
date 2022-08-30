@@ -6,8 +6,10 @@ import '../../utils/images_path.dart';
 
 class UserInfo extends StatelessWidget {
   final Widget nameTrailing;
+  final bool showVerify;
 
-  const UserInfo({Key? key, this.nameTrailing = const Center()})
+  const UserInfo(
+      {Key? key, this.nameTrailing = const Center(), this.showVerify = false})
       : super(key: key);
 
   @override
@@ -31,10 +33,20 @@ class UserInfo extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    // todo: this will change
-                    'Abo ghanbari',
-                    style: TextStyle(fontSize: AppTheme.sFontSize),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        // todo: this will change
+                        'Abo ghanbari',
+                        style: TextStyle(fontSize: AppTheme.sFontSize),
+                      ),
+                      const SizedBox(width: 8.0),
+                      Visibility(
+                        visible: showVerify,
+                        child: SvgPicture.asset(Images.verify, width: 18.0),
+                      ),
+                    ],
                   ),
                   nameTrailing,
                 ],

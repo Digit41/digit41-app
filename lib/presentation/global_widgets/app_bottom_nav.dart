@@ -5,6 +5,7 @@ import '../../utils/app_theme.dart';
 import '../../utils/images_path.dart';
 import '../screens/home/home.dart';
 import '../screens/message/message.dart';
+import '../screens/profile/profile.dart';
 
 class AppBottomNav extends StatefulWidget {
   const AppBottomNav({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
     Container(),
     Container(),
     Message(),
-    Container(),
+    const Profile(),
   ];
 
   @override

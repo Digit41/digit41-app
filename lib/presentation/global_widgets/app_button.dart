@@ -11,6 +11,7 @@ class AppButton extends StatefulWidget {
   final bool zeroMargin;
   final bool spaceBetween;
   final double? titleSize;
+  final Color? titleColor;
 
   const AppButton({
     Key? key,
@@ -20,6 +21,7 @@ class AppButton extends StatefulWidget {
     this.color,
     this.icon,
     this.titleSize,
+    this.titleColor,
     this.zeroMargin = false,
     this.spaceBetween = true,
   }) : super(key: key);
@@ -95,9 +97,9 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                       Text(
                         widget.title,
                         style: TextStyle(
-                          color: Colors.black,
+                          color: widget.titleColor ?? Colors.black,
                           fontSize: widget.titleSize,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],

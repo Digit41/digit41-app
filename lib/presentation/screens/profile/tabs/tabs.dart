@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/strings.dart';
+import 'my_items.dart';
 import 'unlocked_items.dart';
 
 class ProfileTabs extends StatelessWidget {
@@ -34,10 +35,10 @@ class ProfileTabs extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            Container(),
-            const UnlockedItem(),
+            MyItems(),
+            UnlockedItem(),
           ],
         ),
       ),

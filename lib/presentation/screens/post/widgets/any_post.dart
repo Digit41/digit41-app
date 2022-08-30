@@ -34,14 +34,14 @@ class AnyPost extends StatelessWidget {
         ),
         Row(
           children: [
-            _anyOption(Images.like, '10'),
+            const AnyOptionOfPost(Images.like, '10'),
             const SizedBox(width: 20.0),
-            _anyOption(Images.comment, '2'),
+            const AnyOptionOfPost(Images.comment, '2'),
             const SizedBox(width: 22.0),
-            _anyOption(Images.heartDigit, '2'),
+            const AnyOptionOfPost(Images.heartDigit, '2'),
             const SizedBox(width: 22.0),
             Expanded(
-              child: _anyOption(
+              child: AnyOptionOfPost(
                 Images.money,
                 Strings.sendTip,
                 onTap: () {
@@ -90,16 +90,27 @@ class AnyPost extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _anyOption(String icon, String val, {GestureTapCallback? onTap}) =>
-      GestureDetector(
-        onTap: onTap,
-        child: Row(
-          children: [
-            SvgPicture.asset(icon),
-            const SizedBox(width: 4.0),
-            Text(val, style: TextStyle(fontSize: AppTheme.sFontSize)),
-          ],
-        ),
-      );
+class AnyOptionOfPost extends StatelessWidget {
+  final GestureTapCallback? onTap;
+  final String icon;
+  final String val;
+
+  const AnyOptionOfPost(this.icon, this.val, {Key? key, this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        children: [
+          SvgPicture.asset(icon),
+          const SizedBox(width: 4.0),
+          Text(val, style: TextStyle(fontSize: AppTheme.sFontSize)),
+        ],
+      ),
+    );
+  }
 }

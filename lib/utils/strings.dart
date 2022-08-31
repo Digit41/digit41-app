@@ -40,7 +40,9 @@ class Strings{
   static const successful = 'Successful';
   static const youSend = 'You send';
   static const settings = 'Settings';
+  static const explore = 'Explore';
   static const youDeniedImagePermission =
       'you has denied access to images on their device.';
   static const tellUs = 'Tell us about your self';
+  static const emptyUnlockItem = 'You don\'t have any purchased item yet';
 }

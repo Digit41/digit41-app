@@ -38,4 +38,5 @@ class Images{
   static const camera = 'assets/images/camera.svg';
   static const gallery = 'assets/images/gallery.svg';
   static const ribbons = 'assets/images/ribbons.svg';
+  static const moon = 'assets/images/moon.png';
 }

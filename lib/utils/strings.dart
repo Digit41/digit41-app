@@ -41,8 +41,10 @@ class Strings{
   static const youSend = 'You send';
   static const settings = 'Settings';
   static const explore = 'Explore';
+  static const mint = 'Mint';
   static const youDeniedImagePermission =
       'you has denied access to images on their device.';
   static const tellUs = 'Tell us about your self';
   static const emptyUnlockItem = 'You don\'t have any purchased item yet';
+  static const emptyMyItem = 'You don\'t have any item yet';
 }

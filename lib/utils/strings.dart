@@ -21,6 +21,7 @@ class Strings{
   static const optional = 'optional';
   static const congrats = 'Congrats';
   static const item = 'Item';
+  static const items = 'Items';
   static const successfully = 'successfully';
   static const unlocked = 'Unlocked';
   static const myItems = 'My Items';
@@ -42,6 +43,8 @@ class Strings{
   static const settings = 'Settings';
   static const explore = 'Explore';
   static const mint = 'Mint';
+  static const subscribers = 'Subscribers';
+  static const subscribe = 'Subscribe';
   static const youDeniedImagePermission =
       'you has denied access to images on their device.';
   static const tellUs = 'Tell us about your self';

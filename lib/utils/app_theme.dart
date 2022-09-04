@@ -8,7 +8,10 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.black,
     brightness: Brightness.dark,
     primaryColor: primaryColor,
-    appBarTheme: const AppBarTheme(backgroundColor: Colors.black),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.black,
+      iconTheme: IconThemeData(size: 14.0),
+    ),
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: Colors.black,
       contentTextStyle: TextStyle(color: Colors.white),

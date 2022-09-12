@@ -18,7 +18,7 @@ class UnlockedItem extends StatelessWidget {
         : ListView.builder(
             padding: const EdgeInsets.all(16.0),
             itemCount: 10,
-            itemBuilder: (_, index) => const AnyPost(unlocaked: true),
+            itemBuilder: (_, index) => AnyPost(unlocaked: true),
           );
   }
 }

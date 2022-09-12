@@ -13,8 +13,9 @@ import 'post_media.dart';
 
 class AnyPost extends StatelessWidget {
   final bool unlocaked;
+  ValueNotifier<bool> _expandTxt = ValueNotifier(false);
 
-  const AnyPost({Key? key, this.unlocaked = false}) : super(key: key);
+  AnyPost({Key? key, this.unlocaked = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,24 +58,32 @@ class AnyPost extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10.0),
-        RichText(
-          text: TextSpan(
-            style: TextStyle(
-              color: Theme.of(context).textTheme.bodyText1!.color,
-              fontSize: AppTheme.sFontSize,
-            ),
-            children: [
-              const TextSpan(
-                // todo: this will change
-                text:
-                    'sdfdssdcdcsdccsdcdcscvssdvdvdsvdvdsvdvdvsdfdfdfsdfdsfdsdsdcsddvddsvdvdvdvdvdvsdvddsdcd',
-                style: TextStyle(height: 1.5),
+        ValueListenableBuilder(
+          valueListenable: _expandTxt,
+          builder: (_, val, ___) => RichText(
+            text: TextSpan(
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyText1!.color,
+                fontSize: AppTheme.sFontSize,
               ),
-              TextSpan(
-                  text: ' ${Strings.more}',
+              children: [
+                TextSpan(
+                  // todo: this will change
+                  text: _expandTxt.value
+                      ? 'sdfdssdcdcsdccsdcdcscvssdvdvdsvdvdsvdvdvsdfdfdfsdfdsfd'
+                      : 'sdsdcsddvddsvdvdvdvdvdvsdvddsdcd',
+                  style: const TextStyle(height: 1.5),
+                ),
+                TextSpan(
+                  text: ' ${_expandTxt.value ? Strings.less : Strings.more}',
                   style: TextStyle(color: Theme.of(context).primaryColor),
-                  recognizer: TapGestureRecognizer()..onTap = () {}),
-            ],
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      _expandTxt.value = !_expandTxt.value;
+                    },
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 8.0),

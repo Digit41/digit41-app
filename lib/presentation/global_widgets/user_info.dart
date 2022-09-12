@@ -72,7 +72,7 @@ class UserInfo extends StatelessWidget {
                       'ENS',
                       style: TextStyle(
                         color: Colors.grey.shade500,
-                        fontSize: AppTheme.ssFontSize,
+                        fontSize: 10.0,
                       ),
                     ),
                   ),
@@ -81,7 +81,8 @@ class UserInfo extends StatelessWidget {
                     // todo: this will change
                     'sofdo.com',
                     style: TextStyle(
-                      fontSize: showVerify ? 11.0 : AppTheme.ssFontSize,
+                      fontSize: showVerify ? 11.0 : AppTheme.sFontSize,
+                      color: Colors.grey,
                     ),
                   ),
                 ],

@@ -17,15 +17,20 @@ class CustomAppbar extends StatelessWidget {
       titleSpacing: 0.0,
       title: _InvisibleExpandedHeader(
         child: Container(
-          height: 65.0,
+          width: double.infinity,
           alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.only(bottom: 10.0, left: 2.0, right: 2.0),
+          padding: const EdgeInsets.only(
+            bottom: 14.0,
+            left: 18.0,
+            right: 18.0,
+            top: 20.0,
+          ),
           decoration: BoxDecoration(
+            color: Colors.black,
             gradient: RadialGradient(
               radius: 9.0,
               colors: [
                 Colors.grey.shade900,
-                Colors.black,
                 Colors.black,
                 Colors.black,
               ],
@@ -36,14 +41,18 @@ class CustomAppbar extends StatelessWidget {
             children: [
               Text(
                 Strings.tBalance,
-                style:
-                    TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: AppTheme.sFontSize,
+                ),
               ),
               Text(
                 // todo: this will change
                 '232,22 DGT',
                 style: TextStyle(
-                    color: Colors.white, fontSize: AppTheme.sFontSize),
+                  color: Colors.white,
+                  fontSize: AppTheme.mFontSize,
+                ),
               ),
               Text(''.padRight(Strings.tBalance.length)),
             ],
@@ -52,7 +61,7 @@ class CustomAppbar extends StatelessWidget {
       ),
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Column(
             children: [
               const SizedBox(height: 20.0),

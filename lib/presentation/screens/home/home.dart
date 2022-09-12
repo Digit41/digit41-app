@@ -8,19 +8,19 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: CustomScrollView(
-        slivers: [
-          const CustomAppbar(),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (_, index) => AnyPost(),
-              childCount: 10,
+    return CustomScrollView(
+      slivers: [
+        const CustomAppbar(),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (_, index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: AnyPost(),
             ),
+            childCount: 10,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

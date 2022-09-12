@@ -65,8 +65,8 @@ class PostMedia extends StatelessWidget {
             ),
           if (btnOnTap != null && !unlocked)
             Positioned(
-              bottom: 8.0,
-              width: MediaQuery.of(context).size.width - 80.0,
+              bottom: 0.0,
+              width: MediaQuery.of(context).size.width - 70.0,
               child: AppButton(
                 onTap: btnOnTap!,
                 color: Theme.of(context).textTheme.bodyText1!.color,

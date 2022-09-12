@@ -4,6 +4,7 @@ class Strings{
   static const tBalance = 'T BALANCE';
   static const sendTip = 'Send Tip';
   static const more = 'More';
+  static const less = 'Less';
   static const unlockFor = 'Unlock for ';
   static const unlock = 'Unlock';
   static const unlockItem = 'Unlock the item';

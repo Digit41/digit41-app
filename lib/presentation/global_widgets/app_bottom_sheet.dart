@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/app_theme.dart';
+
 void showGeneralBottomSheet(
   BuildContext context, {
   String? title,
@@ -28,14 +30,21 @@ void showGeneralBottomSheet(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Text(title ?? ''),
+                      child: Text(
+                        title ?? '',
+                        style: TextStyle(fontSize: AppTheme.lFontSize),
+                      ),
                     ),
                     if (dismissible)
                       IconButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: const Icon(Icons.clear),
+                        icon: const Icon(
+                          Icons.clear,
+                          size: 18.0,
+                          color: Colors.grey,
+                        ),
                       ),
                   ],
                 ),

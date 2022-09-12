@@ -34,7 +34,7 @@ class Subscription extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 10,
-                itemBuilder: (_, index) => const AnyPost(),
+                itemBuilder: (_, index) => AnyPost(),
               )
             ],
           ),

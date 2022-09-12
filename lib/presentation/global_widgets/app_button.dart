@@ -76,14 +76,14 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                   ? EdgeInsets.zero
                   : const EdgeInsets.symmetric(
                       horizontal: 16.0,
-                      vertical: 14.0,
+                      vertical: 12.0,
                     ),
               margin: widget.zeroMargin
                   ? EdgeInsets.zero
                   : const EdgeInsets.only(bottom: 16.0),
               decoration: BoxDecoration(
                 color: widget.color ?? Theme.of(context).primaryColor,
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
               ),
               child: Stack(
                 children: [

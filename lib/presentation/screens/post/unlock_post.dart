@@ -19,11 +19,8 @@ class UnlockPost extends StatelessWidget {
       children: [
         const PostMedia(height: 210.0),
         const SizedBox(height: 8.0),
-        UserInfo(
-          nameTrailing: Text(
-            Strings.creator,
-            style: TextStyle(fontSize: AppTheme.ssFontSize),
-          ),
+        const UserInfo(
+          nameTrailing: Text(Strings.creator, style: TextStyle(fontSize: 10.0)),
         ),
         const SizedBox(height: 24.0),
         _info(Strings.price, '3'),

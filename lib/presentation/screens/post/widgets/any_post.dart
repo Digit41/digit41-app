@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../../../../utils/strings.dart';
+import '../../../../utils/utils.dart';
 import '../../../global_widgets/app_bottom_sheet.dart';
 import '../../../global_widgets/user_info.dart';
+import '../../profile/subscription.dart';
 import '../send_tip.dart';
 import '../unlock_post.dart';
 import 'post_media.dart';
@@ -22,7 +24,11 @@ class AnyPost extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const UserInfo(),
+        UserInfo(
+          onTap: () {
+            navigateToPage(context, const Subscription());
+          },
+        ),
         PostMedia(
           btnOnTap: () {
             showGeneralBottomSheet(

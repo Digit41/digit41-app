@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'emojis_visibility_state.dart';
+part 'chat_state.dart';
 
 class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
   EmojisVisibilityCubit() : super(EmojisVisibilityInVisible());
@@ -11,4 +12,12 @@ class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
             ? EmojisVisibilityVisible()
             : EmojisVisibilityInVisible(),
       );
+}
+
+class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
+  ChatTextFieldCubit() : super(ChatTextFieldInitial());
+
+  void writing() => emit(ChatTextFieldWriting());
+
+  void submit() => emit(ChatTextFieldSubmit());
 }

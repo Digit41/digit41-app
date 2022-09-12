@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../cubit_logic/chat/emojis_visibility_cubit.dart';
+import '../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import 'widgets/bubble_chat.dart';
@@ -23,9 +23,15 @@ class Chat extends StatelessWidget {
     return Scaffold(
       appBar: _appbar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: BlocProvider(
-          create: (context) => EmojisVisibilityCubit(),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<EmojisVisibilityCubit>(
+              create: (_) => EmojisVisibilityCubit(),
+            ),
+            BlocProvider<ChatTextFieldCubit>(
+                create: (_) => ChatTextFieldCubit()),
+          ],
           child: Column(
             children: [
               Expanded(
@@ -58,7 +64,7 @@ class Chat extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Reply(title: 'username test', msg: 'reply test'),
               ),
-              const Align(
+              Align(
                 alignment: Alignment.bottomCenter,
                 child: TextInputChat(),
               ),
@@ -71,7 +77,6 @@ class Chat extends StatelessWidget {
   }
 
   PreferredSizeWidget _appbar() => AppBar(
-        iconTheme: const IconThemeData(size: 14.0),
         actions: [
           IconButton(
             onPressed: () {},
@@ -90,7 +95,7 @@ class Chat extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Hossein', style: TextStyle(fontSize: AppTheme.sFontSize)),
+                Text('Hossein', style: TextStyle(fontSize: AppTheme.mFontSize)),
                 Text(
                   'online',
                   style: TextStyle(

@@ -1,8 +1,8 @@
-import 'package:digit41/cubit_logic/chat/emojis_visibility_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../../utils/app_theme.dart';
 import '../../../../../utils/images_path.dart';
 import '../../../../../utils/strings.dart';
@@ -10,33 +10,30 @@ import '../../../../global_widgets/app_bottom_sheet.dart';
 import '../../../post/send_tip.dart';
 import '../attach.dart';
 
-class TextInputChat extends StatefulWidget {
-  const TextInputChat({Key? key}) : super(key: key);
+class TextInputChat extends StatelessWidget {
+  late ChatTextFieldCubit _cubit;
 
-  @override
-  State<TextInputChat> createState() => _TextInputChatState();
-}
-
-class _TextInputChatState extends State<TextInputChat> {
-  final TextEditingController _textController = TextEditingController();
-  bool _isWriting = false;
+  TextInputChat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _cubit = context.read<ChatTextFieldCubit>();
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
             child: TextField(
-              controller: _textController,
+              controller: _cubit.state.txtFieldController,
               maxLines: null,
               textInputAction: TextInputAction.send,
               onChanged: (String txt) {
-                setState(() {
-                  _isWriting = txt.isNotEmpty;
-                });
+                if (txt.isNotEmpty)
+                  _cubit.writing();
+                else
+                  _cubit.submit();
               },
               onSubmitted: _submitMsg,
               textAlign: TextAlign.left,
@@ -72,25 +69,39 @@ class _TextInputChatState extends State<TextInputChat> {
           const SizedBox(width: 8.0),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 50),
-            child: _isWriting
-                ? _option(
-              Images.sendMsgTxt,
-              color: Theme.of(context).primaryColor,
-            )
-                : Row(
-              children: [
-                _option(Images.money, onTap: () {
-                  showGeneralBottomSheet(
-                    context,
-                    title: '${Strings.sendTip} ${Strings.to}',
-                    child: SendTip(),
-                  );
-                }),
-                const SizedBox(width: 8.0),
-                _option(Images.attachment, onTap: () {
-                  showGeneralBottomSheet(context, child: const Attach());
-                }),
-              ],
+            child: Builder(
+              builder: (context) {
+                return context.watch<ChatTextFieldCubit>().state
+                        is ChatTextFieldWriting
+                    ? _option(
+                        Images.sendMsgTxt,
+                        color: Theme.of(context).primaryColor,
+                      )
+                    : Row(
+                        children: [
+                          _option(
+                            Images.money,
+                            onTap: () {
+                              showGeneralBottomSheet(
+                                context,
+                                title: '${Strings.sendTip} ${Strings.to}',
+                                child: SendTip(),
+                              );
+                            },
+                          ),
+                          const SizedBox(width: 8.0),
+                          _option(
+                            Images.attachment,
+                            onTap: () {
+                              showGeneralBottomSheet(
+                                context,
+                                child: const Attach(),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+              },
             ),
           ),
         ],
@@ -99,14 +110,12 @@ class _TextInputChatState extends State<TextInputChat> {
   }
 
   void _submitMsg(String txt) {
-    _textController.clear();
-    setState(() {
-      _isWriting = false;
-    });
+    _cubit.state.txtFieldController.clear();
+    _cubit.submit();
   }
 
   Widget _option(String icon,
-      {GestureTapCallback? onTap, Color color = AppTheme.grey}) =>
+          {GestureTapCallback? onTap, Color color = AppTheme.grey}) =>
       GestureDetector(
         onTap: onTap,
         child: Container(

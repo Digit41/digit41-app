@@ -19,7 +19,6 @@ class Reply extends StatelessWidget {
         color: AppTheme.grey,
       ),
       padding: const EdgeInsets.all(6.0),
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

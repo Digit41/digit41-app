@@ -15,7 +15,7 @@ class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
 }
 
 class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
-  ChatTextFieldCubit() : super(ChatTextFieldInitial());
+  ChatTextFieldCubit() : super(ChatTextFieldSubmit());
 
   void writing() => emit(ChatTextFieldWriting());
 

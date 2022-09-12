@@ -17,7 +17,7 @@ class TextInputChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _cubit = context.read<ChatTextFieldCubit>();
+    _cubit = context.watch<ChatTextFieldCubit>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -34,6 +34,11 @@ class TextInputChat extends StatelessWidget {
                   _cubit.writing();
                 else
                   _cubit.submit();
+                _cubit.state.txtFieldController.text = txt;
+                _cubit.state.txtFieldController.selection =
+                    TextSelection.fromPosition(
+                  TextPosition(offset: txt.length),
+                );
               },
               onSubmitted: _submitMsg,
               textAlign: TextAlign.left,
@@ -69,40 +74,35 @@ class TextInputChat extends StatelessWidget {
           const SizedBox(width: 8.0),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 50),
-            child: Builder(
-              builder: (context) {
-                return context.watch<ChatTextFieldCubit>().state
-                        is ChatTextFieldWriting
-                    ? _option(
-                        Images.sendMsgTxt,
-                        color: Theme.of(context).primaryColor,
-                      )
-                    : Row(
-                        children: [
-                          _option(
-                            Images.money,
-                            onTap: () {
-                              showGeneralBottomSheet(
-                                context,
-                                title: '${Strings.sendTip} ${Strings.to}',
-                                child: SendTip(),
-                              );
-                            },
-                          ),
-                          const SizedBox(width: 8.0),
-                          _option(
-                            Images.attachment,
-                            onTap: () {
-                              showGeneralBottomSheet(
-                                context,
-                                child: const Attach(),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-              },
-            ),
+            child: _cubit.state is ChatTextFieldWriting
+                ? _option(
+                    Images.sendMsgTxt,
+                    color: Theme.of(context).primaryColor,
+                  )
+                : Row(
+                    children: [
+                      _option(
+                        Images.money,
+                        onTap: () {
+                          showGeneralBottomSheet(
+                            context,
+                            title: '${Strings.sendTip} ${Strings.to}',
+                            child: SendTip(),
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 8.0),
+                      _option(
+                        Images.attachment,
+                        onTap: () {
+                          showGeneralBottomSheet(
+                            context,
+                            child: const Attach(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
           ),
         ],
       ),

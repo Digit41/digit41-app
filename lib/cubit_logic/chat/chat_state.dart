@@ -13,16 +13,6 @@ abstract class ChatTextFieldState extends Equatable {
   final FocusNode txtFieldFocus = FocusNode();
 }
 
-class ChatTextFieldInitial extends ChatTextFieldState {
-  @override
-  List<Object?> get props => [];
-}
-
-class ChatTextFieldFocus extends ChatTextFieldState {
-  @override
-  List<Object?> get props => [];
-}
-
 class ChatTextFieldWriting extends ChatTextFieldState {
   @override
   List<Object?> get props => [];

@@ -109,13 +109,16 @@ class Chat extends StatelessWidget {
         ),
       );
 
-  Widget _emojis() => BlocBuilder<EmojisVisibilityCubit, EmojisVisibilityState>(
-        builder: (context, state) {
+  Widget _emojis() => Builder(
+        builder: (ctx) {
           return Align(
             alignment: Alignment.bottomCenter,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 150),
-              height: state is EmojisVisibilityInVisible ? 0.0 : 180.0,
+              height: ctx.watch<EmojisVisibilityCubit>().state
+                      is EmojisVisibilityInVisible
+                  ? 0.0
+                  : 180.0,
               decoration: const BoxDecoration(
                 color: AppTheme.grey,
                 borderRadius: BorderRadius.only(
@@ -134,7 +137,11 @@ class Chat extends StatelessWidget {
                 ),
                 itemCount: emojiList.length,
                 itemBuilder: (_, int index) => InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    var c = ctx.read<ChatTextFieldCubit>();
+                    c.writing();
+                    c.state.txtFieldController.text += emojiList[index].char;
+                  },
                   child: Text(
                     emojiList[index].char,
                     style: const TextStyle(fontSize: 26.0),
@@ -142,7 +149,7 @@ class Chat extends StatelessWidget {
                 ),
                 shrinkWrap: true,
                 padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.08,
+                  left: MediaQuery.of(ctx).size.width * 0.08,
                 ),
               ),
             ),

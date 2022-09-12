@@ -12,12 +12,7 @@ class Message extends StatelessWidget {
 
   final _search = AppTextFormField(
     hint: Strings.searchForUser,
-    prefixIcon: SvgPicture.asset(
-      Images.searchUnselected,
-      width: 18.0,
-      height: 18.0,
-      color: Colors.grey,
-    ),
+    prefixIcon: SvgPicture.asset(Images.searchUnselected, color: Colors.grey),
     hidePrefixAfterTyping: true,
   );
 

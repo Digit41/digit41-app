@@ -87,13 +87,10 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         prefixIcon: _hidePrefix
             ? null
             : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 14.0),
                 child: widget.prefixIcon,
               ),
-        prefixIconConstraints: const BoxConstraints(
-          minHeight: 18.0,
-          minWidth: 18.0,
-        ),
+        // prefixIconConstraints: const BoxConstraints(minWidth: 16.0),
         fillColor: AppTheme.grey,
         filled: _filled,
         enabledBorder: OutlineInputBorder(

@@ -135,6 +135,8 @@ class Chat extends StatelessWidget {
 
   Widget _emojis() => Builder(
         builder: (ctx) {
+          var txtFieldCubit = ctx.read<ChatTextFieldCubit>();
+
           return Align(
             alignment: Alignment.bottomCenter,
             child: AnimatedContainer(
@@ -142,7 +144,7 @@ class Chat extends StatelessWidget {
               height: ctx.watch<EmojisVisibilityCubit>().state
                       is EmojisVisibilityInVisible
                   ? 0.0
-                  : 180.0,
+                  : 190.0,
               decoration: const BoxDecoration(
                 color: AppTheme.grey,
                 borderRadius: BorderRadius.only(
@@ -150,31 +152,52 @@ class Chat extends StatelessWidget {
                   topRight: Radius.circular(16.0),
                 ),
               ),
-              padding: const EdgeInsets.only(top: 16.0),
-              child: GridView.builder(
-                controller: ScrollController(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 6,
-                  childAspectRatio: 1.65,
-                  mainAxisSpacing: 10.0,
-                  crossAxisSpacing: 10.0,
-                ),
-                itemCount: emojiList.length,
-                itemBuilder: (_, int index) => InkWell(
-                  onTap: () {
-                    var c = ctx.read<ChatTextFieldCubit>();
-                    c.writing();
-                    c.state.txtFieldController.text += emojiList[index].char;
-                  },
-                  child: Text(
-                    emojiList[index].char,
-                    style: const TextStyle(fontSize: 26.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      controller: ScrollController(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 6,
+                        childAspectRatio: 1.65,
+                        mainAxisSpacing: 10.0,
+                        crossAxisSpacing: 10.0,
+                      ),
+                      itemCount: emojiList.length,
+                      itemBuilder: (_, int index) => InkWell(
+                        onTap: () {
+                          txtFieldCubit.writing();
+                          txtFieldCubit.state.txtFieldController.text +=
+                              emojiList[index].char;
+                        },
+                        child: Text(
+                          emojiList[index].char,
+                          style: const TextStyle(fontSize: 26.0),
+                        ),
+                      ),
+                      shrinkWrap: true,
+                      padding: EdgeInsets.only(
+                        top: 8.0,
+                        left: MediaQuery.of(ctx).size.width * 0.08,
+                      ),
+                    ),
                   ),
-                ),
-                shrinkWrap: true,
-                padding: EdgeInsets.only(
-                  left: MediaQuery.of(ctx).size.width * 0.08,
-                ),
+                  Container(
+                    height: 32.0,
+                    color: AppTheme.grey,
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: InkWell(
+                      onTap: txtFieldCubit.backspace,
+                      child: const Icon(
+                        Icons.backspace_outlined,
+                        size: 18.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );

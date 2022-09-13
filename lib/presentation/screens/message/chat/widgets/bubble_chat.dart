@@ -85,7 +85,8 @@ class BubbleChat extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                '7:00 PM',
+                                //todo: must be change
+                                '${DateTime.now().hour}:${DateTime.now().minute}',
                                 style: TextStyle(
                                   color: sent ? Colors.black : Colors.grey,
                                   fontSize: AppTheme.ssFontSize,

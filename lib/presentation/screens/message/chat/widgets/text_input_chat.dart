@@ -11,15 +11,17 @@ import '../../../post/send_tip.dart';
 import '../attach.dart';
 
 class TextInputChat extends StatelessWidget {
-  late ChatTextFieldCubit _cubit;
+  late ChatTextFieldCubit _txtCubit;
   late ListOfChatMsgCubit _msgsCubit;
+  late ChatReplyCubit _replyCubit;
 
   TextInputChat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _cubit = context.watch<ChatTextFieldCubit>();
+    _txtCubit = context.watch<ChatTextFieldCubit>();
     _msgsCubit = context.read<ListOfChatMsgCubit>();
+    _replyCubit = context.read<ChatReplyCubit>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -28,16 +30,16 @@ class TextInputChat extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: TextField(
-              controller: _cubit.state.txtFieldController,
+              controller: _txtCubit.state.txtFieldController,
               maxLines: null,
               textInputAction: TextInputAction.send,
               onChanged: (String txt) {
                 if (txt.isNotEmpty)
-                  _cubit.writing();
+                  _txtCubit.writing();
                 else
-                  _cubit.submit();
-                _cubit.state.txtFieldController.text = txt;
-                _cubit.state.txtFieldController.selection =
+                  _txtCubit.submit();
+                _txtCubit.state.txtFieldController.text = txt;
+                _txtCubit.state.txtFieldController.selection =
                     TextSelection.fromPosition(
                   TextPosition(offset: txt.length),
                 );
@@ -75,9 +77,9 @@ class TextInputChat extends StatelessWidget {
           const SizedBox(width: 8.0),
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 50),
-            child: _cubit.state is ChatTextFieldWriting
+            child: _txtCubit.state is ChatTextFieldWriting
                 ? _option(
-              Images.sendMsgTxt,
+                    Images.sendMsgTxt,
                     color: Theme.of(context).primaryColor,
                     onTap: _submitMsg,
                   )
@@ -112,10 +114,11 @@ class TextInputChat extends StatelessWidget {
   }
 
   void _submitMsg() {
-    String msg = _cubit.state.txtFieldController.text;
-    _cubit.state.txtFieldController.clear();
-    _cubit.submit();
+    String msg = _txtCubit.state.txtFieldController.text;
+    _txtCubit.state.txtFieldController.clear();
+    _txtCubit.submit();
     _msgsCubit.addAMsg(msg);
+    _replyCubit.hide();
   }
 
   Widget _option(String icon,

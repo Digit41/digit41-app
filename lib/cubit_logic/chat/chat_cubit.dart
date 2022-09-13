@@ -9,10 +9,10 @@ class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
   EmojisVisibilityCubit() : super(EmojisVisibilityInVisible());
 
   void toggleVisibility() => emit(
-    state is EmojisVisibilityInVisible
-        ? EmojisVisibilityVisible()
-        : EmojisVisibilityInVisible(),
-  );
+        state is EmojisVisibilityInVisible
+            ? EmojisVisibilityVisible()
+            : EmojisVisibilityInVisible(),
+      );
 }
 
 class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
@@ -37,6 +37,16 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
     state.txtFieldController.text = txt;
     if (txt.isEmpty) submit();
   }
+}
+
+class ChatReplyCubit extends Cubit<ChatReplyState> {
+  ChatReplyCubit() : super(ChatReplyHideState());
+
+  void hide() => emit(ChatReplyHideState());
+
+  void reply(String username, String msg) => emit(
+        ChatReplyShowState(username, msg),
+      );
 }
 
 /// for test and temporary, Todo: must be refactor

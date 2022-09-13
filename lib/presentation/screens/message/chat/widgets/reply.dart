@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../../utils/app_theme.dart';
 import '../../../../../utils/images_path.dart';
 
@@ -54,7 +56,9 @@ class Reply extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.clear, size: 18.0),
-            onPressed: () {},
+            onPressed: () {
+              context.read<ChatReplyCubit>().hide();
+            },
           ),
         ],
       ),

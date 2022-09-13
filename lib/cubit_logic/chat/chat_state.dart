@@ -23,13 +23,32 @@ class ChatTextFieldSubmit extends ChatTextFieldState {
   List<Object?> get props => [];
 }
 
+@immutable
+abstract class ChatReplyState extends Equatable {}
+
+class ChatReplyHideState extends ChatReplyState {
+  @override
+  List<Object?> get props => [];
+}
+
+class ChatReplyShowState extends ChatReplyState {
+  //todo: may need refactor
+  final String username;
+  final String msg;
+
+  ChatReplyShowState(this.username, this.msg);
+
+  @override
+  List<Object?> get props => [username, msg];
+}
+
 /// for test and temporary, Todo: must be refactor
 class ListOfChatMsgState {
-  List<String> msgs = [];
+  final List<String> msgs;
 
-  ListOfChatMsgState copyWith(List<String> msgs) {
-    var l = ListOfChatMsgState();
-    l.msgs = msgs;
-    return l;
-  }
+  ListOfChatMsgState({this.msgs = const []});
+
+  ListOfChatMsgState copyWith(List<String> msgs) => ListOfChatMsgState(
+        msgs: msgs,
+      );
 }

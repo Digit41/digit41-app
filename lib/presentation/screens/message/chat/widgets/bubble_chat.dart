@@ -24,6 +24,8 @@ class BubbleChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BubbleChatMenu(
+      username: 'now is fake',
+      msg: msg,
       sent: sent,
       child: Column(
         children: [
@@ -70,11 +72,11 @@ class BubbleChat extends StatelessWidget {
                             ? child!
                             : Text(
                           msg,
-                                style: TextStyle(
-                                  color: sent ? Colors.black : Colors.white,
-                                  height: 1.5,
-                                ),
-                              ),
+                          style: TextStyle(
+                            color: sent ? Colors.black : Colors.white,
+                            height: 1.5,
+                          ),
+                        ),
                         const SizedBox(height: 5.0),
                         Container(
                           margin:

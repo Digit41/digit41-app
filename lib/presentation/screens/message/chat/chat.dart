@@ -35,6 +35,9 @@ class Chat extends StatelessWidget {
             BlocProvider<ListOfChatMsgCubit>(
               create: (_) => ListOfChatMsgCubit(),
             ),
+            BlocProvider<ChatReplyCubit>(
+              create: (_) => ChatReplyCubit(),
+            ),
           ],
           child: _body(),
         ),
@@ -82,9 +85,10 @@ class Chat extends StatelessWidget {
               reverse: true,
               child: Column(
                 children: [
-                  const BubbleChat(),
+                  const BubbleChat(msg: 'okk test'),
                   const BubbleChat(
                     sent: false,
+                    msg: 'response test ok',
                     replyMessage: ReplyMessage(
                       false,
                       username: 'username',
@@ -121,9 +125,16 @@ class Chat extends StatelessWidget {
             ),
           ),
           // todo: EmptyMessage(),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: Reply(title: 'username test', msg: 'reply test'),
+          BlocBuilder<ChatReplyCubit, ChatReplyState>(
+            builder: (_, state) => state is ChatReplyHideState
+                ? const Center()
+                : Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Reply(
+                      title: (state as ChatReplyShowState).username,
+                      msg: state.msg,
+                    ),
+                  ),
           ),
           Align(
             alignment: Alignment.bottomCenter,

@@ -21,3 +21,10 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
 
   void submit() => emit(ChatTextFieldSubmit());
 }
+
+/// for test and temporary, Todo: must be refactor
+class ListOfChatMsgCubit extends Cubit<ListOfChatMsgState> {
+  ListOfChatMsgCubit() : super(ListOfChatMsgState());
+
+  void addAMsg(String val) => emit(state.copyWith([...state.msgs, val]));
+}

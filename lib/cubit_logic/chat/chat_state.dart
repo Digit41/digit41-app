@@ -22,3 +22,14 @@ class ChatTextFieldSubmit extends ChatTextFieldState {
   @override
   List<Object?> get props => [];
 }
+
+/// for test and temporary, Todo: must be refactor
+class ListOfChatMsgState {
+  List<String> msgs = [];
+
+  ListOfChatMsgState copyWith(List<String> msgs) {
+    var l = ListOfChatMsgState();
+    l.msgs = msgs;
+    return l;
+  }
+}

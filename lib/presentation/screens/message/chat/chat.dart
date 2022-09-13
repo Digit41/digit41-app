@@ -30,47 +30,13 @@ class Chat extends StatelessWidget {
               create: (_) => EmojisVisibilityCubit(),
             ),
             BlocProvider<ChatTextFieldCubit>(
-                create: (_) => ChatTextFieldCubit()),
+              create: (_) => ChatTextFieldCubit(),
+            ),
+            BlocProvider<ListOfChatMsgCubit>(
+              create: (_) => ListOfChatMsgCubit(),
+            ),
           ],
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: const [
-                      BubbleChat(),
-                      BubbleChat(
-                        sent: false,
-                        replyMessage: ReplyMessage(
-                          false,
-                          username: 'username',
-                          message: 'message',
-                        ),
-                      ),
-                      BubbleChat(
-                        replyMessage: ReplyMessage(
-                          true,
-                          username: 'username',
-                          message: 'message',
-                        ),
-                      ),
-                      BubbleChat(showRibbons: true, child: SuccessMsgSendTip())
-                    ],
-                  ),
-                ),
-              ),
-              // todo: EmptyMessage(),
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: Reply(title: 'username test', msg: 'reply test'),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: TextInputChat(),
-              ),
-              _emojis(),
-            ],
-          ),
+          child: _body(),
         ),
       ),
     );
@@ -107,6 +73,64 @@ class Chat extends StatelessWidget {
             )
           ],
         ),
+      );
+
+  Widget _body() => Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              reverse: true,
+              child: Column(
+                children: [
+                  const BubbleChat(),
+                  const BubbleChat(
+                    sent: false,
+                    replyMessage: ReplyMessage(
+                      false,
+                      username: 'username',
+                      message: 'message',
+                    ),
+                  ),
+                  const BubbleChat(
+                    replyMessage: ReplyMessage(
+                      true,
+                      username: 'username',
+                      message: 'message',
+                    ),
+                  ),
+                  const BubbleChat(
+                    showRibbons: true,
+                    child: SuccessMsgSendTip(),
+                  ),
+
+                  /// for test, Todo: must be delete or refactor(also above codes)
+                  BlocBuilder<ListOfChatMsgCubit, ListOfChatMsgState>(
+                    builder: (ctx, state) {
+                      return ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: state.msgs.length,
+                        itemBuilder: (_, index) => BubbleChat(
+                          msg: state.msgs[index],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // todo: EmptyMessage(),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Reply(title: 'username test', msg: 'reply test'),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TextInputChat(),
+          ),
+          _emojis(),
+        ],
       );
 
   Widget _emojis() => Builder(

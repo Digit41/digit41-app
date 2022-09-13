@@ -12,12 +12,14 @@ import '../attach.dart';
 
 class TextInputChat extends StatelessWidget {
   late ChatTextFieldCubit _cubit;
+  late ListOfChatMsgCubit _msgsCubit;
 
   TextInputChat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     _cubit = context.watch<ChatTextFieldCubit>();
+    _msgsCubit = context.read<ListOfChatMsgCubit>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -40,7 +42,6 @@ class TextInputChat extends StatelessWidget {
                   TextPosition(offset: txt.length),
                 );
               },
-              onSubmitted: _submitMsg,
               textAlign: TextAlign.left,
               style: const TextStyle(height: 1.3),
               decoration: InputDecoration(
@@ -76,8 +77,9 @@ class TextInputChat extends StatelessWidget {
             duration: const Duration(milliseconds: 50),
             child: _cubit.state is ChatTextFieldWriting
                 ? _option(
-                    Images.sendMsgTxt,
+              Images.sendMsgTxt,
                     color: Theme.of(context).primaryColor,
+                    onTap: _submitMsg,
                   )
                 : Row(
                     children: [
@@ -109,9 +111,11 @@ class TextInputChat extends StatelessWidget {
     );
   }
 
-  void _submitMsg(String txt) {
+  void _submitMsg() {
+    String msg = _cubit.state.txtFieldController.text;
     _cubit.state.txtFieldController.clear();
     _cubit.submit();
+    _msgsCubit.addAMsg(msg);
   }
 
   Widget _option(String icon,

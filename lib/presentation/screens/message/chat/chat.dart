@@ -165,21 +165,24 @@ class Chat extends StatelessWidget {
                         crossAxisSpacing: 10.0,
                       ),
                       itemCount: emojiList.length,
-                      itemBuilder: (_, int index) => InkWell(
-                        onTap: () {
-                          txtFieldCubit.writing();
-                          txtFieldCubit.state.txtFieldController.text +=
-                              emojiList[index].char;
-                        },
-                        child: Text(
-                          emojiList[index].char,
-                          style: const TextStyle(fontSize: 26.0),
+                      itemBuilder: (_, int index) => Center(
+                        child: InkWell(
+                          onTap: () {
+                            txtFieldCubit.writing();
+                            txtFieldCubit.state.txtFieldController.text +=
+                                emojiList[index].char;
+                          },
+                          child: Text(
+                            emojiList[index].char,
+                            style: const TextStyle(fontSize: 26.0),
+                          ),
                         ),
                       ),
                       shrinkWrap: true,
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 8.0,
-                        left: MediaQuery.of(ctx).size.width * 0.08,
+                        left: 4.0,
+                        right: 4.0,
                       ),
                     ),
                   ),

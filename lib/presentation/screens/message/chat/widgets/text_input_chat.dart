@@ -33,17 +33,7 @@ class TextInputChat extends StatelessWidget {
               controller: _txtCubit.state.txtFieldController,
               maxLines: null,
               textInputAction: TextInputAction.send,
-              onChanged: (String txt) {
-                if (txt.isNotEmpty)
-                  _txtCubit.writing();
-                else
-                  _txtCubit.submit();
-                _txtCubit.state.txtFieldController.text = txt;
-                _txtCubit.state.txtFieldController.selection =
-                    TextSelection.fromPosition(
-                  TextPosition(offset: txt.length),
-                );
-              },
+              onChanged: _txtCubit.txtFieldOnChange,
               textAlign: TextAlign.left,
               style: const TextStyle(height: 1.3),
               decoration: InputDecoration(

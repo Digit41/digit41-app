@@ -16,12 +16,26 @@ class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
 }
 
 class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
+  /// we can have a use case that [txtFieldOnChange] and [backspace]
+  /// functions be into so that logic becomes more separate
+
   ChatTextFieldCubit() : super(ChatTextFieldSubmit());
 
   void writing() => emit(ChatTextFieldWriting());
 
   /// focus or waiting for user typing state is like submit state
   void submit() => emit(ChatTextFieldSubmit());
+
+  String? txtFieldOnChange(String txt) {
+    if (txt.isNotEmpty)
+      writing();
+    else
+      submit();
+    state.txtFieldController.text = txt;
+    state.txtFieldController.selection =
+        TextSelection.fromPosition(TextPosition(offset: txt.length));
+    return null;
+  }
 
   void backspace() {
     String txt = state.txtFieldController.text;

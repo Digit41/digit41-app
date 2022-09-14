@@ -77,4 +77,9 @@ class ListOfChatMsgCubit extends Cubit<ListOfChatMsgState> {
   ListOfChatMsgCubit() : super(ListOfChatMsgState());
 
   void addAMsg(String val) => emit(state.copyWith([...state.msgs, val]));
+
+  void deleteAMsg(int index) {
+    state.msgs.removeAt(index);
+    emit(state.copyWith(state.msgs));
+  }
 }

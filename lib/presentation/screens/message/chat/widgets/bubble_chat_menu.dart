@@ -12,6 +12,7 @@ import '../../../../snack_bars/bottom_snack.dart';
 
 class BubbleChatMenu extends StatelessWidget {
   //todo: must be change to user model
+  final int msgIndex;
   final String username;
   final String msg;
 
@@ -20,6 +21,7 @@ class BubbleChatMenu extends StatelessWidget {
 
   const BubbleChatMenu(
       {Key? key,
+      required this.msgIndex,
       required this.child,
       required this.username,
       required this.msg,
@@ -30,6 +32,7 @@ class BubbleChatMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final replyCubit = context.read<ChatReplyEditCubit>();
     final txtFieldCubit = context.read<ChatTextFieldCubit>();
+    final msgsCubit = context.read<ListOfChatMsgCubit>();
 
     return FocusedMenuHolder(
       onPressed: () {},
@@ -104,7 +107,10 @@ class BubbleChatMenu extends StatelessWidget {
               size: 20.0,
               color: Colors.red,
             ),
-            onPressed: () {},
+            onPressed: () {
+              /// for test, todo: must ne refactor
+              if (msgIndex != 100) msgsCubit.deleteAMsg(msgIndex);
+            },
           ),
       ],
       child: child,

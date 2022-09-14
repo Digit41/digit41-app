@@ -7,6 +7,7 @@ import 'bubble_chat_menu.dart';
 
 class BubbleChat extends StatelessWidget {
   final String msg;
+  final int msgIndex;
 
   final bool showRibbons;
   final Widget? child;
@@ -15,6 +16,7 @@ class BubbleChat extends StatelessWidget {
 
   const BubbleChat({
     Key? key,
+    required this.msgIndex,
     this.msg = 'this is a msg for test',
     this.sent = true,
     this.showRibbons = false,
@@ -28,6 +30,7 @@ class BubbleChat extends StatelessWidget {
       username: 'now is fake',
       msg: msg,
       sent: sent,
+      msgIndex: msgIndex,
       child: Column(
         children: [
           Align(

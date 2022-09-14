@@ -88,8 +88,9 @@ class Chat extends StatelessWidget {
               reverse: true,
               child: Column(
                 children: [
-                  const BubbleChat(msg: 'okk test'),
+                  const BubbleChat(msgIndex: 100, msg: 'okk test'),
                   const BubbleChat(
+                    msgIndex: 100,
                     sent: false,
                     msg: 'response test ok',
                     replyMessage: ReplyMessage(
@@ -99,6 +100,7 @@ class Chat extends StatelessWidget {
                     ),
                   ),
                   const BubbleChat(
+                    msgIndex: 100,
                     replyMessage: ReplyMessage(
                       true,
                       username: 'username',
@@ -106,6 +108,7 @@ class Chat extends StatelessWidget {
                     ),
                   ),
                   const BubbleChat(
+                    msgIndex: 100,
                     showRibbons: true,
                     child: SuccessMsgSendTip(),
                   ),
@@ -118,6 +121,7 @@ class Chat extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: state.msgs.length,
                         itemBuilder: (_, index) => BubbleChat(
+                          msgIndex: index,
                           msg: state.msgs[index],
                         ),
                       );

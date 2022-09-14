@@ -6,8 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import '../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
+import '../../../global_widgets/app_bottom_sheet.dart';
 import 'widgets/bubble_chat.dart';
-import 'widgets/reply.dart';
+import 'widgets/reply_edit.dart';
 import 'widgets/success_msg_send_tip.dart';
 import 'widgets/text_input_chat.dart';
 
@@ -21,7 +22,7 @@ class Chat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _appbar(),
+      appBar: _appbar(context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: MultiBlocProvider(
@@ -35,8 +36,8 @@ class Chat extends StatelessWidget {
             BlocProvider<ListOfChatMsgCubit>(
               create: (_) => ListOfChatMsgCubit(),
             ),
-            BlocProvider<ChatReplyCubit>(
-              create: (_) => ChatReplyCubit(),
+            BlocProvider<ChatReplyEditCubit>(
+              create: (_) => ChatReplyEditCubit(),
             ),
           ],
           child: _body(),
@@ -45,10 +46,12 @@ class Chat extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _appbar() => AppBar(
+  PreferredSizeWidget _appbar(BuildContext context) => AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showGeneralBottomSheet(context);
+            },
             icon: SvgPicture.asset(Images.chatMenu),
           ),
         ],
@@ -125,14 +128,15 @@ class Chat extends StatelessWidget {
             ),
           ),
           // todo: EmptyMessage(),
-          BlocBuilder<ChatReplyCubit, ChatReplyState>(
-            builder: (_, state) => state is ChatReplyHideState
+          BlocBuilder<ChatReplyEditCubit, ChatReplyEditState>(
+            builder: (_, state) => state is ChatReplyEditHideState
                 ? const Center()
                 : Align(
                     alignment: Alignment.bottomCenter,
-                    child: Reply(
-                      title: (state as ChatReplyShowState).username,
+                    child: ReplyEdit(
+                      title: (state as ChatReplyEditShowState).username,
                       msg: state.msg,
+                      rep: state.rep,
                     ),
                   ),
           ),

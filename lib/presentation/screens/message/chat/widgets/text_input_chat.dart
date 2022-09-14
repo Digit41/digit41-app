@@ -13,7 +13,7 @@ import '../attach.dart';
 class TextInputChat extends StatelessWidget {
   late ChatTextFieldCubit _txtCubit;
   late ListOfChatMsgCubit _msgsCubit;
-  late ChatReplyCubit _replyCubit;
+  late ChatReplyEditCubit _replyCubit;
 
   TextInputChat({Key? key}) : super(key: key);
 
@@ -21,7 +21,7 @@ class TextInputChat extends StatelessWidget {
   Widget build(BuildContext context) {
     _txtCubit = context.watch<ChatTextFieldCubit>();
     _msgsCubit = context.read<ListOfChatMsgCubit>();
-    _replyCubit = context.read<ChatReplyCubit>();
+    _replyCubit = context.read<ChatReplyEditCubit>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),

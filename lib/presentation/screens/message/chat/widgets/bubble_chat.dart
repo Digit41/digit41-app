@@ -7,6 +7,7 @@ import 'bubble_chat_menu.dart';
 
 class BubbleChat extends StatelessWidget {
   final String msg;
+
   final bool showRibbons;
   final Widget? child;
   final bool sent;

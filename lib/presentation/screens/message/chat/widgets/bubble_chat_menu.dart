@@ -1,4 +1,3 @@
-import 'package:digit41/presentation/snack_bars/bottom_snack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +8,7 @@ import '../../../../../utils/app_theme.dart';
 import '../../../../../utils/images_path.dart';
 import '../../../../../utils/strings.dart';
 import '../../../../global_widgets/focused_menu.dart';
+import '../../../../snack_bars/bottom_snack.dart';
 
 class BubbleChatMenu extends StatelessWidget {
   //todo: must be change to user model
@@ -28,6 +28,9 @@ class BubbleChatMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final replyCubit = context.read<ChatReplyEditCubit>();
+    final txtFieldCubit = context.read<ChatTextFieldCubit>();
+
     return FocusedMenuHolder(
       onPressed: () {},
       menuWidth: 175.0,
@@ -52,7 +55,10 @@ class BubbleChatMenu extends StatelessWidget {
               style: TextStyle(fontSize: AppTheme.sFontSize),
             ),
             trailingIcon: const Icon(Icons.edit, size: 16.0),
-            onPressed: () {},
+            onPressed: () {
+              txtFieldCubit.editChatMsg(msg);
+              replyCubit.replyEdit(username, msg, rep: false);
+            },
           ),
         FocusedMenuItem(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -62,7 +68,8 @@ class BubbleChatMenu extends StatelessWidget {
           ),
           trailingIcon: SvgPicture.asset(Images.chatReply),
           onPressed: () {
-            context.read<ChatReplyCubit>().reply(username, msg);
+            replyCubit.replyEdit(username, msg);
+            txtFieldCubit.state.txtFieldController.text = '';
           },
         ),
         FocusedMenuItem(
@@ -74,7 +81,7 @@ class BubbleChatMenu extends StatelessWidget {
           trailingIcon: const Icon(Icons.copy, size: 16.0),
           onPressed: () {
             Clipboard.setData(const ClipboardData(text: 'sfdf')).then(
-              (value) {
+                  (value) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   showSnack(
                     txt: Strings.copied,

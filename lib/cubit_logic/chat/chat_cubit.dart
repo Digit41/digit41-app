@@ -26,6 +26,15 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
   /// focus or waiting for user typing state is like submit state
   void submit() => emit(ChatTextFieldSubmit());
 
+  void editChatMsg(String val) {
+    /// It's really important that the switch to new state[write], comes before any code
+    /// else your code's may not have correct operation
+    writing();
+
+    state.txtFieldController.text = val;
+    state.txtFieldFocus.requestFocus();
+  }
+
   String? txtFieldOnChange(String txt) {
     if (txt.isNotEmpty)
       writing();
@@ -53,13 +62,13 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
   }
 }
 
-class ChatReplyCubit extends Cubit<ChatReplyState> {
-  ChatReplyCubit() : super(ChatReplyHideState());
+class ChatReplyEditCubit extends Cubit<ChatReplyEditState> {
+  ChatReplyEditCubit() : super(ChatReplyEditHideState());
 
-  void hide() => emit(ChatReplyHideState());
+  void hide() => emit(ChatReplyEditHideState());
 
-  void reply(String username, String msg) => emit(
-        ChatReplyShowState(username, msg),
+  void replyEdit(String username, String msg, {bool rep = true}) => emit(
+        ChatReplyEditShowState(username, msg, rep),
       );
 }
 

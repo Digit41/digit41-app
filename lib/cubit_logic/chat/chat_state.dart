@@ -24,22 +24,24 @@ class ChatTextFieldSubmit extends ChatTextFieldState {
 }
 
 @immutable
-abstract class ChatReplyState extends Equatable {}
+abstract class ChatReplyEditState extends Equatable {}
 
-class ChatReplyHideState extends ChatReplyState {
+class ChatReplyEditHideState extends ChatReplyEditState {
   @override
   List<Object?> get props => [];
 }
 
-class ChatReplyShowState extends ChatReplyState {
+class ChatReplyEditShowState extends ChatReplyEditState {
   //todo: may need refactor
   final String username;
   final String msg;
 
-  ChatReplyShowState(this.username, this.msg);
+  final bool rep;
+
+  ChatReplyEditShowState(this.username, this.msg, this.rep);
 
   @override
-  List<Object?> get props => [username, msg];
+  List<Object?> get props => [username, msg, rep];
 }
 
 /// for test and temporary, Todo: must be refactor

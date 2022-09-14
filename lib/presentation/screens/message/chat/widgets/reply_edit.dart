@@ -6,12 +6,18 @@ import '../../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../../utils/app_theme.dart';
 import '../../../../../utils/images_path.dart';
 
-class Reply extends StatelessWidget {
+class ReplyEdit extends StatelessWidget {
   final String title;
   final String msg;
 
-  const Reply({Key? key, required this.title, required this.msg})
-      : super(key: key);
+  final bool rep;
+
+  const ReplyEdit({
+    Key? key,
+    required this.title,
+    required this.msg,
+    this.rep = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +37,13 @@ class Reply extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      Images.chatReply,
-                      height: 18.0,
-                      width: 18.0,
-                    ),
+                    rep
+                        ? SvgPicture.asset(
+                            Images.chatReply,
+                            height: 18.0,
+                            width: 18.0,
+                          )
+                        : const Icon(Icons.edit, size: 16.0),
                     const SizedBox(width: 6.0),
                     Text(title),
                   ],
@@ -57,7 +65,13 @@ class Reply extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.clear, size: 18.0),
             onPressed: () {
-              context.read<ChatReplyCubit>().hide();
+              context.read<ChatReplyEditCubit>().hide();
+              if (!rep)
+                context
+                    .read<ChatTextFieldCubit>()
+                    .state
+                    .txtFieldController
+                    .text = '';
             },
           ),
         ],

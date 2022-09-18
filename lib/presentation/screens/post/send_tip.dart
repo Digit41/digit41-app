@@ -10,6 +10,7 @@ class SendTip extends StatelessWidget {
   final _formKay = GlobalKey<FormState>();
   final AppTextFormField _amount = AppTextFormField(
     hint: '${Strings.amountOf} DGT',
+    textInputType: TextInputType.number,
   );
   final AppTextFormField _note = AppTextFormField(
     hint: '${Strings.note} ( ${Strings.optional} )',

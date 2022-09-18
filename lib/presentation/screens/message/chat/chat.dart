@@ -145,8 +145,9 @@ class Chat extends StatelessWidget {
                     ),
                   ),
           ),
-          Align(
+          Container(
             alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.only(bottom: 4.0),
             child: TextInputChat(),
           ),
           _emojis(),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -22,7 +23,7 @@ class Message extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 32.0),
+          const SizedBox(height: kIsWeb ? 32.0 : 55.0),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
@@ -38,6 +39,7 @@ class Message extends StatelessWidget {
           // todo: check empty message and show EmptyWidget
           Expanded(
             child: ListView.separated(
+
               /// needed key for rebuild and handle dismissible function of Slidable
               /// also todo: itemCount must be have interaction because currently have error
               key: UniqueKey(),

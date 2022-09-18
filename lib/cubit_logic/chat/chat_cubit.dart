@@ -1,5 +1,6 @@
 import 'package:emojis/emoji.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,12 +36,17 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
     state.txtFieldFocus.requestFocus();
   }
 
-  String? txtFieldOnChange(String txt) {
+  String? txtFieldOnChange(String txt, {bool append = false}) {
     if (txt.isNotEmpty)
       writing();
     else
       submit();
-    state.txtFieldController.text = txt;
+
+    if (append)
+      state.txtFieldController.text += txt;
+    else
+      state.txtFieldController.text = txt;
+
     state.txtFieldController.selection =
         TextSelection.fromPosition(TextPosition(offset: txt.length));
     return null;
@@ -48,6 +54,8 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
 
   void backspace() {
     String txt = state.txtFieldController.text;
+
+    if (txt.isEmpty) return;
 
     /// this condition is because of that any emoji char is with length 2
     /// also this emoji char can be any position of typed user message
@@ -58,6 +66,11 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
       txt = txt.substring(0, txt.length - 1);
 
     state.txtFieldController.text = txt;
+
+    if (!kIsWeb)
+      state.txtFieldController.selection =
+          TextSelection.fromPosition(TextPosition(offset: txt.length));
+
     if (txt.isEmpty) submit();
   }
 }

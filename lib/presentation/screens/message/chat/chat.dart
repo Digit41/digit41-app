@@ -2,6 +2,7 @@ import 'package:emojis/emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:holding_gesture/holding_gesture.dart';
 
 import '../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../utils/app_theme.dart';
@@ -177,19 +178,18 @@ class Chat extends StatelessWidget {
                     child: GridView.builder(
                       controller: ScrollController(),
                       gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 6,
                         childAspectRatio: 1.65,
-                        mainAxisSpacing: 10.0,
-                        crossAxisSpacing: 10.0,
                       ),
                       itemCount: emojiList.length,
                       itemBuilder: (_, int index) => Center(
                         child: InkWell(
                           onTap: () {
-                            txtFieldCubit.writing();
-                            txtFieldCubit.state.txtFieldController.text +=
-                                emojiList[index].char;
+                            txtFieldCubit.txtFieldOnChange(
+                              emojiList[index].char,
+                              append: true,
+                            );
                           },
                           child: Text(
                             emojiList[index].char,
@@ -206,15 +206,15 @@ class Chat extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 32.0,
+                    height: 34.0,
                     color: AppTheme.grey,
                     alignment: Alignment.centerRight,
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: InkWell(
+                    child: HoldDetector(
+                      onHold: txtFieldCubit.backspace,
                       onTap: txtFieldCubit.backspace,
                       child: const Icon(
                         Icons.backspace_outlined,
-                        size: 18.0,
                         color: Colors.grey,
                       ),
                     ),

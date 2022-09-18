@@ -84,7 +84,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         hintStyle: TextStyle(fontSize: AppTheme.sFontSize),
         counterText: '',
         suffixIcon: widget.suffixIcon,
-        prefixIcon: _hidePrefix
+        prefixIcon: _hidePrefix || widget.prefixIcon == null
             ? null
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),

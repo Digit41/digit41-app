@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../cubit_logic/message/message_cubit.dart';
 import '../../utils/app_theme.dart';
 import '../../utils/images_path.dart';
 import '../screens/home/home.dart';
@@ -31,7 +33,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
       Home(sc: _pagesScrollController[0]),
       Container(),
       Container(),
-      Message(),
+      BlocProvider(create: (_) => MessageCubit(), child: Message()),
       const Profile(),
     ];
   }
@@ -87,7 +89,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
           {bool selected = false}) =>
       BottomNavigationBarItem(
         icon: Padding(
-          padding: const EdgeInsets.only(top: 12.0, bottom: 4.0),
+          padding: const EdgeInsets.only(top: 14.0, bottom: 2.0),
           child: SvgPicture.asset(selected ? iconSelected : iconUnselected),
         ),
         label: '',

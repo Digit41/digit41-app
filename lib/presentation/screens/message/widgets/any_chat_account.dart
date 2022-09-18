@@ -6,14 +6,22 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/highlight_occurrences.dart';
 import '../../../../utils/images_path.dart';
+import '../../../../utils/strings.dart';
 import '../../../../utils/utils.dart';
 import '../../../snack_bars/top_snack.dart';
 import '../chat/chat.dart';
 
 class AnyChatAccount extends StatelessWidget {
   final bool showTrailing;
+  final String name;
+  final String query;
 
-  const AnyChatAccount({Key? key, this.showTrailing = true}) : super(key: key);
+  const AnyChatAccount({
+    Key? key,
+    required this.name,
+    this.showTrailing = true,
+    this.query = '',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,7 @@ class AnyChatAccount extends StatelessWidget {
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete',
+            label: Strings.delete,
           ),
         ],
       ),
@@ -52,7 +60,7 @@ class AnyChatAccount extends StatelessWidget {
           children: [
             RichText(
               text: TextSpan(
-                children: highlightOccurrences('Hossein Asadi', ''),
+                children: highlightOccurrences(name, query),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText1!.color,
                 ),

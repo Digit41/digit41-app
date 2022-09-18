@@ -81,7 +81,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       keyboardType: widget.textInputType ?? TextInputType.text,
       onFieldSubmitted: _selfSubmit,
       validator: widget.validator ?? _selfValidator,
-      onChanged: widget.onChanged ?? _selfOnChange,
+      onChanged: _selfOnChange,
       decoration: InputDecoration(
         hintText: widget.hint,
         hintStyle: TextStyle(fontSize: AppTheme.sFontSize),
@@ -134,6 +134,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
   }
 
   ValueChanged<String>? _selfOnChange(String val) {
+    if (widget.onChanged != null) widget.onChanged!(val);
     if (widget.hidePrefixAfterTyping && val.isNotEmpty) {
       setState(() {
         _hidePrefix = true;

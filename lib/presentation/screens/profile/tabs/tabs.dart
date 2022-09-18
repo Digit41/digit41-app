@@ -12,35 +12,34 @@ class ProfileTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          titleSpacing: 0.0,
-          title: Stack(
-            children: [
-              Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                child: Container(color: AppTheme.grey, height: 2.0),
-              ),
-              TabBar(
-                unselectedLabelColor: Colors.grey,
-                labelColor: Theme.of(context).textTheme.bodyText1!.color,
-                indicatorColor: Theme.of(context).primaryColor,
-                tabs: const [
-                  Tab(text: Strings.myItems),
-                  Tab(text: Strings.unlocked),
-                ],
-              ),
-            ],
+      child: Column(
+        children: [
+          SizedBox(
+            height: 50.0,
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Container(color: AppTheme.grey, height: 2.0),
+                ),
+                TabBar(
+                  unselectedLabelColor: Colors.grey,
+                  labelColor: Theme.of(context).textTheme.bodyText1!.color,
+                  indicatorColor: Theme.of(context).primaryColor,
+                  tabs: const [
+                    Tab(text: Strings.myItems),
+                    Tab(text: Strings.unlocked),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        body: const TabBarView(
-          children: [
-            MyItems(),
-            UnlockedItem(),
-          ],
-        ),
+          const Expanded(
+            child: TabBarView(children: [MyItems(), UnlockedItem()]),
+          ),
+        ],
       ),
     );
   }

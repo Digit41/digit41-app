@@ -83,8 +83,8 @@ class BubbleChatMenu extends StatelessWidget {
           ),
           trailingIcon: const Icon(Icons.copy, size: 16.0),
           onPressed: () {
-            Clipboard.setData(const ClipboardData(text: 'sfdf')).then(
-                  (value) {
+            Clipboard.setData(ClipboardData(text: msg)).then(
+              (value) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   showSnack(
                     txt: Strings.copied,

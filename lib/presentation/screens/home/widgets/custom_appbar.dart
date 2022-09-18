@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -64,7 +65,7 @@ class CustomAppbar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Column(
             children: [
-              const SizedBox(height: 55.0),
+              const SizedBox(height: kIsWeb ? 20.0 : 55.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -169,7 +170,7 @@ class _InvisibleExpandedHeaderState extends State<_InvisibleExpandedHeader> {
 
   void _positionListener() {
     final FlexibleSpaceBarSettings? settings =
-        context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
+    context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
     bool visible =
         settings == null || settings.currentExtent <= settings.minExtent;
     if (_visible != visible) {

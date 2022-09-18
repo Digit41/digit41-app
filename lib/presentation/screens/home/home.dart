@@ -4,11 +4,14 @@ import '../post/widgets/any_post.dart';
 import 'widgets/custom_appbar.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final ScrollController? sc;
+
+  const Home({Key? key, this.sc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: sc,
       slivers: [
         const CustomAppbar(),
         SliverList(

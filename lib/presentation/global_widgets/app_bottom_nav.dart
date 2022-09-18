@@ -17,13 +17,24 @@ class AppBottomNav extends StatefulWidget {
 class _AppBottomNavState extends State<AppBottomNav> {
   int _bottomItemSelectedIndex = 0;
 
-  final pages = [
-    const Home(),
-    Container(),
-    Container(),
-    Message(),
-    const Profile(),
-  ];
+  /// key is index of page in pages list
+  final _pagesScrollController = {
+    0: ScrollController(),
+  };
+
+  late final List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+    pages = [
+      Home(sc: _pagesScrollController[0]),
+      Container(),
+      Container(),
+      Message(),
+      const Profile(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +46,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
           type: BottomNavigationBarType.fixed,
           currentIndex: _bottomItemSelectedIndex,
           onTap: (newIndex) {
+            _handleScrollToTopInAnyTab(newIndex);
             setState(() {
               _bottomItemSelectedIndex = newIndex;
             });
@@ -72,7 +84,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
   }
 
   BottomNavigationBarItem _item(String iconSelected, String iconUnselected,
-      {bool selected = false}) =>
+          {bool selected = false}) =>
       BottomNavigationBarItem(
         icon: Padding(
           padding: const EdgeInsets.only(top: 12.0, bottom: 4.0),
@@ -80,4 +92,20 @@ class _AppBottomNavState extends State<AppBottomNav> {
         ),
         label: '',
       );
+
+  void _handleScrollToTopInAnyTab(int newIndex) {
+    var sc;
+    if (newIndex == _bottomItemSelectedIndex && newIndex == 0)
+      sc = _pagesScrollController[newIndex];
+    else
+      return;
+    try {
+      if (sc.hasClients && sc.offset > 100.0)
+        sc.animateTo(
+          0.0,
+          duration: const Duration(milliseconds: 600),
+          curve: Curves.ease,
+        );
+    } catch (e) {}
+  }
 }

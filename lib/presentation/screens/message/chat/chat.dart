@@ -32,7 +32,7 @@ class Chat extends StatelessWidget {
               create: (_) => EmojisVisibilityCubit(),
             ),
             BlocProvider<ChatTextFieldCubit>(
-              create: (_) => ChatTextFieldCubit(),
+              create: (_) => ChatTextFieldCubit(_.read()),
             ),
             BlocProvider<ListOfChatMsgCubit>(
               create: (_) => ListOfChatMsgCubit(),

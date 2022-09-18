@@ -9,18 +9,30 @@ part 'chat_state.dart';
 class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
   EmojisVisibilityCubit() : super(EmojisVisibilityInVisible());
 
-  void toggleVisibility() => emit(
-        state is EmojisVisibilityInVisible
-            ? EmojisVisibilityVisible()
-            : EmojisVisibilityInVisible(),
-      );
+  void toggleVisibility({BuildContext? context}) {
+    if (state is EmojisVisibilityInVisible) {
+      emit(EmojisVisibilityVisible());
+
+      FocusScopeNode fs = FocusScope.of(context!);
+      if (!fs.hasPrimaryFocus) fs.unfocus();
+    } else
+      emit(EmojisVisibilityInVisible());
+  }
+
+  void inVisible() => emit(EmojisVisibilityInVisible());
 }
 
 class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
   /// we can have a use case that [txtFieldOnChange] and [backspace]
   /// functions be into so that logic becomes more separate
 
-  ChatTextFieldCubit() : super(ChatTextFieldSubmit());
+  final EmojisVisibilityCubit _emojiCubit;
+
+  ChatTextFieldCubit(this._emojiCubit) : super(ChatTextFieldSubmit()) {
+    state.txtFieldFocus.addListener(() {
+      if (state.txtFieldFocus.hasFocus) _emojiCubit.inVisible();
+    });
+  }
 
   void writing() => emit(ChatTextFieldWriting());
 

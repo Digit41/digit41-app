@@ -31,6 +31,7 @@ class TextInputChat extends StatelessWidget {
           Expanded(
             child: TextField(
               controller: _txtCubit.state.txtFieldController,
+              focusNode: _txtCubit.state.txtFieldFocus,
               maxLines: null,
               textInputAction: TextInputAction.send,
               onChanged: _txtCubit.txtFieldOnChange,
@@ -58,7 +59,9 @@ class TextInputChat extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   onPressed: () {
-                    context.read<EmojisVisibilityCubit>().toggleVisibility();
+                    context
+                        .read<EmojisVisibilityCubit>()
+                        .toggleVisibility(context: context);
                   },
                 ),
               ),

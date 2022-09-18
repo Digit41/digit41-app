@@ -12,14 +12,12 @@ import '../../../snack_bars/top_snack.dart';
 import '../chat/chat.dart';
 
 class AnyChatAccount extends StatelessWidget {
-  final bool showTrailing;
   final String name;
   final String query;
 
   const AnyChatAccount({
     Key? key,
     required this.name,
-    this.showTrailing = true,
     this.query = '',
   }) : super(key: key);
 
@@ -52,11 +50,11 @@ class AnyChatAccount extends StatelessWidget {
         },
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16.0,
-          vertical: 10.0,
+          vertical: 2.0,
         ),
         leading: SvgPicture.asset(Images.chatAccountDefault),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             RichText(
               text: TextSpan(
@@ -66,29 +64,31 @@ class AnyChatAccount extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 4.0),
             Text(
-              'sffsdfsfwefewfewfefwefewfewjfhwefjrnjkrngnbrejhgjerbgbhrejbghjbrgh',
-              overflow: TextOverflow.ellipsis,
-              style:
-                  TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
+              '12:21 AM',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: AppTheme.sFontSize,
+              ),
             ),
           ],
         ),
-        trailing: Visibility(
-          visible: showTrailing,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.end,
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '12:21 AM',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: AppTheme.sFontSize,
+              Expanded(
+                child: Text(
+                  'sffsdfsfwefewfewfefwefewfewjfhwefjrnjkrngnbrejhgjerbgbhrejbghjbrgh',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: AppTheme.sFontSize,
+                  ),
                 ),
               ),
-              const SizedBox(height: 6.0),
+              const SizedBox(width: 32.0),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(25.0),

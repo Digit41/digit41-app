@@ -88,7 +88,7 @@ class AnyChatAccount extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(
                   vertical: 2.0,
-                  horizontal: 5.0,
+                  horizontal: 4.9,
                 ),
                 margin: const EdgeInsets.only(bottom: 2.5),
                 child: Text(

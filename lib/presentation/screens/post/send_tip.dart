@@ -11,6 +11,7 @@ class SendTip extends StatelessWidget {
   final AppTextFormField _amount = AppTextFormField(
     hint: '${Strings.amountOf} DGT',
     textInputType: TextInputType.number,
+    autofocus: true,
   );
   final AppTextFormField _note = AppTextFormField(
     hint: '${Strings.note} ( ${Strings.optional} )',
@@ -21,23 +22,26 @@ class SendTip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8.0),
-        const UserInfo(),
-        const SizedBox(height: 24.0),
-        Form(key: _formKay, child: _amount),
-        const SizedBox(height: 8.0),
-        Text(
-          '${Strings.balance}: 54 DGT',
-          style: TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
-        ),
-        const SizedBox(height: 16.0),
-        _note,
-        const SizedBox(height: 32.0),
-        AppButton(title: Strings.pay, onTap: () {}),
-      ],
+    return Padding(
+      padding: MediaQuery.of(context).viewInsets,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8.0),
+          const UserInfo(),
+          const SizedBox(height: 24.0),
+          Form(key: _formKay, child: _amount),
+          const SizedBox(height: 8.0),
+          Text(
+            '${Strings.balance}: 54 DGT',
+            style: TextStyle(color: Colors.grey, fontSize: AppTheme.sFontSize),
+          ),
+          const SizedBox(height: 16.0),
+          _note,
+          const SizedBox(height: 32.0),
+          AppButton(title: Strings.pay, onTap: () {}),
+        ],
+      ),
     );
   }
 }

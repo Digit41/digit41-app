@@ -18,6 +18,7 @@ class AppTextFormField extends StatefulWidget {
   final bool hidePrefixAfterTyping;
   final bool obscure;
   final bool enable;
+  final bool autofocus;
   final FormFieldValidator<String>? validator;
   ValueChanged<String>? onChanged;
 
@@ -35,6 +36,7 @@ class AppTextFormField extends StatefulWidget {
     this.hidePrefixAfterTyping = false,
     this.obscure = false,
     this.enable = true,
+    this.autofocus = false,
     this.validator,
     this.onChanged,
   }) : super(key: key);
@@ -68,6 +70,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
     return TextFormField(
       controller: widget.controller,
       focusNode: widget.focusNode,
+      autofocus: widget.autofocus,
       textInputAction: widget.nextFocusNode != null
           ? TextInputAction.next
           : TextInputAction.done,

@@ -75,7 +75,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
       {bool selected = false}) =>
       BottomNavigationBarItem(
         icon: Padding(
-          padding: const EdgeInsets.only(top: 16.0),
+          padding: const EdgeInsets.only(top: 12.0, bottom: 4.0),
           child: SvgPicture.asset(selected ? iconSelected : iconUnselected),
         ),
         label: '',

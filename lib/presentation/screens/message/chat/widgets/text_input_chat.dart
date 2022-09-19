@@ -21,7 +21,9 @@ class TextInputChat extends StatelessWidget {
   Widget build(BuildContext context) {
     _txtCubit = context.watch<ChatTextFieldCubit>();
     _msgsCubit = context.read<ListOfChatMsgCubit>();
-    _replyCubit = context.read<ChatReplyEditCubit>();
+
+    /// cubit must be [watch] for apply regex after edit a message or close it
+    _replyCubit = context.watch<ChatReplyEditCubit>();
 
     /// persian regex
     RegExp regex = RegExp(

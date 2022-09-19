@@ -1,13 +1,15 @@
 import 'dart:async';
-import 'package:digit41/presentation/global_widgets/app_bottom_nav.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import '../../cubit_logic/net_connection/net_connection_cubit.dart';
 import '../../utils/images_path.dart';
 import '../../utils/strings.dart';
 import '../../utils/utils.dart';
+import '../global_widgets/app_bottom_nav.dart';
 import '../global_widgets/app_button.dart';
 
 class Splash extends StatefulWidget {
@@ -18,12 +20,20 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  bool _netConnected = true;
+  late Timer _timer;
+
+  void _init() {
+    _timer = Timer(const Duration(seconds: 1), () {
+      if (_netConnected)
+        navigateToPage(context, const AppBottomNav(), replace: true);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 1), () {
-      navigateToPage(context, const AppBottomNav(), replace: true);
-    });
+    _init();
   }
 
   @override
@@ -35,7 +45,14 @@ class _SplashState extends State<Splash> {
             Expanded(child: SvgPicture.asset(Images.splashLogo)),
             Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
-              child: BlocBuilder<NetConnectionCubit, NetConnectionState>(
+              child: BlocConsumer<NetConnectionCubit, NetConnectionState>(
+                listener: (_, state) {
+                  if (state is NetConnected) {
+                    _netConnected = true;
+                    if (!_timer.isActive) _init();
+                  } else
+                    _netConnected = false;
+                },
                 builder: (ctx, state) {
                   return state is NetConnected
                       ? const CupertinoActivityIndicator()
@@ -47,7 +64,7 @@ class _SplashState extends State<Splash> {
                               ctx.read<NetConnectionCubit>().checkNet();
                             },
                           ),
-                        );
+                  );
                 },
               ),
             ),

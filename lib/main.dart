@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit_logic/net_connection/net_connection_cubit.dart';
-import 'presentation/screens/message/chat/chat.dart';
+import 'presentation/screens/splash.dart';
 import 'utils/app_theme.dart';
 
 void main() {
@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+
+        ///todo: try handle with dio interceptor
         BlocProvider<NetConnectionCubit>(create: (_) => NetConnectionCubit()),
       ],
       child: MaterialApp(
@@ -39,7 +41,7 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-  };
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

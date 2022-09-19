@@ -72,7 +72,7 @@ class BubbleChatMenu extends StatelessWidget {
           trailingIcon: SvgPicture.asset(Images.chatReply),
           onPressed: () {
             replyCubit.replyEdit(username, msg);
-            txtFieldCubit.state.txtFieldController.text = '';
+            txtFieldCubit.state.txtFieldController.clear();
           },
         ),
         FocusedMenuItem(

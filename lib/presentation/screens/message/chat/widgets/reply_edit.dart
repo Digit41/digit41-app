@@ -71,7 +71,7 @@ class ReplyEdit extends StatelessWidget {
                     .read<ChatTextFieldCubit>()
                     .state
                     .txtFieldController
-                    .text = '';
+                    .clear();
             },
           ),
         ],

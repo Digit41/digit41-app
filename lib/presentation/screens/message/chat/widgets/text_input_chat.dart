@@ -23,46 +23,57 @@ class TextInputChat extends StatelessWidget {
     _msgsCubit = context.read<ListOfChatMsgCubit>();
     _replyCubit = context.read<ChatReplyEditCubit>();
 
+    /// persian regex
+    RegExp regex = RegExp(
+        r'^[\u0622\u0627\u0628\u067E\u062A-\u062C\u0686\u062D-\u0632\u0698\u0633-\u063A\u0641\u0642\u06A9\u06AF\u0644-\u0648\u06CC\u06F0-\u06F9]+$');
+    bool rtl = regex.hasMatch(_txtCubit.state.txtFieldController.text);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Expanded(
-            child: TextField(
-              controller: _txtCubit.state.txtFieldController,
-              focusNode: _txtCubit.state.txtFieldFocus,
-              maxLines: null,
-              textInputAction: TextInputAction.send,
-              onChanged: _txtCubit.txtFieldOnChange,
-              textAlign: TextAlign.left,
-              style: const TextStyle(height: 1.3),
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  borderSide: BorderSide(
-                    width: 0.0,
-                    style: BorderStyle.none,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 90.0),
+              child: TextField(
+                controller: _txtCubit.state.txtFieldController,
+                focusNode: _txtCubit.state.txtFieldFocus,
+                textDirection: rtl ? TextDirection.rtl : TextDirection.ltr,
+                maxLines: null,
+                textInputAction: TextInputAction.newline,
+                onChanged: _txtCubit.txtFieldOnChange,
+                style: const TextStyle(height: 1.3),
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 4.0,
+                    vertical: 1.0,
                   ),
-                ),
-                hintText: Strings.typeMsg,
-                filled: true,
-                fillColor: AppTheme.grey,
-                hintStyle: TextStyle(
-                  color: Colors.grey,
-                  fontSize: AppTheme.sFontSize,
-                ),
-                prefixIcon: IconButton(
-                  icon: const Icon(
-                    Icons.emoji_emotions_outlined,
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    borderSide: BorderSide(
+                      width: 0.0,
+                      style: BorderStyle.none,
+                    ),
+                  ),
+                  hintText: Strings.typeMsg,
+                  filled: true,
+                  fillColor: AppTheme.grey,
+                  hintStyle: TextStyle(
                     color: Colors.grey,
+                    fontSize: AppTheme.sFontSize,
                   ),
-                  onPressed: () {
-                    context
-                        .read<EmojisVisibilityCubit>()
-                        .toggleVisibility(context: context);
-                  },
+                  prefixIcon: IconButton(
+                    icon: const Icon(
+                      Icons.emoji_emotions_outlined,
+                      color: Colors.grey,
+                    ),
+                    onPressed: () {
+                      context
+                          .read<EmojisVisibilityCubit>()
+                          .toggleVisibility(context: context);
+                    },
+                  ),
                 ),
               ),
             ),

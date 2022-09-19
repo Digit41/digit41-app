@@ -27,8 +27,12 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
   /// functions be into so that logic becomes more separate
 
   final EmojisVisibilityCubit _emojiCubit;
+  final ListOfChatMsgCubit _msgList;
 
-  ChatTextFieldCubit(this._emojiCubit) : super(ChatTextFieldSubmit()) {
+  int? tempEditMsgIndex;
+
+  ChatTextFieldCubit(this._emojiCubit, this._msgList)
+      : super(ChatTextFieldSubmit()) {
     state.txtFieldFocus.addListener(() {
       if (state.txtFieldFocus.hasFocus) _emojiCubit.inVisible();
     });
@@ -37,14 +41,24 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
   void writing() => emit(ChatTextFieldWriting());
 
   /// focus or waiting for user typing state is like submit state
-  void submit() => emit(ChatTextFieldSubmit());
+  void submit({String? msg}) {
+    if (msg != null && tempEditMsgIndex == null)
+      _msgList.addAMsg(msg);
+    else if (msg != null && tempEditMsgIndex != null) {
+      _msgList.editAMsg(tempEditMsgIndex!, msg);
+      tempEditMsgIndex = null;
+    }
 
-  void editChatMsg(String val) {
+    emit(ChatTextFieldSubmit());
+  }
+
+  void editChatMsg(int msgIndex) {
     /// It's really important that the switch to new state[write], comes before any code
     /// else your code's may not have correct operation
     writing();
 
-    state.txtFieldController.text = val;
+    tempEditMsgIndex = msgIndex;
+    state.txtFieldController.text = _msgList.state.msgs[msgIndex];
     state.txtFieldFocus.requestFocus();
   }
 
@@ -102,6 +116,11 @@ class ListOfChatMsgCubit extends Cubit<ListOfChatMsgState> {
   ListOfChatMsgCubit() : super(ListOfChatMsgState());
 
   void addAMsg(String val) => emit(state.copyWith([...state.msgs, val]));
+
+  void editAMsg(int msgIndex, String newMsg) {
+    state.msgs[msgIndex] = newMsg;
+    emit(state.copyWith(state.msgs));
+  }
 
   void deleteAMsg(int index) {
     state.msgs.removeAt(index);

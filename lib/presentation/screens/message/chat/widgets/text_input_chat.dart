@@ -12,7 +12,6 @@ import '../attach.dart';
 
 class TextInputChat extends StatelessWidget {
   late ChatTextFieldCubit _txtCubit;
-  late ListOfChatMsgCubit _msgsCubit;
   late ChatReplyEditCubit _replyCubit;
 
   TextInputChat({Key? key}) : super(key: key);
@@ -20,7 +19,6 @@ class TextInputChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _txtCubit = context.watch<ChatTextFieldCubit>();
-    _msgsCubit = context.read<ListOfChatMsgCubit>();
 
     /// cubit must be [watch] for apply regex after edit a message or close it
     _replyCubit = context.watch<ChatReplyEditCubit>();
@@ -122,8 +120,7 @@ class TextInputChat extends StatelessWidget {
   void _submitMsg() {
     String msg = _txtCubit.state.txtFieldController.text;
     _txtCubit.state.txtFieldController.clear();
-    _txtCubit.submit();
-    _msgsCubit.addAMsg(msg);
+    _txtCubit.submit(msg: msg);
     _replyCubit.hide();
   }
 

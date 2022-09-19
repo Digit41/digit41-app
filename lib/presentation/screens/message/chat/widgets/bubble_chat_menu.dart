@@ -59,7 +59,7 @@ class BubbleChatMenu extends StatelessWidget {
             ),
             trailingIcon: const Icon(Icons.edit, size: 16.0),
             onPressed: () {
-              txtFieldCubit.editChatMsg(msg);
+              txtFieldCubit.editChatMsg(msgIndex);
               replyCubit.replyEdit(username, msg, rep: false);
             },
           ),

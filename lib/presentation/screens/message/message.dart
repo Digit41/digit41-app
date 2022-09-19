@@ -55,15 +55,15 @@ class Message extends StatelessWidget {
           BlocBuilder<MessageCubit, String>(
             builder: (_, state) {
               /// for test: todo: may need to refactor
-              var _aList;
+              List<String> aList;
               if (state == '')
-                _aList = _accounts;
+                aList = _accounts;
               else {
-                _aList = _accounts
+                aList = _accounts
                     .where((element) =>
                         element.toLowerCase().contains(state.toLowerCase()))
                     .toList();
-                _aList.sort();
+                aList.sort((e1, e2) => e1.indexOf(state));
               }
               // todo: check empty message and show EmptyWidget
               return Expanded(
@@ -73,13 +73,13 @@ class Message extends StatelessWidget {
                   key: UniqueKey(),
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   itemBuilder: (_, int index) => AnyChatAccount(
-                    name: _aList[index],
+                    name: aList[index],
                     query: state,
                   ),
                   separatorBuilder: (_, int index) => const Divider(
                     height: 0.0,
                   ),
-                  itemCount: _aList.length,
+                  itemCount: aList.length,
                 ),
               );
             },

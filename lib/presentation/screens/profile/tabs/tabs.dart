@@ -27,7 +27,7 @@ class ProfileTabs extends StatelessWidget {
                 TabBar(
                   unselectedLabelColor: Colors.grey,
                   labelColor: Theme.of(context).textTheme.bodyText1!.color,
-                  indicatorColor: Theme.of(context).primaryColor,
+                  indicatorColor: AppTheme.primaryColor,
                   tabs: const [
                     Tab(text: Strings.myItems),
                     Tab(text: Strings.unlocked),

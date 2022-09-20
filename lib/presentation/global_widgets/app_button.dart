@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:digit41/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatefulWidget {
@@ -82,7 +83,7 @@ class _AppButtonState extends State<AppButton> with TickerProviderStateMixin {
                   ? EdgeInsets.zero
                   : const EdgeInsets.only(bottom: 16.0),
               decoration: BoxDecoration(
-                color: widget.color ?? Theme.of(context).primaryColor,
+                color: widget.color ?? AppTheme.primaryColor,
                 borderRadius: const BorderRadius.all(Radius.circular(6.0)),
               ),
               child: Stack(

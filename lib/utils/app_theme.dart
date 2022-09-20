@@ -20,6 +20,7 @@ class AppTheme {
   static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: Colors.black,
     brightness: Brightness.dark,
+    primaryColor: Colors.black,
     primarySwatch: const MaterialColor(0xffA8F358, _materialPrimaryColor),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,

@@ -82,7 +82,7 @@ class AnyPost extends StatelessWidget {
                 ),
                 TextSpan(
                   text: ' ${_expandTxt.value ? Strings.less : Strings.more}',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: TextStyle(color: AppTheme.primaryColor),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
                       _expandTxt.value = !_expandTxt.value;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/app_theme.dart';
+
 class TakenPhoto extends StatelessWidget {
   const TakenPhoto({Key? key}) : super(key: key);
 
@@ -24,7 +26,7 @@ class TakenPhoto extends StatelessWidget {
           ),
           FloatingActionButton(
             onPressed: () {},
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: AppTheme.primaryColor,
             child: const Icon(Icons.check),
           ),
         ],

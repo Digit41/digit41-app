@@ -89,7 +89,7 @@ class Message extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         mini: true,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: AppTheme.primaryColor,
         child: const Icon(Icons.add, color: Colors.black),
       ),
     );

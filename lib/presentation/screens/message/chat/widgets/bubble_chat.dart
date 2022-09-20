@@ -43,8 +43,8 @@ class BubbleChat extends StatelessWidget {
                     color: showRibbons
                         ? Colors.white
                         : sent
-                        ? Theme.of(context).primaryColor
-                        : AppTheme.grey,
+                            ? AppTheme.primaryColor
+                            : AppTheme.grey,
                     borderRadius: BorderRadius.only(
                       topRight: const Radius.circular(8.0),
                       topLeft: const Radius.circular(8.0),
@@ -75,16 +75,16 @@ class BubbleChat extends StatelessWidget {
                         child != null
                             ? child!
                             : Text(
-                          msg,
-                          style: TextStyle(
-                            color: sent ? Colors.black : Colors.white,
-                            height: 1.5,
-                          ),
-                        ),
+                                msg,
+                                style: TextStyle(
+                                  color: sent ? Colors.black : Colors.white,
+                                  height: 1.5,
+                                ),
+                              ),
                         const SizedBox(height: 5.0),
                         Container(
                           margin:
-                          EdgeInsets.only(top: showRibbons ? 20.0 : 0.0),
+                              EdgeInsets.only(top: showRibbons ? 20.0 : 0.0),
                           alignment: Alignment.bottomRight,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +135,7 @@ class ReplyMessage extends StatelessWidget {
         Container(
           width: 2.0,
           height: 33.0,
-          color: _sent ? Colors.black : Theme.of(context).primaryColor,
+          color: _sent ? Colors.black : AppTheme.primaryColor,
         ),
         Flexible(
           child: Padding(
@@ -146,8 +146,7 @@ class ReplyMessage extends StatelessWidget {
                 Text(
                   username,
                   style: TextStyle(
-                    color:
-                        _sent ? Colors.black : Theme.of(context).primaryColor,
+                    color: _sent ? Colors.black : AppTheme.primaryColor,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),

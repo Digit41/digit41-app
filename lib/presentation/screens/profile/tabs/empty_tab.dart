@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../../../global_widgets/app_button.dart';
 
@@ -30,8 +31,7 @@ class EmptyTab extends StatelessWidget {
             child: AppButton(
               title: btnTitle,
               onTap: onTap,
-              color: Theme.of(context).primaryColor,
-            ),
+                color: AppTheme.primaryColor),
           ),
         ],
       ),

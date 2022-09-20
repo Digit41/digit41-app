@@ -88,34 +88,34 @@ class TextInputChat extends StatelessWidget {
             duration: const Duration(milliseconds: 50),
             child: _txtCubit.state is ChatTextFieldWriting
                 ? _option(
-              Images.sendMsgTxt,
-              color: Theme.of(context).primaryColor,
-              onTap: _submitMsg,
-            )
+                    Images.sendMsgTxt,
+                    color: AppTheme.primaryColor,
+                    onTap: _submitMsg,
+                  )
                 : Row(
-              children: [
-                _option(
-                  Images.money,
-                  onTap: () {
-                    showGeneralBottomSheet(
-                      context,
-                      title: '${Strings.sendTip} ${Strings.to}',
-                      child: SendTip(),
-                    );
-                  },
-                ),
-                const SizedBox(width: 8.0),
-                _option(
-                  Images.attachment,
-                  onTap: () {
-                    showGeneralBottomSheet(
-                      context,
-                      child: const Attach(),
-                    );
-                  },
-                ),
-              ],
-            ),
+                    children: [
+                      _option(
+                        Images.money,
+                        onTap: () {
+                          showGeneralBottomSheet(
+                            context,
+                            title: '${Strings.sendTip} ${Strings.to}',
+                            child: SendTip(),
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 8.0),
+                      _option(
+                        Images.attachment,
+                        onTap: () {
+                          showGeneralBottomSheet(
+                            context,
+                            child: const Attach(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
           ),
         ],
       ),

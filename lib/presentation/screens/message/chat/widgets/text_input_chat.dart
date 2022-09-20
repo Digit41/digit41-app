@@ -13,11 +13,13 @@ import '../attach.dart';
 class TextInputChat extends StatelessWidget {
   late ChatTextFieldCubit _txtCubit;
   late ChatReplyEditCubit _replyCubit;
+  late EmojisVisibilityCubit _emojiCubit;
 
   TextInputChat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    _emojiCubit = context.read<EmojisVisibilityCubit>();
     _txtCubit = context.watch<ChatTextFieldCubit>();
 
     /// cubit must be [watch] for apply regex after edit a message or close it
@@ -27,6 +29,10 @@ class TextInputChat extends StatelessWidget {
     RegExp regex = RegExp(
         r'^[\u0622\u0627\u0628\u067E\u062A-\u062C\u0686\u062D-\u0632\u0698\u0633-\u063A\u0641\u0642\u06A9\u06AF\u0644-\u0648\u06CC\u06F0-\u06F9]+$');
     bool rtl = regex.hasMatch(_txtCubit.state.txtFieldController.text);
+
+    _txtCubit.state.txtFieldFocus.addListener(() {
+      if (_txtCubit.state.txtFieldFocus.hasFocus) _emojiCubit.inVisible();
+    });
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -69,9 +75,8 @@ class TextInputChat extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     onPressed: () {
-                      context
-                          .read<EmojisVisibilityCubit>()
-                          .toggleVisibility(context: context);
+                      _txtCubit.state.txtFieldFocus.unfocus();
+                      _emojiCubit.toggleVisibility();
                     },
                   ),
                 ),
@@ -83,34 +88,34 @@ class TextInputChat extends StatelessWidget {
             duration: const Duration(milliseconds: 50),
             child: _txtCubit.state is ChatTextFieldWriting
                 ? _option(
-                    Images.sendMsgTxt,
-                    color: Theme.of(context).primaryColor,
-                    onTap: _submitMsg,
-                  )
+              Images.sendMsgTxt,
+              color: Theme.of(context).primaryColor,
+              onTap: _submitMsg,
+            )
                 : Row(
-                    children: [
-                      _option(
-                        Images.money,
-                        onTap: () {
-                          showGeneralBottomSheet(
-                            context,
-                            title: '${Strings.sendTip} ${Strings.to}',
-                            child: SendTip(),
-                          );
-                        },
-                      ),
-                      const SizedBox(width: 8.0),
-                      _option(
-                        Images.attachment,
-                        onTap: () {
-                          showGeneralBottomSheet(
-                            context,
-                            child: const Attach(),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+              children: [
+                _option(
+                  Images.money,
+                  onTap: () {
+                    showGeneralBottomSheet(
+                      context,
+                      title: '${Strings.sendTip} ${Strings.to}',
+                      child: SendTip(),
+                    );
+                  },
+                ),
+                const SizedBox(width: 8.0),
+                _option(
+                  Images.attachment,
+                  onTap: () {
+                    showGeneralBottomSheet(
+                      context,
+                      child: const Attach(),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

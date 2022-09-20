@@ -9,34 +9,39 @@ part 'chat_state.dart';
 class EmojisVisibilityCubit extends Cubit<EmojisVisibilityState> {
   EmojisVisibilityCubit() : super(EmojisVisibilityInVisible());
 
-  void toggleVisibility({BuildContext? context}) {
-    if (state is EmojisVisibilityInVisible) {
-      emit(EmojisVisibilityVisible());
-
-      FocusScopeNode fs = FocusScope.of(context!);
-      if (!fs.hasPrimaryFocus) fs.unfocus();
-    } else
-      emit(EmojisVisibilityInVisible());
-  }
+  void toggleVisibility() => state is EmojisVisibilityInVisible
+      ? emit(EmojisVisibilityVisible())
+      : emit(EmojisVisibilityInVisible());
 
   void inVisible() => emit(EmojisVisibilityInVisible());
+}
+
+/// for test and temporary, Todo: must be refactor
+class ListOfChatMsgCubit extends Cubit<ListOfChatMsgState> {
+  ListOfChatMsgCubit() : super(ListOfChatMsgState());
+
+  void addAMsg(String val) => emit(state.copyWith([...state.msgs, val]));
+
+  void editAMsg(int msgIndex, String newMsg) {
+    state.msgs[msgIndex] = newMsg;
+    emit(state.copyWith(state.msgs));
+  }
+
+  void deleteAMsg(int index) {
+    state.msgs.removeAt(index);
+    emit(state.copyWith(state.msgs));
+  }
 }
 
 class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
   /// we can have a use case that [txtFieldOnChange] and [backspace]
   /// functions be into so that logic becomes more separate
 
-  final EmojisVisibilityCubit _emojiCubit;
   final ListOfChatMsgCubit _msgList;
 
   int? tempEditMsgIndex;
 
-  ChatTextFieldCubit(this._emojiCubit, this._msgList)
-      : super(ChatTextFieldSubmit()) {
-    state.txtFieldFocus.addListener(() {
-      if (state.txtFieldFocus.hasFocus) _emojiCubit.inVisible();
-    });
-  }
+  ChatTextFieldCubit(this._msgList) : super(ChatTextFieldSubmit());
 
   void writing() => emit(ChatTextFieldWriting());
 
@@ -109,21 +114,4 @@ class ChatReplyEditCubit extends Cubit<ChatReplyEditState> {
   void replyEdit(String username, String msg, {bool rep = true}) => emit(
         ChatReplyEditShowState(username, msg, rep),
       );
-}
-
-/// for test and temporary, Todo: must be refactor
-class ListOfChatMsgCubit extends Cubit<ListOfChatMsgState> {
-  ListOfChatMsgCubit() : super(ListOfChatMsgState());
-
-  void addAMsg(String val) => emit(state.copyWith([...state.msgs, val]));
-
-  void editAMsg(int msgIndex, String newMsg) {
-    state.msgs[msgIndex] = newMsg;
-    emit(state.copyWith(state.msgs));
-  }
-
-  void deleteAMsg(int index) {
-    state.msgs.removeAt(index);
-    emit(state.copyWith(state.msgs));
-  }
 }

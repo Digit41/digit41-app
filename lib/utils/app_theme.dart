@@ -4,10 +4,23 @@ class AppTheme {
   static const primaryColor = Color(0xffA8F358);
   static const grey = Color(0xff292929);
 
+  static const _materialPrimaryColor = {
+    50: Color.fromRGBO(168, 243, 88, .1),
+    100: Color.fromRGBO(168, 243, 88, .2),
+    200: Color.fromRGBO(168, 243, 88, .3),
+    300: Color.fromRGBO(168, 243, 88, .4),
+    400: Color.fromRGBO(168, 243, 88, .5),
+    500: Color.fromRGBO(168, 243, 88, .6),
+    600: Color.fromRGBO(168, 243, 88, .7),
+    700: Color.fromRGBO(168, 243, 88, .8),
+    800: Color.fromRGBO(168, 243, 88, .9),
+    900: Color.fromRGBO(168, 243, 88, 1),
+  };
+
   static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: Colors.black,
     brightness: Brightness.dark,
-    primaryColor: primaryColor,
+    primarySwatch: const MaterialColor(0xffA8F358, _materialPrimaryColor),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,
       iconTheme: IconThemeData(size: 14.0),

@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'cubit_logic/net_connection/net_connection_cubit.dart';
@@ -9,10 +8,6 @@ import 'presentation/screens/splash.dart';
 import 'utils/app_theme.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: Colors.black),
-  );
-
   runApp(const MyApp());
 }
 

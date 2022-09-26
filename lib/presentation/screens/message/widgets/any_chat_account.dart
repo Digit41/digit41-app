@@ -46,6 +46,7 @@ class AnyChatAccount extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
           navigateToPage(context, Chat());
         },
         contentPadding: const EdgeInsets.symmetric(

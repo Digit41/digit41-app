@@ -73,14 +73,18 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
     else
       submit();
 
-    if (append)
+    if (append) {
+      /// this command needed because with remove emoji or add it, cursor jumps
+      state.txtFieldFocus.unfocus();
+
       state.txtFieldController.text += txt;
-    else
+    } else
       state.txtFieldController.text = txt;
 
     state.txtFieldController.selection =
         TextSelection.fromPosition(TextPosition(offset: txt.length));
-    return null;
+
+    return txt;
   }
 
   void backspace() {

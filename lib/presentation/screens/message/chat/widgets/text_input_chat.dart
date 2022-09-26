@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,7 +28,8 @@ class TextInputChat extends StatelessWidget {
 
     /// persian regex
     RegExp regex = RegExp(
-        r'^[\u0622\u0627\u0628\u067E\u062A-\u062C\u0686\u062D-\u0632\u0698\u0633-\u063A\u0641\u0642\u06A9\u06AF\u0644-\u0648\u06CC\u06F0-\u06F9]+$');
+      r'^[\u0622\u0627\u0628\u067E\u062A-\u062C\u0686\u062D-\u0632\u0698\u0633-\u063A\u0641\u0642\u06A9\u06AF\u0644-\u0648\u06CC\u06F0-\u06F9]+$',
+    );
     bool rtl = regex.hasMatch(_txtCubit.state.txtFieldController.text);
 
     _txtCubit.state.txtFieldFocus.addListener(() {
@@ -75,7 +77,10 @@ class TextInputChat extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     onPressed: () {
-                      _txtCubit.state.txtFieldFocus.unfocus();
+                      /// no way for unfocus chat txt field, like:
+                      /// [_txtCubit.state.txtFieldFocus.unfocus();]
+                      /// so have to use below command
+                      SystemChannels.textInput.invokeMethod('TextInput.hide');
                       _emojiCubit.toggleVisibility();
                     },
                   ),
@@ -108,6 +113,8 @@ class TextInputChat extends StatelessWidget {
                       _option(
                         Images.attachment,
                         onTap: () {
+                          SystemChannels.textInput
+                              .invokeMethod('TextInput.hide');
                           showGeneralBottomSheet(
                             context,
                             child: const Attach(),

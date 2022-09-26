@@ -36,7 +36,19 @@ class Chat extends StatelessWidget {
               create: (_) => ChatReplyEditCubit(),
             ),
           ],
-          child: _body(),
+          child: Builder(builder: (context) {
+            return WillPopScope(
+              onWillPop: () async {
+                var ec = context.read<EmojisVisibilityCubit>();
+                if (ec.state is EmojisVisibilityVisible) {
+                  ec.inVisible();
+                  return false;
+                }
+                return true;
+              },
+              child: _body(),
+            );
+          }),
         ),
       ),
     );

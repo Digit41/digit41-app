@@ -104,6 +104,13 @@ class ChatTextFieldCubit extends Cubit<ChatTextFieldState> {
 
     if (txt.isEmpty) submit();
   }
+
+  @override
+  Future<void> close() {
+    state.txtFieldFocus.dispose();
+    state.txtFieldController.dispose();
+    return super.close();
+  }
 }
 
 class ChatReplyEditCubit extends Cubit<ChatReplyEditState> {

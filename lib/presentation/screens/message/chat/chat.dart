@@ -1,24 +1,19 @@
-import 'package:emojis/emoji.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:holding_gesture/holding_gesture.dart';
 
 import '../../../../cubit_logic/chat/chat_cubit.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/images_path.dart';
 import '../../../global_widgets/app_bottom_sheet.dart';
+import 'app_emojis.dart';
 import 'widgets/bubble_chat.dart';
 import 'widgets/reply_edit.dart';
 import 'widgets/success_msg_send_tip.dart';
 import 'widgets/text_input_chat.dart';
 
 class Chat extends StatelessWidget {
-  late List<Emoji> emojiList;
-
-  Chat({Key? key}) : super(key: key) {
-    emojiList = Emoji.all();
-  }
+  const Chat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -150,80 +145,7 @@ class Chat extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 4.0),
             child: TextInputChat(),
           ),
-          _emojis(),
+          AppEmojis(),
         ],
-      );
-
-  Widget _emojis() => Builder(
-        builder: (ctx) {
-          var txtFieldCubit = ctx.read<ChatTextFieldCubit>();
-
-          return Align(
-            alignment: Alignment.bottomCenter,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
-              height: ctx.watch<EmojisVisibilityCubit>().state
-                      is EmojisVisibilityInVisible
-                  ? 0.0
-                  : 190.0,
-              decoration: const BoxDecoration(
-                color: AppTheme.grey,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.0),
-                  topRight: Radius.circular(16.0),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: GridView.builder(
-                      controller: ScrollController(),
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 6,
-                        childAspectRatio: 1.65,
-                      ),
-                      itemCount: emojiList.length,
-                      itemBuilder: (_, int index) => Center(
-                        child: InkWell(
-                          onTap: () {
-                            txtFieldCubit.txtFieldOnChange(
-                              emojiList[index].char,
-                              append: true,
-                            );
-                          },
-                          child: Text(
-                            emojiList[index].char,
-                            style: const TextStyle(fontSize: 26.0),
-                          ),
-                        ),
-                      ),
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.only(
-                        top: 8.0,
-                        left: 4.0,
-                        right: 4.0,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 34.0,
-                    color: AppTheme.grey,
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: HoldDetector(
-                      onHold: txtFieldCubit.backspace,
-                      onTap: txtFieldCubit.backspace,
-                      child: const Icon(
-                        Icons.backspace_outlined,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
       );
 }

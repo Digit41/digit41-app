@@ -39,22 +39,32 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(child: SvgPicture.asset(Images.splashLogo)),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 32.0),
-              child: BlocConsumer<NetConnectionCubit, NetConnectionState>(
-                listener: (_, state) {
-                  if (state is NetConnected) {
-                    _netConnected = true;
-                    if (!_timer.isActive) _init();
-                  } else
-                    _netConnected = false;
-                },
-                builder: (ctx, state) {
-                  return state is NetConnected
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 32.0),
+        child: BlocConsumer<NetConnectionCubit, NetConnectionState>(
+          listener: (_, state) {
+            if (state is NetConnected) {
+              _netConnected = true;
+              if (!_timer.isActive) _init();
+            } else
+              _netConnected = false;
+          },
+          builder: (ctx, state) {
+            return Center(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(Images.splashLogo),
+                        const SizedBox(height: 16.0),
+                        if (state is! NetConnected)
+                          const Text(Strings.netIsNotConnect),
+                      ],
+                    ),
+                  ),
+                  state is NetConnected
                       ? const CupertinoActivityIndicator()
                       : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -64,11 +74,11 @@ class _SplashState extends State<Splash> {
                               ctx.read<NetConnectionCubit>().checkNet();
                             },
                           ),
-                  );
-                },
+                        ),
+                ],
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

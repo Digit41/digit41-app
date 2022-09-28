@@ -11,7 +11,9 @@ import '../../global_widgets/app_text_form_field.dart';
 import 'widgets/any_chat_account.dart';
 
 class Message extends StatelessWidget {
-  Message({Key? key}) : super(key: key);
+  final ScrollController? scrollCtl;
+
+  Message({Key? key, this.scrollCtl}) : super(key: key);
 
   ///testi!
   final _accounts = [
@@ -71,6 +73,7 @@ class Message extends StatelessWidget {
                   /// needed key for rebuild and handle dismissible function of Slidable
                   /// also todo: itemCount must be have interaction because currently have error
                   key: UniqueKey(),
+                  controller: scrollCtl,
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   itemBuilder: (_, int index) => AnyChatAccount(
                     name: aList[index],

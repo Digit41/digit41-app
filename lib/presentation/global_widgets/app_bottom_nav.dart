@@ -22,6 +22,7 @@ class _AppBottomNavState extends State<AppBottomNav> {
   /// key is index of page in pages list
   final _pagesScrollController = {
     0: ScrollController(),
+    3: ScrollController(),
   };
 
   late final List<Widget> pages;
@@ -30,10 +31,13 @@ class _AppBottomNavState extends State<AppBottomNav> {
   void initState() {
     super.initState();
     pages = [
-      Home(sc: _pagesScrollController[0]),
+      Home(scrollCtl: _pagesScrollController[0]),
       Container(),
       Container(),
-      BlocProvider(create: (_) => MessageCubit(), child: Message()),
+      BlocProvider(
+        create: (_) => MessageCubit(),
+        child: Message(scrollCtl: _pagesScrollController[3]),
+      ),
       const Profile(),
     ];
   }
@@ -98,6 +102,8 @@ class _AppBottomNavState extends State<AppBottomNav> {
   void _handleScrollToTopInAnyTab(int newIndex) {
     var sc;
     if (newIndex == _bottomItemSelectedIndex && newIndex == 0)
+      sc = _pagesScrollController[newIndex];
+    else if (newIndex == _bottomItemSelectedIndex && newIndex == 3)
       sc = _pagesScrollController[newIndex];
     else
       return;

@@ -32,12 +32,14 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-   - assets/images/
-   - assets/icons/
+    - assets/images/
+    - assets/icons/
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - assets: fonts/Schyler-Regular.ttf
-  #       - assets: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: railGrotesk
+      fonts:
+        - asset: assets/fonts/rail-grotesk-regular.ttf
+  #        - asset: assets/fonts/open-sauce-one-regular.ttf
+  #        - asset: assets/fonts/open-sauce-one-bold.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic

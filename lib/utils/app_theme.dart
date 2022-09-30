@@ -22,6 +22,7 @@ class AppTheme {
     brightness: Brightness.dark,
     primaryColor: Colors.black,
     primarySwatch: const MaterialColor(0xffA8F358, _materialPrimaryColor),
+    fontFamily: 'railGrotesk',
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,
       iconTheme: IconThemeData(size: 14.0),

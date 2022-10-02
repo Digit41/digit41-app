@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -15,49 +15,40 @@ class CustomAppbar extends StatelessWidget {
       expandedHeight: 130.0,
       backgroundColor: Colors.transparent,
       pinned: true,
-      titleSpacing: 0.0,
       title: _InvisibleExpandedHeader(
-        child: Container(
-          width: double.infinity,
-          alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.only(
-            bottom: 14.0,
-            left: 18.0,
-            right: 18.0,
-            top: 20.0,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.black,
-            gradient: RadialGradient(
-              radius: 9.0,
-              colors: [
-                Colors.grey.shade900,
-                Colors.black,
-                Colors.black,
-              ],
+        child: Stack(
+          children: [
+            Blur(
+              blurColor: Colors.black,
+              colorOpacity: 0.8,
+              blur: 10.0,
+              child: Container(height: 100.0),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                Strings.tBalance,
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: AppTheme.sFontSize,
-                ),
+            SizedBox(
+              height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    Strings.tBalance,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: AppTheme.sFontSize,
+                    ),
+                  ),
+                  Text(
+                    // todo: this will change
+                    '232,22 DGT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: AppTheme.mFontSize,
+                    ),
+                  ),
+                  Text(''.padRight(Strings.tBalance.length)),
+                ],
               ),
-              Text(
-                // todo: this will change
-                '232,22 DGT',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: AppTheme.mFontSize,
-                ),
-              ),
-              Text(''.padRight(Strings.tBalance.length)),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       flexibleSpace: FlexibleSpaceBar(
@@ -65,7 +56,7 @@ class CustomAppbar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Column(
             children: [
-              const SizedBox(height: kIsWeb ? 20.0 : 55.0),
+              const SizedBox(height: 8.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -88,13 +79,16 @@ class CustomAppbar extends StatelessWidget {
                     height: 20.0,
                   ),
                   const SizedBox(width: 8.0),
-                  Text('2,344 DGT',
-                      style: TextStyle(fontSize: AppTheme.lFontSize)),
+                  Text(
+                    '2,344 DGT',
+                    style: TextStyle(fontSize: AppTheme.lFontSize),
+                  ),
                   const SizedBox(width: 8.0),
                   Container(
                     decoration: BoxDecoration(
-                        color: AppTheme.primaryColor.withAlpha(90),
-                        borderRadius: BorderRadius.circular(10.0)),
+                      color: AppTheme.primaryColor.withAlpha(90),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 6.0,
                       vertical: 3.0,
@@ -170,7 +164,7 @@ class _InvisibleExpandedHeaderState extends State<_InvisibleExpandedHeader> {
 
   void _positionListener() {
     final FlexibleSpaceBarSettings? settings =
-    context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
+        context.dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
     bool visible =
         settings == null || settings.currentExtent <= settings.minExtent;
     if (_visible != visible) {

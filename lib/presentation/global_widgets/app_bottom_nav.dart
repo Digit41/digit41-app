@@ -44,46 +44,48 @@ class _AppBottomNavState extends State<AppBottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[_bottomItemSelectedIndex],
-      bottomNavigationBar: Theme(
-        data: AppTheme.theme,
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: _bottomItemSelectedIndex,
-          onTap: (newIndex) {
-            _handleScrollToTopInAnyTab(newIndex);
-            setState(() {
-              _bottomItemSelectedIndex = newIndex;
-            });
-          },
-          items: [
-            _item(
-              Images.homeSelected,
-              Images.homeUnselected,
-              selected: _bottomItemSelectedIndex == 0,
-            ),
-            _item(
-              Images.searchSelected,
-              Images.searchUnselected,
-              selected: _bottomItemSelectedIndex == 1,
-            ),
-            _item(
-              Images.addPostSelected,
-              Images.addPostUnselected,
-              selected: _bottomItemSelectedIndex == 2,
-            ),
-            _item(
-              Images.messageSelected,
-              Images.messageUnselected,
-              selected: _bottomItemSelectedIndex == 3,
-            ),
-            _item(
-              Images.accountSelected,
-              Images.accountUnselected,
-              selected: _bottomItemSelectedIndex == 4,
-            ),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        body: pages[_bottomItemSelectedIndex],
+        bottomNavigationBar: Theme(
+          data: AppTheme.theme,
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _bottomItemSelectedIndex,
+            onTap: (newIndex) {
+              _handleScrollToTopInAnyTab(newIndex);
+              setState(() {
+                _bottomItemSelectedIndex = newIndex;
+              });
+            },
+            items: [
+              _item(
+                Images.homeSelected,
+                Images.homeUnselected,
+                selected: _bottomItemSelectedIndex == 0,
+              ),
+              _item(
+                Images.searchSelected,
+                Images.searchUnselected,
+                selected: _bottomItemSelectedIndex == 1,
+              ),
+              _item(
+                Images.addPostSelected,
+                Images.addPostUnselected,
+                selected: _bottomItemSelectedIndex == 2,
+              ),
+              _item(
+                Images.messageSelected,
+                Images.messageUnselected,
+                selected: _bottomItemSelectedIndex == 3,
+              ),
+              _item(
+                Images.accountSelected,
+                Images.accountUnselected,
+                selected: _bottomItemSelectedIndex == 4,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -46,6 +46,7 @@ class Strings{
   static const mint = 'Mint';
   static const subscribers = 'Subscribers';
   static const subscribe = 'Subscribe';
+  static const notResult = 'Not exist any result for';
   static const netIsNotConnect = 'Your internet connection is not established!';
   static const youDeniedImagePermission =
       'you has denied access to images on their device.';

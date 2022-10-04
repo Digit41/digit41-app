@@ -68,21 +68,23 @@ class Message extends StatelessWidget {
               }
               // todo: check empty message and show EmptyWidget
               return Expanded(
-                child: ListView.separated(
-                  /// needed key for rebuild and handle dismissible function of Slidable
-                  /// also todo: itemCount must be have interaction because currently have error
-                  key: UniqueKey(),
-                  controller: scrollCtl,
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  itemBuilder: (_, int index) => AnyChatAccount(
-                    name: aList[index],
-                    query: state,
-                  ),
-                  separatorBuilder: (_, int index) => const Divider(
-                    height: 0.0,
-                  ),
-                  itemCount: aList.length,
-                ),
+                child: aList.isEmpty
+                    ? Center(child: Text('${Strings.notResult} "$state"'))
+                    : ListView.separated(
+                        /// needed key for rebuild and handle dismissible function of Slidable
+                        /// also todo: itemCount must be have interaction because currently have error
+                        key: UniqueKey(),
+                        controller: scrollCtl,
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        itemBuilder: (_, int index) => AnyChatAccount(
+                          name: aList[index],
+                          query: state,
+                        ),
+                        separatorBuilder: (_, int index) => const Divider(
+                          height: 0.0,
+                        ),
+                        itemCount: aList.length,
+                      ),
               );
             },
           ),

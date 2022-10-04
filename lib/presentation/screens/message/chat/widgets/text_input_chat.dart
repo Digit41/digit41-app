@@ -39,52 +39,73 @@ class TextInputChat extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Expanded(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 90.0),
-              child: TextField(
-                controller: _txtCubit.state.txtFieldController,
-                focusNode: _txtCubit.state.txtFieldFocus,
-                textDirection: rtl ? TextDirection.rtl : TextDirection.ltr,
-                maxLines: null,
-                textInputAction: TextInputAction.newline,
-                onChanged: _txtCubit.txtFieldOnChange,
-                style: const TextStyle(height: 1.3),
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 4.0,
-                    vertical: 1.0,
-                  ),
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                    borderSide: BorderSide(
-                      width: 0.0,
-                      style: BorderStyle.none,
+              constraints: const BoxConstraints(maxHeight: 110.0),
+              child: Stack(
+                children: [
+                  ScrollConfiguration(
+                    behavior: const MaterialScrollBehavior().copyWith(
+                      overscroll: false,
+                    ),
+                    child: SingleChildScrollView(
+                      reverse: true,
+                      child: TextField(
+                        controller: _txtCubit.state.txtFieldController,
+                        focusNode: _txtCubit.state.txtFieldFocus,
+                        textDirection:
+                            rtl ? TextDirection.rtl : TextDirection.ltr,
+                        maxLines: null,
+                        textInputAction: TextInputAction.newline,
+                        onChanged: _txtCubit.txtFieldOnChange,
+                        style: const TextStyle(height: 1.3),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(1.0),
+                          border: const OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(
+                              width: 0.0,
+                              style: BorderStyle.none,
+                            ),
+                          ),
+                          hintText: Strings.typeMsg,
+                          filled: true,
+                          fillColor: AppTheme.grey,
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: AppTheme.sFontSize,
+                          ),
+                          prefixIcon: IconButton(
+                            icon: const Icon(
+                              Icons.emoji_emotions_outlined,
+                              color: Colors.transparent,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  hintText: Strings.typeMsg,
-                  filled: true,
-                  fillColor: AppTheme.grey,
-                  hintStyle: TextStyle(
-                    color: Colors.grey,
-                    fontSize: AppTheme.sFontSize,
-                  ),
-                  prefixIcon: IconButton(
-                    icon: const Icon(
-                      Icons.emoji_emotions_outlined,
-                      color: Colors.grey,
+                  Positioned(
+                    bottom: 0.0,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.emoji_emotions_outlined,
+                        color: Colors.grey,
+                      ),
+                      onPressed: () {
+                        /// no way for unfocus chat txt field, like:
+                        /// [_txtCubit.state.txtFieldFocus.unfocus();]
+                        /// so have to use below command
+                        SystemChannels.textInput.invokeMethod('TextInput.hide');
+                        _emojiCubit.toggleVisibility();
+                      },
                     ),
-                    onPressed: () {
-                      /// no way for unfocus chat txt field, like:
-                      /// [_txtCubit.state.txtFieldFocus.unfocus();]
-                      /// so have to use below command
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                      _emojiCubit.toggleVisibility();
-                    },
                   ),
-                ),
+                ],
               ),
             ),
           ),

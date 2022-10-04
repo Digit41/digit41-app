@@ -147,6 +147,7 @@ class ReplyMessage extends StatelessWidget {
                   username,
                   style: TextStyle(
                     color: _sent ? Colors.black : AppTheme.primaryColor,
+                    fontSize: AppTheme.mFontSize,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),

@@ -62,6 +62,7 @@ class AnyChatAccount extends StatelessWidget {
                 children: highlightOccurrences(name, query),
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText1!.color,
+                  fontSize: AppTheme.mFontSize,
                 ),
               ),
             ),

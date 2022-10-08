@@ -4,14 +4,45 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:holding_gesture/holding_gesture.dart';
 
 import '../../../../cubit_logic/chat/chat_cubit.dart';
+import '../../../../utils/app_shared_preferences.dart';
 import '../../../../utils/app_theme.dart';
 
-class AppEmojis extends StatelessWidget {
+class AppEmojis extends StatefulWidget {
+  const AppEmojis({Key? key}) : super(key: key);
+
+  @override
+  State<AppEmojis> createState() => _AppEmojisState();
+}
+
+class _AppEmojisState extends State<AppEmojis> {
   final List<Widget> _cats = [];
   final List<List<Emoji>> _emojiList = [];
+  final AppSharedPreferences _pref = AppSharedPreferences();
+
+  /// for prevent from repeatedly call [_getRecentlyEmoji] with repeat user tap
+  bool _multiTapOnRecentTab = false;
+
   late ChatTextFieldCubit _chatTxtFieldCubit;
 
-  AppEmojis({Key? key}) : super(key: key) {
+  Future<void> _getRecentlyEmoji({bool setS = false}) async {
+    List<Emoji> temp = [];
+    List<String> recently = await _pref.getRecentlyEmojisClicked();
+    for (var element in recently) temp.add(Emoji.byChar(element)!);
+
+    if (setS) {
+      _emojiList.removeAt(0);
+      _emojiList.insert(0, temp);
+      setState(() {});
+    } else
+      _emojiList.add(temp);
+  }
+
+  void _init() async {
+    await _getRecentlyEmoji();
+    _cats.add(
+      const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.pages)),
+    );
+
     for (int i = 0; i < EmojiGroup.values.length; i++) {
       _cats.add(
         const Padding(
@@ -22,6 +53,13 @@ class AppEmojis extends StatelessWidget {
 
       _emojiList.add(Emoji.byGroup(EmojiGroup.values[i]).toList());
     }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
   }
 
   @override
@@ -45,7 +83,7 @@ class AppEmojis extends StatelessWidget {
           ),
         ),
         child: DefaultTabController(
-          length: EmojiGroup.values.length,
+          length: _cats.length,
           child: Column(
             children: [
               TabBar(
@@ -55,6 +93,13 @@ class AppEmojis extends StatelessWidget {
                 unselectedLabelColor: Colors.grey,
                 labelColor: Theme.of(context).textTheme.bodyText1!.color,
                 indicatorColor: AppTheme.primaryColor,
+                onTap: (index) {
+                  if (index == 0 && !_multiTapOnRecentTab) {
+                    _getRecentlyEmoji(setS: true);
+                    _multiTapOnRecentTab = true;
+                  } else
+                    _multiTapOnRecentTab = false;
+                },
                 tabs: _cats,
               ),
               Expanded(
@@ -74,6 +119,7 @@ class AppEmojis extends StatelessWidget {
                         itemBuilder: (_, int index) => Center(
                           child: InkWell(
                             onTap: () {
+                              _pref.holdEmojiClicked(_emojiList[i][index].char);
                               _chatTxtFieldCubit.txtFieldOnChange(
                                 _emojiList[i][index].char,
                                 append: true,

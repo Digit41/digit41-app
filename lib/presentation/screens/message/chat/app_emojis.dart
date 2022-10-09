@@ -54,8 +54,8 @@ class _AppEmojisState extends State<AppEmojis> {
     _init();
   }
 
-  Widget _catIcon(int pIndex) => IconButton(
-        onPressed: () {
+  Widget _catIcon(int pIndex) => GestureDetector(
+        onTap: () {
           _pageCtl.animateToPage(
             pIndex,
             duration: const Duration(milliseconds: 400),
@@ -63,23 +63,27 @@ class _AppEmojisState extends State<AppEmojis> {
           );
           _currentPage.value = pIndex;
         },
-        icon: ValueListenableBuilder(
+        child: ValueListenableBuilder(
           valueListenable: _currentPage,
-          builder: (_, __, ___) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.category,
-                color: pIndex == _currentPage.value ? null : Colors.grey,
-              ),
-              const SizedBox(height: 6.0),
-              Container(
-                width: 60.0,
-                height: 2.0,
-                color:
-                    pIndex == _currentPage.value ? AppTheme.primaryColor : null,
-              ),
-            ],
+          builder: (_, __, ___) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.category,
+                  color: pIndex == _currentPage.value ? null : Colors.grey,
+                ),
+                const SizedBox(height: 6.0),
+                Container(
+                  width: 48.0,
+                  height: 2.0,
+                  color: pIndex == _currentPage.value
+                      ? AppTheme.primaryColor
+                      : null,
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -95,7 +99,7 @@ class _AppEmojisState extends State<AppEmojis> {
         height: context.watch<EmojisVisibilityCubit>().state
                 is EmojisVisibilityInVisible
             ? 0.0
-            : 250.0,
+            : 255.0,
         clipBehavior: Clip.hardEdge,
         decoration: const BoxDecoration(
           color: AppTheme.grey,
@@ -108,10 +112,7 @@ class _AppEmojisState extends State<AppEmojis> {
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                child: Row(children: _cats),
-              ),
+              child: Row(children: _cats),
             ),
             Expanded(
               child: PageView(

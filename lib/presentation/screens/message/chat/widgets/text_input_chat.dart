@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +57,7 @@ class TextInputChat extends StatelessWidget {
                         controller: _txtCubit.state.txtFieldController,
                         focusNode: _txtCubit.state.txtFieldFocus,
                         textDirection:
-                            rtl ? TextDirection.rtl : TextDirection.ltr,
+                        rtl ? TextDirection.rtl : TextDirection.ltr,
                         maxLines: null,
                         textInputAction: TextInputAction.newline,
                         onChanged: _txtCubit.txtFieldOnChange,
@@ -65,7 +66,7 @@ class TextInputChat extends StatelessWidget {
                           contentPadding: const EdgeInsets.all(1.0),
                           border: const OutlineInputBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
+                            BorderRadius.all(Radius.circular(8.0)),
                             borderSide: BorderSide(
                               width: 0.0,
                               style: BorderStyle.none,
@@ -90,7 +91,7 @@ class TextInputChat extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 0.0,
+                    bottom: kIsWeb ? 4.0 : 0.0,
                     child: IconButton(
                       icon: const Icon(
                         Icons.emoji_emotions_outlined,
@@ -114,36 +115,36 @@ class TextInputChat extends StatelessWidget {
             duration: const Duration(milliseconds: 50),
             child: _txtCubit.state is ChatTextFieldWriting
                 ? _option(
-                    Images.sendMsgTxt,
-                    color: AppTheme.primaryColor,
-                    onTap: _submitMsg,
-                  )
+              Images.sendMsgTxt,
+              color: AppTheme.primaryColor,
+              onTap: _submitMsg,
+            )
                 : Row(
-                    children: [
-                      _option(
-                        Images.money,
-                        onTap: () {
-                          showGeneralBottomSheet(
-                            context,
-                            title: '${Strings.sendTip} ${Strings.to}',
-                            child: SendTip(),
-                          );
-                        },
-                      ),
-                      const SizedBox(width: 8.0),
-                      _option(
-                        Images.attachment,
-                        onTap: () {
-                          SystemChannels.textInput
-                              .invokeMethod('TextInput.hide');
-                          showGeneralBottomSheet(
-                            context,
-                            child: const Attach(),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+              children: [
+                _option(
+                  Images.money,
+                  onTap: () {
+                    showGeneralBottomSheet(
+                      context,
+                      title: '${Strings.sendTip} ${Strings.to}',
+                      child: SendTip(),
+                    );
+                  },
+                ),
+                const SizedBox(width: 8.0),
+                _option(
+                  Images.attachment,
+                  onTap: () {
+                    SystemChannels.textInput
+                        .invokeMethod('TextInput.hide');
+                    showGeneralBottomSheet(
+                      context,
+                      child: const Attach(),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -158,7 +159,7 @@ class TextInputChat extends StatelessWidget {
   }
 
   Widget _option(String icon,
-          {GestureTapCallback? onTap, Color color = AppTheme.grey}) =>
+      {GestureTapCallback? onTap, Color color = AppTheme.grey}) =>
       GestureDetector(
         onTap: onTap,
         child: Container(

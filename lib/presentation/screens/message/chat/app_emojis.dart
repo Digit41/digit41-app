@@ -19,8 +19,8 @@ class _AppEmojisState extends State<AppEmojis> {
   final List<List<Emoji>> _emojiList = [];
   final AppSharedPreferences _pref = AppSharedPreferences();
 
-  /// for prevent from repeatedly call [_getRecentlyEmoji] with repeat user tap
-  bool _multiTapOnRecentTab = false;
+  final PageController _pageCtl = PageController();
+  final ValueNotifier<int> _currentPage = ValueNotifier(0);
 
   late ChatTextFieldCubit _chatTxtFieldCubit;
 
@@ -39,21 +39,13 @@ class _AppEmojisState extends State<AppEmojis> {
 
   void _init() async {
     await _getRecentlyEmoji();
-    _cats.add(
-      const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.pages)),
-    );
+    _cats.add(_catIcon(0));
 
     for (int i = 0; i < EmojiGroup.values.length; i++) {
-      _cats.add(
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Icon(Icons.category),
-        ),
-      );
+      _cats.add(_catIcon(i + 1));
 
       _emojiList.add(Emoji.byGroup(EmojiGroup.values[i]).toList());
     }
-    setState(() {});
   }
 
   @override
@@ -61,6 +53,36 @@ class _AppEmojisState extends State<AppEmojis> {
     super.initState();
     _init();
   }
+
+  Widget _catIcon(int pIndex) => IconButton(
+        onPressed: () {
+          _pageCtl.animateToPage(
+            pIndex,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeIn,
+          );
+          _currentPage.value = pIndex;
+        },
+        icon: ValueListenableBuilder(
+          valueListenable: _currentPage,
+          builder: (_, __, ___) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.category,
+                color: pIndex == _currentPage.value ? null : Colors.grey,
+              ),
+              const SizedBox(height: 6.0),
+              Container(
+                width: 60.0,
+                height: 2.0,
+                color:
+                    pIndex == _currentPage.value ? AppTheme.primaryColor : null,
+              ),
+            ],
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -82,76 +104,69 @@ class _AppEmojisState extends State<AppEmojis> {
             topRight: Radius.circular(16.0),
           ),
         ),
-        child: DefaultTabController(
-          length: _cats.length,
-          child: Column(
-            children: [
-              TabBar(
-                isScrollable: true,
-                labelPadding: EdgeInsets.zero,
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                unselectedLabelColor: Colors.grey,
-                labelColor: Theme.of(context).textTheme.bodyText1!.color,
-                indicatorColor: AppTheme.primaryColor,
-                onTap: (index) {
-                  if (index == 0 && !_multiTapOnRecentTab) {
-                    _getRecentlyEmoji(setS: true);
-                    _multiTapOnRecentTab = true;
-                  } else
-                    _multiTapOnRecentTab = false;
-                },
-                tabs: _cats,
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                child: Row(children: _cats),
               ),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    for (int i = 0; i < _emojiList.length; i++)
-                      GridView.builder(
-                        controller: ScrollController(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 6,
-                          childAspectRatio: 1.6,
-                        ),
+            ),
+            Expanded(
+              child: PageView(
+                controller: _pageCtl,
+                onPageChanged: (index) {
+                  _currentPage.value = index;
+                  if (index == 0) _getRecentlyEmoji(setS: true);
+                },
+                children: [
+                  for (int i = 0; i < _emojiList.length; i++)
+                    GridView.builder(
+                      controller: ScrollController(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 6,
+                        childAspectRatio: 1.6,
+                      ),
 
-                        /// [i] is page index
-                        itemCount: _emojiList[i].length,
-                        itemBuilder: (_, int index) => Center(
-                          child: InkWell(
-                            onTap: () {
-                              _pref.holdEmojiClicked(_emojiList[i][index].char);
-                              _chatTxtFieldCubit.txtFieldOnChange(
-                                _emojiList[i][index].char,
-                                append: true,
-                              );
-                            },
-                            child: Text(
+                      /// [i] is page index
+                      itemCount: _emojiList[i].length,
+                      itemBuilder: (_, int index) => Center(
+                        child: InkWell(
+                          onTap: () {
+                            _pref.holdEmojiClicked(_emojiList[i][index].char);
+                            _chatTxtFieldCubit.txtFieldOnChange(
                               _emojiList[i][index].char,
-                              style: const TextStyle(fontSize: 26.0),
-                            ),
+                              append: true,
+                            );
+                          },
+                          child: Text(
+                            _emojiList[i][index].char,
+                            style: const TextStyle(fontSize: 26.0),
                           ),
                         ),
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.only(top: 4.0),
                       ),
-                  ],
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(top: 4.0),
+                    ),
+                ],
+              ),
+            ),
+            Container(
+              height: 34.0,
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: HoldDetector(
+                onHold: _chatTxtFieldCubit.backspace,
+                onTap: _chatTxtFieldCubit.backspace,
+                child: const Icon(
+                  Icons.backspace_outlined,
+                  color: Colors.grey,
                 ),
               ),
-              Container(
-                height: 34.0,
-                alignment: Alignment.centerRight,
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: HoldDetector(
-                  onHold: _chatTxtFieldCubit.backspace,
-                  onTap: _chatTxtFieldCubit.backspace,
-                  child: const Icon(
-                    Icons.backspace_outlined,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

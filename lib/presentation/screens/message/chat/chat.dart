@@ -157,7 +157,7 @@ class Chat extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 4.0),
             child: TextInputChat(),
           ),
-          AppEmojis(),
+          const AppEmojis(),
         ],
       );
 }

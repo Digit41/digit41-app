@@ -6,23 +6,27 @@ class AppSharedPreferences {
   void holdEmojiClicked(String emoji) async {
     final SharedPreferences prefs = await _prefs;
     var temp = prefs.getStringList("emojisClicked") ?? [];
-    bool add = true;
+    bool exist = false;
 
     for (var element in temp)
       if (element == emoji) {
-        add = false;
+        exist = true;
         break;
       }
 
-    if (add) {
+    if (exist)
+
+      /// update position of emoji exist
+      temp.insert(0, temp.removeAt(temp.indexOf(emoji)));
+    else {
       if (temp.length < 23)
         temp.insert(0, emoji);
       else {
         temp.removeAt(22);
         temp.insert(0, emoji);
       }
-      await prefs.setStringList("emojisClicked", temp);
     }
+    await prefs.setStringList("emojisClicked", temp);
   }
 
   Future<List<String>> getRecentlyEmojisClicked() async {
